@@ -84,6 +84,8 @@ public class User extends  AbstractEntity{
 
     public void setPassword(String password) {
         this.password = password;
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public boolean isActive() {
