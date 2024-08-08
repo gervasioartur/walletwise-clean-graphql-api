@@ -95,6 +95,8 @@ public class User extends  AbstractEntity{
         List<IValidator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("Firstname",this.firstname).required().build());
         validators.addAll(ValidationBuilder.of("Lastname",this.lastname).required().build());
+        validators.addAll(ValidationBuilder.of("Username",this.username).required().build());
+
         return validators;
     }
 }
