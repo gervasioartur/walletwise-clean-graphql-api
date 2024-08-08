@@ -4,7 +4,7 @@ public enum GeneralEnumString {
     PASSWORD_REGEX_EXPRESSION("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,32}$"),
     EMAIL_REGEX_EXPRESSION("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
-    private String value;
+    private final String value;
 
     GeneralEnumString(String value) {
         this.value = value;

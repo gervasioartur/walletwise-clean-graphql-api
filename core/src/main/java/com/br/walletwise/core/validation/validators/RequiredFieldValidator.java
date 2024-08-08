@@ -13,15 +13,12 @@ public class RequiredFieldValidator extends AbstractValidator {
 
     @Override
     public String validate() {
-        if (this.fieldValue instanceof String) {
-            return ((String) this.fieldValue).trim().isEmpty() ? this.returnMessage : null;
-        } else if (this.fieldValue instanceof Double) {
-            return ((Double) this.fieldValue) == 0 ? this.returnMessage : null;
-        } else if (this.fieldValue instanceof Integer) {
-            return ((Integer) this.fieldValue) == 0 ? this.returnMessage : null;
-        } else if (this.fieldValue == null) {
-            return this.returnMessage;
-        }
-        return null;
+        return switch (this.fieldValue) {
+            case String s -> s.trim().isEmpty() ? this.returnMessage : null;
+            case Double v -> v == 0 ? this.returnMessage : null;
+            case Integer i -> i == 0 ? this.returnMessage : null;
+            case null -> this.returnMessage;
+            default -> null;
+        };
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationBuilder {
-    private final List<IValidator> validators =  new ArrayList<IValidator>();
+    private final List<IValidator> validators =  new ArrayList<>();
     private final String fieldName;
     private final Object fieldValue;
 
