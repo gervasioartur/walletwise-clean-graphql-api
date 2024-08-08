@@ -325,12 +325,12 @@ class UserTests {
 
         User user =  new User(id, firstName, lastName, username, email, password, isActive);
 
-        assertThat(user.getId()).isEqualTo(user.getId());
-        assertThat(user.getFirstname()).isEqualTo(user.getFirstname());
-        assertThat(user.getLastname()).isEqualTo(user.getLastname());
-        assertThat(user.getUsername()).isEqualTo(user.getUsername());
-        assertThat(user.getEmail()).isEqualTo(user.getEmail());
-        assertThat(user.getPassword()).isEqualTo(user.getPassword());
-        assertThat(user.isActive()).isEqualTo(user.isActive());
+        assertThat(user.getId()).isEqualTo(id);
+        assertThat(user.getFirstname()).isEqualTo(firstName);
+        assertThat(user.getLastname()).isEqualTo(lastName);
+        assertThat(user.getUsername()).isEqualTo(username);
+        assertThat(user.getEmail()).isEqualTo(email);
+        assertThat(user.getPassword()).isEqualTo(password);
+        assertThat(user.isActive()).isEqualTo(isActive);
     }
 }
