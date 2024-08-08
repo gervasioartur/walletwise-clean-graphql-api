@@ -198,7 +198,7 @@ class UserTests {
     @ParameterizedTest
     @ValueSource(strings = {"any_email", "@email.com", "any_@emal"})
     @DisplayName("Should throw DomainException when trying to build user with invalid email")
-    void shouldThrowDomainExceptionWhenTryingToUpdateUserWitInvalidEmail(String email) {
+    void shouldThrowDomainExceptionWhenTryingToBuildUserWitInvalidEmail(String email) {
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
                 faker.name().firstName(),
@@ -207,6 +207,25 @@ class UserTests {
                 email,
                 faker.internet().password(),
                 true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("E-mail is invalid.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"any_email", "@email.com", "any_@emal"})
+    @DisplayName("Should throw DomainException when trying to update user with invalid email")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWitInvalidEmail(String email) {
+        User user = new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
+                true);
+
+        Throwable exception = Assertions.catchThrowable( () -> user.setEmail(email));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("E-mail is invalid.");
