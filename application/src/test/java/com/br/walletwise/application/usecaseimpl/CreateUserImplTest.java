@@ -14,6 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 import static  org.assertj.core.api.Assertions.*;
@@ -66,5 +67,25 @@ class CreateUserImplTest {
         assertThat(exception.getMessage()).isEqualTo("E-mail already in use.");
         verify(this.findByUsername, times(1)).find(user.getUsername());
         verify(this.findByEmail, times(1)).find(user.getEmail());
+    }
+
+    @Test
+    @DisplayName("Should create user on success")
+    void shouldCreateUserOnSuccess(){
+        User user = MocksFactory.userWithNoIdFactory();
+        String encodedPassword = UUID.randomUUID().toString();
+        User userWithEncodedPassword = user;
+        userWithEncodedPassword.setPassword(encodedPassword);
+
+        when(this.findByUsername.find(user.getUsername())).thenReturn(Optional.empty());
+        when(this.findByEmail.find(user.getEmail())).thenReturn(Optional.empty());
+        when(this.encodePassword.encode(user.getPassword())).thenReturn(encodedPassword);
+
+        this.createUser.create(user);
+
+        verify(this.findByUsername, times(1)).find(user.getUsername());
+        verify(this.findByEmail, times(1)).find(user.getEmail());
+        verify(this.encodePassword, times(1)).encode(user.getPassword());
+        verify(this.createUserGateway, times(1)).create(userWithEncodedPassword);
     }
 }
