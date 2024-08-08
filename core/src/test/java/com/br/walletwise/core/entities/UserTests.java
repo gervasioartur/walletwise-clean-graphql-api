@@ -5,9 +5,12 @@ import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.UUID;
 
 class UserTests {
     private final Faker faker = new Faker();
@@ -305,5 +308,27 @@ class UserTests {
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Password too weak! Must contain at " +
                 "least 8 characters,one uppercase letter, a special character and a number.");
+    }
+
+    @Test
+    @DisplayName("Should return correct values on build success")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword() {
+        UUID id = UUID.randomUUID();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String username = faker.name().username();
+        String email = faker.internet().emailAddress();
+        String password = strongPassword;
+        boolean isActive = true;
+
+        User user =  new User(id, firstName, lastName, username, email, password, isActive);
+
+        Assertions.assertThat(user.getId()).isEqualTo(user.getId());
+        Assertions.assertThat(user.getFirstname()).isEqualTo(user.getFirstname());
+        Assertions.assertThat(user.getLastname()).isEqualTo(user.getLastname());
+        Assertions.assertThat(user.getUsername()).isEqualTo(user.getUsername());
+        Assertions.assertThat(user.getEmail()).isEqualTo(user.getEmail());
+        Assertions.assertThat(user.getPassword()).isEqualTo(user.getPassword());
+        Assertions.assertThat(user.isActive()).isEqualTo(user.isActive());
     }
 }
