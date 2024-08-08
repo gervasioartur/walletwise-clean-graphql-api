@@ -54,6 +54,8 @@ public class User extends  AbstractEntity{
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public String getUsername() {
