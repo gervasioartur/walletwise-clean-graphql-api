@@ -5,13 +5,14 @@ import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class UserTests {
     private final Faker faker = new Faker();
+
+    String strongPassword = "Password!1234H";
 
     @ParameterizedTest
     @NullAndEmptySource
@@ -23,7 +24,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -40,7 +41,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable(() -> user.setFirstname(firstname) );
@@ -59,7 +60,7 @@ class UserTests {
                 lastname,
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -76,7 +77,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable(() -> user.setLastname(lastname) );
@@ -95,7 +96,7 @@ class UserTests {
                 faker.name().lastName(),
                 username,
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -112,7 +113,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable(() -> user.setUsername(Username) );
@@ -132,7 +133,7 @@ class UserTests {
                 faker.name().lastName(),
                 username,
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -150,7 +151,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable(() ->  user.setUsername(username) );
@@ -169,7 +170,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 email,
-                faker.internet().password(),
+                strongPassword,
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -186,7 +187,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable( () -> user.setEmail(email) );
@@ -205,7 +206,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 email,
-                faker.internet().password(),
+                strongPassword,
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -222,7 +223,7 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable( () -> user.setEmail(email));
@@ -233,7 +234,7 @@ class UserTests {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Should throw DomainException when trying to build user with email empty or null")
+    @DisplayName("Should throw DomainException when trying to build user with password empty or null")
     void shouldThrowDomainExceptionWhenTryingToBuildUserWithPasswordEmptyOrNull(String password) {
 
         Throwable exception = Assertions.catchThrowable( () -> new User(
@@ -251,7 +252,7 @@ class UserTests {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Should throw DomainException when trying to update user with email empty or null")
+    @DisplayName("Should throw DomainException when trying to update user with password empty or null")
     void shouldThrowDomainExceptionWhenTryingToUpdateUserWithPasswordEmptyOrNull(String password) {
         User user = new User(
                 null,
@@ -259,12 +260,31 @@ class UserTests {
                 faker.name().lastName(),
                 faker.name().username(),
                 faker.internet().emailAddress(),
-                faker.internet().password(),
+                strongPassword,
                 true);
 
         Throwable exception = Assertions.catchThrowable( () ->  user.setPassword(password));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Password is required.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "any_password", "123password", "123_password"})
+    @DisplayName("Should throw DomainException when trying to build user with weak password")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword(String password) {
+
+        Throwable exception = Assertions.catchThrowable( () -> new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                password,
+                true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Password too weak! Must contain at " +
+                "least 8 characters,one uppercase letter, a special character and a number.");
     }
 }
