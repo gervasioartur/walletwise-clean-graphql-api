@@ -11,8 +11,8 @@ class UserTests {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Should throw BusinessException when trying to build user with firstname empty or null")
-    void shouldThrowBusinessExceptionWhenTryingToBuildUserWithFirstNameEmptyOrNull(String firstname) {
+    @DisplayName("Should throw DomainException when trying to build user with firstname empty or null")
+    void shouldThrowDomainExceptionWhenTryingToBuildUserWithFirstNameEmptyOrNull(String firstname) {
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
                 "",
@@ -21,6 +21,25 @@ class UserTests {
                 "any_email",
                 "any_password",
                 true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Firstname is required.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException when trying to set firstname with empty or null value")
+    void shouldThrowDomainExceptionWhenTryingToSetFirstNameWithEmptyOrNullValue(String firstname) {
+        User user = new User(
+                null,
+                "any_fist_name",
+                "any_last_name",
+                "any_username",
+                "any_email",
+                "any_password",
+                true);
+
+        Throwable exception = Assertions.catchThrowable(() -> user.setFirstname(firstname) );
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Firstname is required.");
