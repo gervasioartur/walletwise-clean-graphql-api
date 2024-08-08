@@ -2,6 +2,7 @@ package com.br.walletwise.core.entities;
 
 import com.br.walletwise.core.domain.entities.User;
 import com.br.walletwise.core.exception.DomainException;
+import com.github.javafaker.Faker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class UserTests {
+    private final Faker faker = new Faker();
 
     @ParameterizedTest
     @NullAndEmptySource
@@ -18,10 +20,10 @@ class UserTests {
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
                 firstname,
-                "any_last_name",
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -34,11 +36,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToSetFirstNameWithEmptyOrNullValue(String firstname) {
         User user = new User(
                 null,
-                "any_fist_name",
-                "any_last_name",
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true);
 
         Throwable exception = Assertions.catchThrowable(() -> user.setFirstname(firstname) );
@@ -53,11 +55,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToBuildUserWitLastNameEmptyOrNull(String lastname) {
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
-                "first_name",
+                faker.name().firstName(),
                 lastname,
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -70,11 +72,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToSetLastnameWithEmptyOrNullValue(String lastname) {
         User user = new User(
                 null,
-                "any_fist_name",
-                "any_last_name",
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true);
 
         Throwable exception = Assertions.catchThrowable(() -> user.setLastname(lastname) );
@@ -89,11 +91,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToBuildUserWitUsernameEmptyOrNull(String username) {
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
-                "first_name",
-                "any_last_name",
+                faker.name().firstName(),
+                faker.name().lastName(),
                 username,
-                "any_email",
-                "any_password",
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -106,11 +108,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToSetUsernameWithEmptyOrNullValue(String Username) {
         User user = new User(
                 null,
-                "any_fist_name",
-                "any_last_name",
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true);
 
         Throwable exception = Assertions.catchThrowable(() -> user.setUsername(Username) );
@@ -119,17 +121,18 @@ class UserTests {
         Assertions.assertThat(exception.getMessage()).isEqualTo("Username is required.");
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"@any_username","any@username", "any_username@"})
     @DisplayName("Should throw DomainException when trying to build user with invalid Username")
-    void shouldThrowDomainExceptionWhenTryingToBuildUserWithInvalidUsername() {
+    void shouldThrowDomainExceptionWhenTryingToBuildUserWithInvalidUsername(String username) {
 
         Throwable exception = Assertions.catchThrowable(() ->  new User(
                 null,
-                "any_fist_name",
-                "any_last_name",
-                "@any_username",
-                "any_email",
-                "any_password",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                username,
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -143,11 +146,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToUpdateUserWithInvalidUsername(String username) {
         User user = new User(
                 null,
-                "any_fist_name",
-                "any_last_name",
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true);
 
         Throwable exception = Assertions.catchThrowable(() ->  user.setUsername(username) );
@@ -162,11 +165,11 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToBuildUserWitEmailEmptyOrNull(String email) {
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
-                "first_name",
-                "any_last_name",
-                "any_username",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
                 email,
-                "any_password",
+                faker.internet().password(),
                 true));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
@@ -179,17 +182,34 @@ class UserTests {
     void shouldThrowDomainExceptionWhenTryingToUpdateUserWitEmailEmptyOrNull(String email) {
         User user = new User(
                 null,
-                "first_name",
-                "any_last_name",
-                "any_username",
-                "any_email",
-                "any_password",
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
                 true);
 
         Throwable exception = Assertions.catchThrowable( () -> user.setEmail(email) );
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("E-mail is required.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"any_email", "@email.com", "any_@emal"})
+    @DisplayName("Should throw DomainException when trying to build user with invalid email")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWitInvalidEmail(String email) {
+        Throwable exception = Assertions.catchThrowable( () -> new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                email,
+                faker.internet().password(),
+                true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("E-mail is invalid.");
     }
 
 }
