@@ -80,4 +80,21 @@ class UserTests {
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Lastname is required.");
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException when trying to build user with username empty or null")
+    void shouldThrowDomainExceptionWhenTryingToBuildUserWitUsernameEmptyOrNull(String username) {
+        Throwable exception = Assertions.catchThrowable( () -> new User(
+                null,
+                "first_name",
+                "any_last_name",
+                username,
+                "any_email",
+                "any_password",
+                true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Username is required.");
+    }
 }
