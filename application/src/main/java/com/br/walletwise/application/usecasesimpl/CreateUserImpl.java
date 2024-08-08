@@ -32,7 +32,7 @@ public class CreateUserImpl implements CreateUser {
             throw new  BusinessException("Username already exists.");
 
         if (this.findByEmail.find(user.getEmail()).isPresent())
-            throw new  BusinessException("Username already exists.");
+            throw new  BusinessException("E-mail already in use.");
 
         String encodedPassword = this.encodePassword.encode(user.getPassword());
         user.setPassword(encodedPassword);
