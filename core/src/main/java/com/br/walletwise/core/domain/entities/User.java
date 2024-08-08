@@ -101,6 +101,7 @@ public class User extends  AbstractEntity{
         validators.addAll(ValidationBuilder.of("Lastname",this.lastname).required().build());
         validators.addAll(ValidationBuilder.of("Username",this.username).required().username().build());
         validators.addAll(ValidationBuilder.of("E-mail",this.email).required().email().build());
+        validators.addAll(ValidationBuilder.of("Password",this.password).required().build());
         return validators;
     }
 }
