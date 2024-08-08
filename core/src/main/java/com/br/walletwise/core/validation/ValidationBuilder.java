@@ -1,5 +1,8 @@
 package com.br.walletwise.core.validation;
 
+import com.br.walletwise.core.validation.validators.contracts.IValidator;
+import com.br.walletwise.core.validation.validators.RequiredFieldValidator;
+
 import java.util.ArrayList;
 import java.util.List;
 

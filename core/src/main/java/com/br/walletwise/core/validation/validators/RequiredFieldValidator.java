@@ -1,4 +1,6 @@
-package com.br.walletwise.core.validation;
+package com.br.walletwise.core.validation.validators;
+
+import com.br.walletwise.core.validation.AbstractValidator;
 
 public class RequiredFieldValidator extends AbstractValidator {
     private final String returnMessage;

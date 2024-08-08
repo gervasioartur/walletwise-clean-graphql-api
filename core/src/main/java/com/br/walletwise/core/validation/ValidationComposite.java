@@ -1,10 +1,10 @@
 package com.br.walletwise.core.validation;
 
-import com.br.walletwise.core.exception.DomainException;
+import com.br.walletwise.core.validation.validators.contracts.IValidator;
 
 import java.util.List;
 
-public class ValidationComposite implements IValidator{
+public class ValidationComposite implements IValidator {
     private final List<IValidator> validators;
 
     public ValidationComposite(List<IValidator> validators) {

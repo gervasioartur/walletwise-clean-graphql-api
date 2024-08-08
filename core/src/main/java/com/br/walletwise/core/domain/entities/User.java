@@ -1,7 +1,7 @@
 package com.br.walletwise.core.domain.entities;
 
 import com.br.walletwise.core.exception.DomainException;
-import com.br.walletwise.core.validation.IValidator;
+import com.br.walletwise.core.validation.validators.contracts.IValidator;
 import com.br.walletwise.core.validation.ValidationBuilder;
 
 import java.util.ArrayList;
