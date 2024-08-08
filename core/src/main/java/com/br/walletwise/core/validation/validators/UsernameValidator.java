@@ -6,7 +6,6 @@ public class UsernameValidator extends AbstractValidator {
     private final String returnMessage;
 
     public UsernameValidator(Object fieldValue) {
-        this.fieldName = fieldName;
         this.fieldValue = fieldValue;
         this.returnMessage = "Username is invalid.";
     }
