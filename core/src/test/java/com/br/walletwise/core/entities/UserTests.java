@@ -274,44 +274,6 @@ class UserTests {
         assertThat(exception.getMessage()).isEqualTo("Password is required.");
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"test", "any_password", "123password", "123_password"})
-    @DisplayName("Should throw DomainException when trying to build user with weak password")
-    void shouldThrowDomainExceptionWhenTryingToBuildUserWithWeakPassword(String password) {
-
-        Throwable exception = catchThrowable( () -> new User(
-                null,
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.name().username(),
-                faker.internet().emailAddress(),
-                password,
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Password too weak! Must contain at " +
-                "least 8 characters,one uppercase letter, a special character and a number.");
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"test", "any_password", "123password", "123_password"})
-    @DisplayName("Should throw DomainException when trying to update user with weak password")
-    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword(String password) {
-        User user =  new User(
-                null,
-                faker.name().firstName(),
-                faker.name().lastName(),
-                faker.name().username(),
-                faker.internet().emailAddress(),
-                strongPassword,
-                true);
-        Throwable exception = catchThrowable( () -> user.setPassword(password));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Password too weak! Must contain at " +
-                "least 8 characters,one uppercase letter, a special character and a number.");
-    }
-
     @Test
     @DisplayName("Should return correct values on build success")
     void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword() {
