@@ -18,9 +18,6 @@ public class User extends  AbstractEntity{
     private boolean active;
 
     public User(UUID id, String firstname, String lastname, String username, String email, String password, boolean active) {
-        String error = this.validate();
-        if (error != null) throw new DomainException(error);
-
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -28,6 +25,9 @@ public class User extends  AbstractEntity{
         this.email = email;
         this.password = password;
         this.active = active;
+
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public UUID getId() {
@@ -44,6 +44,8 @@ public class User extends  AbstractEntity{
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public String getLastname() {
