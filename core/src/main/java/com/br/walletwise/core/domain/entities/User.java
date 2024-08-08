@@ -74,6 +74,8 @@ public class User extends  AbstractEntity{
 
     public void setEmail(String email) {
         this.email = email;
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public String getPassword() {
