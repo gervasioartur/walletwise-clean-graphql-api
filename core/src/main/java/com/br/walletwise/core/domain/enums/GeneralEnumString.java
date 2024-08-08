@@ -1,7 +1,8 @@
 package com.br.walletwise.core.domain.enums;
 
 public enum GeneralEnumString {
-    EMAIL_EXPRESSION("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    PASSWORD_REGEX_EXPRESSION("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,32}$"),
+    EMAIL_REGEX_EXPRESSION("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
     private String value;
 
