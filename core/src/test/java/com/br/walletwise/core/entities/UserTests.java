@@ -173,4 +173,23 @@ class UserTests {
         Assertions.assertThat(exception.getMessage()).isEqualTo("E-mail is required.");
     }
 
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException when trying to update user with email empty or null")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWitEmailEmptyOrNull(String email) {
+        User user = new User(
+                null,
+                "first_name",
+                "any_last_name",
+                "any_username",
+                "any_email",
+                "any_password",
+                true);
+
+        Throwable exception = Assertions.catchThrowable( () -> user.setEmail(email) );
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("E-mail is required.");
+    }
+
 }
