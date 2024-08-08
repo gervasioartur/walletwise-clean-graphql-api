@@ -248,4 +248,23 @@ class UserTests {
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Password is required.");
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException when trying to update user with email empty or null")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithPasswordEmptyOrNull(String password) {
+        User user = new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                faker.internet().password(),
+                true);
+
+        Throwable exception = Assertions.catchThrowable( () ->  user.setPassword(password));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Password is required.");
+    }
 }
