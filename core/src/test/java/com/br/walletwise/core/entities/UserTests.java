@@ -272,7 +272,7 @@ class UserTests {
     @ParameterizedTest
     @ValueSource(strings = {"test", "any_password", "123password", "123_password"})
     @DisplayName("Should throw DomainException when trying to build user with weak password")
-    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword(String password) {
+    void shouldThrowDomainExceptionWhenTryingToBuildUserWithWeakPassword(String password) {
 
         Throwable exception = Assertions.catchThrowable( () -> new User(
                 null,
@@ -282,6 +282,25 @@ class UserTests {
                 faker.internet().emailAddress(),
                 password,
                 true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Password too weak! Must contain at " +
+                "least 8 characters,one uppercase letter, a special character and a number.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"test", "any_password", "123password", "123_password"})
+    @DisplayName("Should throw DomainException when trying to update user with weak password")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword(String password) {
+        User user =  new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                strongPassword,
+                true);
+        Throwable exception = Assertions.catchThrowable( () -> user.setPassword(password));
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Password too weak! Must contain at " +
