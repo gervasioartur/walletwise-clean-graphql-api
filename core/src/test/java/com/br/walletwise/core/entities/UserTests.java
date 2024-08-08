@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class UserTests {
 
@@ -130,6 +131,26 @@ class UserTests {
                 "any_email",
                 "any_password",
                 true));
+
+        Assertions.assertThat(exception).isInstanceOf(DomainException.class);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Username is invalid.");
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(strings = {"@any_username","any@username", "any_username@"})
+    @DisplayName("Should throw DomainException when trying to update user with invalid Username")
+    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithInvalidUsername(String username) {
+        User user = new User(
+                null,
+                "any_fist_name",
+                "any_last_name",
+                "any_username",
+                "any_email",
+                "any_password",
+                true);
+
+        Throwable exception = Assertions.catchThrowable(() ->  user.setUsername(username) );
 
         Assertions.assertThat(exception).isInstanceOf(DomainException.class);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Username is invalid.");
