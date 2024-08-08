@@ -64,6 +64,8 @@ public class User extends  AbstractEntity{
 
     public void setUsername(String username) {
         this.username = username;
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public String getEmail() {
@@ -96,7 +98,6 @@ public class User extends  AbstractEntity{
         validators.addAll(ValidationBuilder.of("Firstname",this.firstname).required().build());
         validators.addAll(ValidationBuilder.of("Lastname",this.lastname).required().build());
         validators.addAll(ValidationBuilder.of("Username",this.username).required().build());
-
         return validators;
     }
 }
