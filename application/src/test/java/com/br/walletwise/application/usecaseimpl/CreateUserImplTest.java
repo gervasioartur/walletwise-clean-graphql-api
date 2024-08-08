@@ -51,4 +51,20 @@ class CreateUserImplTest {
         verify(this.findByUsername, times(1)).find(user.getUsername());
     }
 
+    @Test
+    @DisplayName("Should throw BusinessException if email is already in use")
+    void shouldThrowBusinessExceptionIdEmailIsAlreadyInUse(){
+        User user = MocksFactory.userWithNoIdFactory();
+
+        when(this.findByUsername.find(user.getUsername())).thenReturn(Optional.empty());
+        when(this.findByEmail.find(user.getEmail())).thenReturn(Optional.of(user));
+
+
+        Throwable exception = catchThrowable(() -> this.createUser.create(user));
+
+        assertThat(exception).isInstanceOf(BusinessException.class);
+        assertThat(exception.getMessage()).isEqualTo("E-mail already in use.");
+        verify(this.findByUsername, times(1)).find(user.getUsername());
+        verify(this.findByEmail, times(1)).find(user.getEmail());
+    }
 }
