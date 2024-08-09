@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.api.dto;
+package com.br.walletwise.infra.entrypoint.dto;
 
 
 import lombok.Builder;

@@ -1,10 +1,10 @@
-package com.br.walletwise.infra.api.controller;
+package com.br.walletwise.infra.entrypoint.controller;
 
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.core.exception.DomainException;
-import com.br.walletwise.infra.api.dto.CreateUserRequest;
-import com.br.walletwise.infra.api.dto.Response;
+import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
+import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.usecase.CreateUser;
 import io.swagger.v3.oas.annotations.Operation;
