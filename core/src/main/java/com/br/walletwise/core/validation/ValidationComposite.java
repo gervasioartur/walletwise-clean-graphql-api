@@ -1,6 +1,6 @@
 package com.br.walletwise.core.validation;
 
-import com.br.walletwise.core.validation.validators.contracts.IValidator;
+import com.br.walletwise.core.validation.validator.contracts.IValidator;
 
 import java.util.List;
 
@@ -13,12 +13,12 @@ public class ValidationComposite implements IValidator {
 
     @Override
     public String validate() {
-       for (IValidator validator : validators) {
-           String error = validator.validate();
-           if (error != null) {
-               return error;
-           }
-       }
-       return null;
+        for (IValidator validator : validators) {
+            String error = validator.validate();
+            if (error != null) {
+                return error;
+            }
+        }
+        return null;
     }
 }

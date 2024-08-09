@@ -1,4 +1,4 @@
-package com.br.walletwise.core.domain.enums;
+package com.br.walletwise.core.domain.model;
 
 public enum GeneralEnumString {
     PASSWORD_REGEX_EXPRESSION("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$"

@@ -1,6 +1,6 @@
 package com.br.walletwise.usecase;
 
-import com.br.walletwise.core.domain.entities.User;
+import com.br.walletwise.core.domain.entity.User;
 
 import java.util.Optional;
 

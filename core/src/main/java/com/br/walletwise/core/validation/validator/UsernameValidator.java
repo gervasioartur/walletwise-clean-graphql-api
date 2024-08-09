@@ -1,4 +1,4 @@
-package com.br.walletwise.core.validation.validators;
+package com.br.walletwise.core.validation.validator;
 
 import com.br.walletwise.core.validation.AbstractValidator;
 

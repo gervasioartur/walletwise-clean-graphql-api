@@ -1,14 +1,14 @@
-package com.br.walletwise.core.domain.entities;
+package com.br.walletwise.core.domain.entity;
 
 import com.br.walletwise.core.exception.DomainException;
-import com.br.walletwise.core.validation.validators.contracts.IValidator;
 import com.br.walletwise.core.validation.ValidationBuilder;
+import com.br.walletwise.core.validation.validator.contracts.IValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class User extends  AbstractEntity{
+public class User extends AbstractEntity {
     private UUID id;
     private String firstname;
     private String lastname;
@@ -25,6 +25,17 @@ public class User extends  AbstractEntity{
         this.email = email;
         this.password = password;
         this.active = active;
+
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
+    }
+
+    public User(String firstname, String lastname, String username, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
 
         String error = this.validate();
         if (error != null) throw new DomainException(error);
@@ -99,11 +110,11 @@ public class User extends  AbstractEntity{
     @Override
     protected List<IValidator> buildValidators() {
         List<IValidator> validators = new ArrayList<>();
-        validators.addAll(ValidationBuilder.of("Firstname",this.firstname).required().build());
-        validators.addAll(ValidationBuilder.of("Lastname",this.lastname).required().build());
-        validators.addAll(ValidationBuilder.of("Username",this.username).required().username().build());
-        validators.addAll(ValidationBuilder.of("E-mail",this.email).required().email().build());
-        validators.addAll(ValidationBuilder.of("Password",this.password).required().build());
+        validators.addAll(ValidationBuilder.of("Firstname", this.firstname).required().build());
+        validators.addAll(ValidationBuilder.of("Lastname", this.lastname).required().build());
+        validators.addAll(ValidationBuilder.of("Username", this.username).required().username().build());
+        validators.addAll(ValidationBuilder.of("E-mail", this.email).required().email().build());
+        validators.addAll(ValidationBuilder.of("Password", this.password).required().build());
         return validators;
     }
 }

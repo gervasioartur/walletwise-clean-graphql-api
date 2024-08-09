@@ -1,7 +1,7 @@
-package com.br.walletwise.core.domain.entities;
+package com.br.walletwise.core.domain.entity;
 
-import com.br.walletwise.core.validation.validators.contracts.IValidator;
 import com.br.walletwise.core.validation.ValidationComposite;
+import com.br.walletwise.core.validation.validator.contracts.IValidator;
 
 import java.util.List;
 
