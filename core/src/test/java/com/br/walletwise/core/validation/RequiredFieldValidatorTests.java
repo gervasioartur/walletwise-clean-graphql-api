@@ -34,4 +34,16 @@ public class RequiredFieldValidatorTests {
         Assertions.assertThat(error).isNotEmpty();
         Assertions.assertThat(error).isEqualTo("any_field_name is required.");
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0})
+    @DisplayName("Should return error message if the field value is zero")
+    void shouldReturnErrorMessageIfFieldValueIsZero(int fieldValue) {
+        String fieName = "any_field_name";
+        this.validator = new RequiredFieldValidator(fieName,fieldValue );
+        String error  = this.validator.validate();
+
+        Assertions.assertThat(error).isNotEmpty();
+        Assertions.assertThat(error).isEqualTo("any_field_name is required.");
+    }
 }
