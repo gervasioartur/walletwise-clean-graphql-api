@@ -4,7 +4,6 @@ import com.br.walletwise.application.gateway.FindByEmailGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.FindByEmailImpl;
 import com.br.walletwise.core.domain.entity.User;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +27,9 @@ class FindByEmailImplTests {
 
         Optional<User> userResult = findByEmailImpl.find(user.getEmail());
 
-       assertThat(userResult).isPresent();
-       assertThat(userResult.get().getId()).isEqualTo(user.getId());
-       assertThat(userResult.get().getEmail()).isEqualTo(user.getEmail());
+        assertThat(userResult).isPresent();
+        assertThat(userResult.get().getId()).isEqualTo(user.getId());
+        assertThat(userResult.get().getEmail()).isEqualTo(user.getEmail());
     }
 
 }

@@ -22,7 +22,7 @@ public class UserConfig {
                                  EncodePassword encodePassword,
                                  CreateUserGateway createUserGateway) {
 
-        return new CreateUserImpl(findByUsername,findByEmail,encodePassword,createUserGateway);
+        return new CreateUserImpl(findByUsername, findByEmail, encodePassword, createUserGateway);
     }
 
     @Bean

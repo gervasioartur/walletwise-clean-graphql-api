@@ -17,8 +17,8 @@ class RequiredFieldValidatorTests {
     @DisplayName("Should return error message if the field value is empty")
     void shouldReturnErrorMessageIfFieldValueIsEmpty(String fieldValue) {
         String fieName = "any_field_name";
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNotEmpty();
         Assertions.assertThat(error).isEqualTo("any_field_name is required.");
@@ -30,8 +30,8 @@ class RequiredFieldValidatorTests {
     @DisplayName("Should return error message if the field value is zero")
     void shouldReturnErrorMessageIfFieldValueIsZero(double fieldValue) {
         String fieName = "any_field_name";
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNotEmpty();
         Assertions.assertThat(error).isEqualTo("any_field_name is required.");
@@ -42,8 +42,8 @@ class RequiredFieldValidatorTests {
     @DisplayName("Should return error message if the field value is zero")
     void shouldReturnErrorMessageIfFieldValueIsZero(int fieldValue) {
         String fieName = "any_field_name";
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNotEmpty();
         Assertions.assertThat(error).isEqualTo("any_field_name is required.");
@@ -55,8 +55,8 @@ class RequiredFieldValidatorTests {
         String fieName = "any_field_name";
         String fieldValue = "any_value";
 
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNull();
     }
@@ -67,8 +67,8 @@ class RequiredFieldValidatorTests {
         String fieName = "any_field_name";
         double fieldValue = 20.0;
 
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNull();
     }
@@ -79,8 +79,8 @@ class RequiredFieldValidatorTests {
         String fieName = "any_field_name";
         int fieldValue = 20;
 
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNull();
     }
@@ -91,8 +91,8 @@ class RequiredFieldValidatorTests {
         String fieName = "any_field_name";
         Object fieldValue = User.class;
 
-        this.validator = new RequiredFieldValidator(fieName,fieldValue );
-        String error  = this.validator.validate();
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
 
         Assertions.assertThat(error).isNull();
     }
