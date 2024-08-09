@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class EncodePasswordJpaGatewayImplTests {
+class EncodePasswordJpaGatewayImplTests {
     @Autowired
     private EncodePasswordJpaGatewayImpl encodePasswordJpaGateway;
     @MockBean

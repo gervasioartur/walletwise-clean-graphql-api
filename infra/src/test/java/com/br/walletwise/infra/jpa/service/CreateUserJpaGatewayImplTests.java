@@ -3,7 +3,7 @@ package com.br.walletwise.infra.jpa.service;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
 import com.br.walletwise.infra.jpa.repository.IUserJpaRepository;
-import com.br.walletwise.infra.jpa.service.mocks.MocksFactory;
+import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.mappers.UserMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CreateUserJpaGatewayImplTests {
+class CreateUserJpaGatewayImplTests {
     @Autowired
     private CreateUserJpaGatewayImpl createUserJpaGateway;
     @MockBean
