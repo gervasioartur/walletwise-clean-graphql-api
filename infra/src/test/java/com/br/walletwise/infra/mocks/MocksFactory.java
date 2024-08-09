@@ -1,6 +1,7 @@
 package com.br.walletwise.infra.mocks;
 
 import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.infra.api.dto.CreateUserRequest;
 import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
 import com.github.javafaker.Faker;
 
@@ -70,5 +71,14 @@ public class MocksFactory {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
+    }
+
+    public  static CreateUserRequest createUserRequestFactory(){
+        return new CreateUserRequest(
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                "Password!1234H");
     }
 }
