@@ -3,9 +3,9 @@ package com.br.walletwise.infra.mappers;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.api.dto.CreateUserRequest;
 import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class UserMapper {
     public User map(CreateUserRequest request) {
         return new User(
