@@ -3,7 +3,6 @@ package com.br.walletwise.core.entity;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +23,7 @@ class UserTests {
     @NullAndEmptySource
     @DisplayName("Should throw DomainException when trying to build user with firstname empty or null")
     void shouldThrowDomainExceptionWhenTryingToBuildUserWithFirstNameEmptyOrNull(String firstname) {
-        Throwable exception = Assertions.catchThrowable(() -> new User(
+        Throwable exception = catchThrowable(() -> new User(
                 null,
                 firstname,
                 faker.name().lastName(),
@@ -50,10 +49,29 @@ class UserTests {
                 strongPassword,
                 true);
 
-        Throwable exception = Assertions.catchThrowable(() -> user.setFirstname(firstname));
+        Throwable exception = catchThrowable(() -> user.setFirstname(firstname));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Firstname is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null when trying to set firstname with valid input")
+    void shouldReturnNullWhenTryingToSetFirstNameWithValidInput() {
+        User user = new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                strongPassword,
+                true);
+
+        String updateField =  faker.name().firstName();
+
+        user.setFirstname(updateField);
+
+        assertThat(user.getFirstname()).isEqualTo(updateField);
     }
 
     @ParameterizedTest
@@ -71,6 +89,25 @@ class UserTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Lastname is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null when trying to set Lastname with valid input")
+    void shouldReturnNullWhenTryingToSetLastNameWithValidInput() {
+        User user = new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                strongPassword,
+                true);
+
+        String updateField =  faker.name().lastName();
+
+        user.setLastname(updateField);
+
+        assertThat(user.getLastname()).isEqualTo(updateField);
     }
 
     @ParameterizedTest
@@ -107,6 +144,25 @@ class UserTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Username is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null when trying to set username with valid input")
+    void shouldReturnNullWhenTryingToSetUsernameWithValidInput() {
+        User user = new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                strongPassword,
+                true);
+
+        String updateField =  faker.name().username();
+
+        user.setUsername(updateField);
+
+        assertThat(user.getUsername()).isEqualTo(updateField);
     }
 
     @ParameterizedTest
@@ -200,6 +256,25 @@ class UserTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("E-mail is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null when trying to set Email with valid input")
+    void shouldReturnNullWhenTryingToSetEmailWithValidInput() {
+        User user = new User(
+                null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                strongPassword,
+                true);
+
+        String updateField =  faker.internet().emailAddress();
+
+        user.setEmail(updateField);
+
+        assertThat(user.getEmail()).isEqualTo(updateField);
     }
 
     @ParameterizedTest
@@ -315,6 +390,20 @@ class UserTests {
         assertThat(user.getEmail()).isEqualTo(email);
         assertThat(user.getPassword()).isEqualTo(password);
         assertThat(user.isActive()).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should throw Domain exception on build failure")
+    void shouldThrowDomainExceptionOnBuildFailure() {
+        String lastName = faker.name().lastName();
+        String username = faker.name().username();
+        String email = faker.internet().emailAddress();
+        String password = strongPassword;
+
+       Throwable exception = catchThrowable(() -> new User("", lastName, username, email, password));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Firstname is required.");
     }
 
     @Test
