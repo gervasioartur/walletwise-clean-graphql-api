@@ -67,7 +67,7 @@ class UserTests {
                 strongPassword,
                 true);
 
-        String updateField =  faker.name().firstName();
+        String updateField = faker.name().firstName();
 
         user.setFirstname(updateField);
 
@@ -103,7 +103,7 @@ class UserTests {
                 strongPassword,
                 true);
 
-        String updateField =  faker.name().lastName();
+        String updateField = faker.name().lastName();
 
         user.setLastname(updateField);
 
@@ -158,7 +158,7 @@ class UserTests {
                 strongPassword,
                 true);
 
-        String updateField =  faker.name().username();
+        String updateField = faker.name().username();
 
         user.setUsername(updateField);
 
@@ -270,7 +270,7 @@ class UserTests {
                 strongPassword,
                 true);
 
-        String updateField =  faker.internet().emailAddress();
+        String updateField = faker.internet().emailAddress();
 
         user.setEmail(updateField);
 
@@ -400,7 +400,7 @@ class UserTests {
         String email = faker.internet().emailAddress();
         String password = strongPassword;
 
-       Throwable exception = catchThrowable(() -> new User("", lastName, username, email, password));
+        Throwable exception = catchThrowable(() -> new User("", lastName, username, email, password));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Firstname is required.");
@@ -415,7 +415,7 @@ class UserTests {
         String email = faker.internet().emailAddress();
         String password = strongPassword;
         UUID id = UUID.randomUUID();
-        boolean active =  true;
+        boolean active = true;
 
         User user = new User(firstName, lastName, username, email, password);
         user.setId(id);
