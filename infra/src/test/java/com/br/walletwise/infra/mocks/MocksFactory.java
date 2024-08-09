@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.jpa.service.mocks;
+package com.br.walletwise.infra.mocks;
 
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
