@@ -33,10 +33,26 @@ class UserMapperTests {
 
     @Test
     @DisplayName("Should return UserJpaEntity on map from user")
-    void shouldReturnUserOnMapFromUserJpaEntity() {
+    void shouldReturnUserJpaEntityOnMapFromUser() {
         User user = MocksFactory.userFactory();
 
         UserJpaEntity userJpaEntity =  this.mapper.map(user);
+
+        assertThat(userJpaEntity.getId()).isEqualTo(user.getId());
+        assertThat(userJpaEntity.getFirstname()).isEqualTo(user.getFirstname());
+        assertThat(userJpaEntity.getLastname()).isEqualTo(user.getLastname());
+        assertThat(userJpaEntity.getUsername()).isEqualTo(user.getUsername());
+        assertThat(userJpaEntity.getEmail()).isEqualTo(user.getEmail());
+        assertThat(userJpaEntity.getPassword()).isEqualTo(user.getPassword());
+        assertThat(userJpaEntity.isActive()).isEqualTo(user.isActive());
+    }
+
+    @Test
+    @DisplayName("Should return user on map from UserJpaEntity")
+    void shouldReturnUserOnMapFromUserJpaEntity() {
+        UserJpaEntity userJpaEntity  = MocksFactory.userJpaEntityFactory();
+
+        User user  =  this.mapper.map(userJpaEntity);
 
         assertThat(userJpaEntity.getId()).isEqualTo(user.getId());
         assertThat(userJpaEntity.getFirstname()).isEqualTo(user.getFirstname());

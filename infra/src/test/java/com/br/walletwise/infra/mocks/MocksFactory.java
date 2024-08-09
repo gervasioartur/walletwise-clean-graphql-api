@@ -45,6 +45,20 @@ public class MocksFactory {
         );
     }
 
+    public static UserJpaEntity userJpaEntityFactory() {
+        return new UserJpaEntity(
+                UUID.randomUUID(),
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.name().username(),
+                faker.internet().emailAddress(),
+                "Password!1234H",
+                true,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
+    }
+
     public static UserJpaEntity userJpaEntityFactory(User user){
         return UserJpaEntity
                 .builder()
