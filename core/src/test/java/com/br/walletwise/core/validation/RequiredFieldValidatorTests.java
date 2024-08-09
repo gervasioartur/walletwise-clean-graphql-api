@@ -1,8 +1,10 @@
 package com.br.walletwise.core.validation;
 
+import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.validation.validator.RequiredFieldValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -46,4 +48,17 @@ public class RequiredFieldValidatorTests {
         Assertions.assertThat(error).isNotEmpty();
         Assertions.assertThat(error).isEqualTo("any_field_name is required.");
     }
+
+    @Test
+    @DisplayName("Should return null on success")
+    void shouldReturnNullOnSuccess() {
+        String fieName = "any_field_name";
+        String fieldValue = "any_value";
+
+        this.validator = new RequiredFieldValidator(fieName,fieldValue );
+        String error  = this.validator.validate();
+
+        Assertions.assertThat(error).isNull();
+    }
+
 }
