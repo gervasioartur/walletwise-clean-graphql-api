@@ -50,10 +50,46 @@ public class RequiredFieldValidatorTests {
     }
 
     @Test
-    @DisplayName("Should return null on success")
-    void shouldReturnNullOnSuccess() {
+    @DisplayName("Should return null on success string")
+    void shouldReturnNullOnSuccessString() {
         String fieName = "any_field_name";
         String fieldValue = "any_value";
+
+        this.validator = new RequiredFieldValidator(fieName,fieldValue );
+        String error  = this.validator.validate();
+
+        Assertions.assertThat(error).isNull();
+    }
+
+    @Test
+    @DisplayName("Should return null on success double value")
+    void shouldReturnNullOnSuccessDoubleValue() {
+        String fieName = "any_field_name";
+        double fieldValue = 20.0;
+
+        this.validator = new RequiredFieldValidator(fieName,fieldValue );
+        String error  = this.validator.validate();
+
+        Assertions.assertThat(error).isNull();
+    }
+
+    @Test
+    @DisplayName("Should return null on success in value")
+    void shouldReturnNullOnSuccessIntValue() {
+        String fieName = "any_field_name";
+        int fieldValue = 20;
+
+        this.validator = new RequiredFieldValidator(fieName,fieldValue );
+        String error  = this.validator.validate();
+
+        Assertions.assertThat(error).isNull();
+    }
+
+    @Test
+    @DisplayName("Should return null on success in value")
+    void shouldReturnNullOnSuccessObjectValue() {
+        String fieName = "any_field_name";
+        Object fieldValue = User.class;
 
         this.validator = new RequiredFieldValidator(fieName,fieldValue );
         String error  = this.validator.validate();
