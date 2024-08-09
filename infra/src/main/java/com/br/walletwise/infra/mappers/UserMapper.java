@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UserMapper {
-    public User map(CreateUserRequest request){
+    public User map(CreateUserRequest request) {
         return new User(
                 request.firstname(),
                 request.lastname(),
@@ -17,7 +17,7 @@ public class UserMapper {
     }
 
 
-    public UserJpaEntity map(User user){
+    public UserJpaEntity map(User user) {
         return UserJpaEntity
                 .builder()
                 .id(user.getId())
@@ -30,7 +30,7 @@ public class UserMapper {
                 .build();
     }
 
-    public User map(UserJpaEntity entity){
+    public User map(UserJpaEntity entity) {
         return new User(
                 entity.getId(),
                 entity.getFirstname(),
@@ -39,6 +39,6 @@ public class UserMapper {
                 entity.getEmail(),
                 entity.getPassword(),
                 entity.isActive()
-                );
+        );
     }
 }
