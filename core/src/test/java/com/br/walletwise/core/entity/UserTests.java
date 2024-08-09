@@ -276,8 +276,8 @@ class UserTests {
     }
 
     @Test
-    @DisplayName("Should return correct values on build success")
-    void shouldThrowDomainExceptionWhenTryingToUpdateUserWithWeakPassword() {
+    @DisplayName("Should return correct values on build success with id")
+    void shouldReturnCorrectValuesOnBuildSuccessWithId() {
         UUID id = UUID.randomUUID();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
@@ -295,5 +295,25 @@ class UserTests {
         assertThat(user.getEmail()).isEqualTo(email);
         assertThat(user.getPassword()).isEqualTo(password);
         assertThat(user.isActive()).isEqualTo(isActive);
+    }
+
+    @Test
+    @DisplayName("Should return correct values on build success")
+    void shouldReturnCorrectValuesOnBuildSuccessWithNoId() {
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String username = faker.name().username();
+        String email = faker.internet().emailAddress();
+        String password = strongPassword;
+
+        User user = new User(firstName, lastName, username, email, password);
+
+        assertThat(user.getId()).isNull();
+        assertThat(user.getFirstname()).isEqualTo(firstName);
+        assertThat(user.getLastname()).isEqualTo(lastName);
+        assertThat(user.getUsername()).isEqualTo(username);
+        assertThat(user.getEmail()).isEqualTo(email);
+        assertThat(user.getPassword()).isEqualTo(password);
+        assertThat(user.isActive()).isFalse();
     }
 }
