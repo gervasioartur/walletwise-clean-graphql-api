@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class RequiredFieldValidatorTests {
+class RequiredFieldValidatorTests {
     private RequiredFieldValidator validator;
 
     @ParameterizedTest
