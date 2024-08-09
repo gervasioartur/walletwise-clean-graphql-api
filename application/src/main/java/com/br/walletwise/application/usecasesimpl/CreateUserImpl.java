@@ -1,8 +1,8 @@
 package com.br.walletwise.application.usecasesimpl;
 
 import com.br.walletwise.application.gateway.CreateUserGateway;
-import com.br.walletwise.core.domain.entities.User;
-import com.br.walletwise.core.exception.BusinessException;
+import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.usecase.CreateUser;
 import com.br.walletwise.usecase.EncodePassword;
 import com.br.walletwise.usecase.FindByEmail;
@@ -29,10 +29,10 @@ public class CreateUserImpl implements CreateUser {
     @Override
     public void create(User user) {
         if (this.findByUsername.find(user.getUsername()).isPresent())
-            throw new  BusinessException("Username already exists.");
+            throw new ConflictException("Username already exists.");
 
         if (this.findByEmail.find(user.getEmail()).isPresent())
-            throw new  BusinessException("E-mail already in use.");
+            throw new ConflictException("E-mail already in use.");
 
         String encodedPassword = this.encodePassword.encode(user.getPassword());
         user.setPassword(encodedPassword);

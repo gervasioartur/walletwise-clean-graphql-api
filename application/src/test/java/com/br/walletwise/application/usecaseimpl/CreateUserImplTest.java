@@ -3,8 +3,8 @@ package com.br.walletwise.application.usecaseimpl;
 import com.br.walletwise.application.gateway.CreateUserGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.CreateUserImpl;
-import com.br.walletwise.core.domain.entities.User;
-import com.br.walletwise.core.exception.BusinessException;
+import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.usecase.CreateUser;
 import com.br.walletwise.usecase.EncodePassword;
 import com.br.walletwise.usecase.FindByEmail;
@@ -16,8 +16,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
-import static  org.assertj.core.api.Assertions.*;
 
 class CreateUserImplTest {
     private CreateUser createUser;
@@ -29,10 +30,10 @@ class CreateUserImplTest {
 
     @BeforeEach
     void setUp() {
-        this.findByUsername =  mock(FindByUsername.class);
-        this.findByEmail =  mock(FindByEmail.class);
-        this.encodePassword =  mock(EncodePassword.class);
-        this.createUserGateway =  mock(CreateUserGateway.class);
+        this.findByUsername = mock(FindByUsername.class);
+        this.findByEmail = mock(FindByEmail.class);
+        this.encodePassword = mock(EncodePassword.class);
+        this.createUserGateway = mock(CreateUserGateway.class);
 
         this.createUser = new CreateUserImpl(findByUsername, findByEmail, encodePassword, createUserGateway);
     }
@@ -47,14 +48,14 @@ class CreateUserImplTest {
 
         Throwable exception = catchThrowable(() -> this.createUser.create(user));
 
-        assertThat(exception).isInstanceOf(BusinessException.class);
+        assertThat(exception).isInstanceOf(ConflictException.class);
         assertThat(exception.getMessage()).isEqualTo("Username already exists.");
         verify(this.findByUsername, times(1)).find(user.getUsername());
     }
 
     @Test
     @DisplayName("Should throw BusinessException if email is already in use")
-    void shouldThrowBusinessExceptionIdEmailIsAlreadyInUse(){
+    void shouldThrowBusinessExceptionIdEmailIsAlreadyInUse() {
         User user = MocksFactory.userWithNoIdFactory();
 
         when(this.findByUsername.find(user.getUsername())).thenReturn(Optional.empty());
@@ -63,7 +64,7 @@ class CreateUserImplTest {
 
         Throwable exception = catchThrowable(() -> this.createUser.create(user));
 
-        assertThat(exception).isInstanceOf(BusinessException.class);
+        assertThat(exception).isInstanceOf(ConflictException.class);
         assertThat(exception.getMessage()).isEqualTo("E-mail already in use.");
         verify(this.findByUsername, times(1)).find(user.getUsername());
         verify(this.findByEmail, times(1)).find(user.getEmail());
@@ -71,7 +72,7 @@ class CreateUserImplTest {
 
     @Test
     @DisplayName("Should create user on success")
-    void shouldCreateUserOnSuccess(){
+    void shouldCreateUserOnSuccess() {
         User user = MocksFactory.userWithNoIdFactory();
         String encodedPassword = UUID.randomUUID().toString();
         User userWithEncodedPassword = user;
