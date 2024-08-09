@@ -2,6 +2,7 @@ package com.br.walletwise.infra.mappers;
 
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.api.dto.CreateUserRequest;
+import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class UserMapperTests {
     private UserMapper mapper;
 
     @Test
-    @DisplayName("Should return user on map from creat user request ")
+    @DisplayName("Should return user on map from creatUserRequest")
     void shouldReturnUserOnMapFromCreatUserRequest() {
         CreateUserRequest request = MocksFactory.createUserRequestFactory();
 
@@ -28,5 +29,21 @@ class UserMapperTests {
         assertThat(user.getUsername()).isEqualTo(request.username());
         assertThat(user.getEmail()).isEqualTo(request.email());
         assertThat(user.getPassword()).isEqualTo(request.password());
+    }
+
+    @Test
+    @DisplayName("Should return UserJpaEntity on map from user")
+    void shouldReturnUserOnMapFromUserJpaEntity() {
+        User user = MocksFactory.userFactory();
+
+        UserJpaEntity userJpaEntity =  this.mapper.map(user);
+
+        assertThat(userJpaEntity.getId()).isEqualTo(user.getId());
+        assertThat(userJpaEntity.getFirstname()).isEqualTo(user.getFirstname());
+        assertThat(userJpaEntity.getLastname()).isEqualTo(user.getLastname());
+        assertThat(userJpaEntity.getUsername()).isEqualTo(user.getUsername());
+        assertThat(userJpaEntity.getEmail()).isEqualTo(user.getEmail());
+        assertThat(userJpaEntity.getPassword()).isEqualTo(user.getPassword());
+        assertThat(userJpaEntity.isActive()).isEqualTo(user.isActive());
     }
 }
