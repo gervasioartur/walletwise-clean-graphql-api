@@ -8,6 +8,7 @@ import com.br.walletwise.core.exception.UnauthorizedException;
 import com.br.walletwise.usecase.AuthenticateUser;
 import com.br.walletwise.usecase.FindByEmail;
 import com.br.walletwise.usecase.FindByUsername;
+import com.br.walletwise.usecase.GenerateToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,17 +23,22 @@ import static org.mockito.Mockito.*;
 
 class AuthenticateUserImplTests {
     private AuthenticateUser authenticateUser;
-
     private FindByUsername findByUsername;
     private FindByEmail findByEmail;
+    private GenerateToken generateToken;
     private AuthenticateUserGateway authenticateUserGateway;
 
     @BeforeEach
     void setUp() {
         this.findByUsername =  mock(FindByUsername.class);
         this.findByEmail =  mock(FindByEmail.class);
+        this.generateToken =  mock(GenerateToken.class);
         this.authenticateUserGateway = mock(AuthenticateUserGateway.class);
-        this.authenticateUser = new AuthenticateUserImpl(findByUsername,findByEmail, authenticateUserGateway);
+        this.authenticateUser = new AuthenticateUserImpl(
+                findByUsername,
+                findByEmail,
+                generateToken,
+                authenticateUserGateway);
     }
 
     @ParameterizedTest
@@ -63,7 +69,7 @@ class AuthenticateUserImplTests {
 
         when(this.findByEmail.find(usernameOrEmail)).thenReturn(Optional.of(user));
         when(this.findByUsername.find(usernameOrEmail)).thenReturn(Optional.of(user));
-        when(this.authenticateUserGateway.authenticate(usernameOrEmail, password)).thenReturn(null);
+        when(this.generateToken.generate(usernameOrEmail)).thenReturn(null);
 
         Throwable exception = catchThrowable(() -> this.authenticateUser.authenticate(usernameOrEmail, password));
 
@@ -85,7 +91,8 @@ class AuthenticateUserImplTests {
 
         when(this.findByUsername.find(usernameOrEmail)).thenReturn(Optional.of(user));
         when(this.findByEmail.find(usernameOrEmail)).thenReturn(Optional.of(user));
-        when(this.authenticateUserGateway.authenticate(user.getUsername(), password)).thenReturn(accessToken);
+        doNothing().when(this.authenticateUserGateway).authenticate(user.getUsername(), password);
+        when(this.generateToken.generate(user.getUsername())).thenReturn(accessToken);
 
         String  result = this.authenticateUser.authenticate(usernameOrEmail, password);
 
