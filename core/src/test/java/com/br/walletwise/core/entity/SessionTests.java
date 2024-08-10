@@ -28,4 +28,17 @@ public class SessionTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("User is required.");
     }
+
+    @Test
+    @DisplayName("Should throw DomainException if user id is null on build session with no session id")
+    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildSessionWithNoSessionId() {
+        UUID userId = null;
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expirationDate = LocalDateTime.now();
+        LocalDateTime creationDate = LocalDateTime.now().plusMinutes(15);
+
+        Throwable exception = catchThrowable(() -> new  Session(userId, token, expirationDate, creationDate));
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("User is required.");
+    }
 }
