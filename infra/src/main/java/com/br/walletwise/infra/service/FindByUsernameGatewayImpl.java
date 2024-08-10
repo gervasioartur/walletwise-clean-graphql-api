@@ -1,6 +1,6 @@
 package com.br.walletwise.infra.service;
 
-import com.br.walletwise.application.gateway.FindByEmailGateway;
+import com.br.walletwise.application.gateway.FindByUsernameGateway;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
 import com.br.walletwise.infra.mappers.UserMapper;
@@ -11,12 +11,12 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class FindByEmailJpaGatewayImpl implements FindByEmailGateway {
+public class FindByUsernameGatewayImpl implements FindByUsernameGateway {
     private final IUserJpaRepository userJpaRepository;
     private final UserMapper mapper;
 
     @Override
-    public Optional<User> find(String email) {
-        return this.userJpaRepository.findByEmail(email).map(this.mapper::map);
+    public Optional<User> find(String username) {
+        return this.userJpaRepository.findByUsername(username).map(this.mapper::map);
     }
 }

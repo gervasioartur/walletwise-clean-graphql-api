@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CreateUserJpaGatewayImpl implements CreateUserGateway {
+public class CreateUserGatewayImpl implements CreateUserGateway {
     private final IUserJpaRepository userRepository;
     private final UserMapper mapper;
 

@@ -1,6 +1,6 @@
-package com.br.walletwise.infra.jpa.service;
+package com.br.walletwise.infra.service;
 
-import com.br.walletwise.infra.service.EncodePasswordJpaGatewayImpl;
+import com.br.walletwise.infra.service.EncodePasswordGatewayImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class EncodePasswordJpaGatewayImplTests {
+class EncodePasswordGatewayImplTests {
     @Autowired
-    private EncodePasswordJpaGatewayImpl encodePasswordJpaGateway;
+    private EncodePasswordGatewayImpl encodePasswordJpaGateway;
     @MockBean
     private PasswordEncoder passwordEncoder;
 

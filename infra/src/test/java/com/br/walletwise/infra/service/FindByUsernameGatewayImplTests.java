@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.jpa.service;
+package com.br.walletwise.infra.service;
 
 import com.br.walletwise.application.gateway.FindByUsernameGateway;
 import com.br.walletwise.core.domain.entity.User;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class FindByUsernameJpaGatewayImplTests {
+public class FindByUsernameGatewayImplTests {
     @Autowired
     FindByUsernameGateway findByUsernameGateway;
 
