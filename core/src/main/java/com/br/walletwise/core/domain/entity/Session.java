@@ -13,25 +13,22 @@ public class Session extends AbstractEntity{
     private UUID id;
     private UUID userId;
     private String token;
-    private LocalDateTime expirationDate;
     private LocalDateTime  creationDate;
 
-    public Session(UUID id, UUID userId, String token, LocalDateTime expirationDate, LocalDateTime creationDate) {
+    public Session(UUID id, UUID userId, String token, LocalDateTime creationDate) {
         this.id = id;
         this.userId = userId;
         this.token = token;
-        this.expirationDate = expirationDate;
         this.creationDate = creationDate;
 
         String error = this.validate();
         if(error != null) throw new  DomainException(error);
     }
 
-    public Session(UUID userId, String token, LocalDateTime expirationDate, LocalDateTime creationDate) {
+    public Session(UUID userId, String token) {
         this.userId = userId;
         this.token = token;
-        this.expirationDate = expirationDate;
-        this.creationDate = creationDate;
+        this.creationDate = LocalDateTime.now();
 
         String error =  this.validate();
         if(error != null) throw new DomainException(error);
@@ -39,10 +36,6 @@ public class Session extends AbstractEntity{
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public UUID getUserId() {
@@ -66,20 +59,8 @@ public class Session extends AbstractEntity{
         if(error != null) throw new DomainException(error);
     }
 
-    public LocalDateTime getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(LocalDateTime expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     public LocalDateTime getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
     }
 
     @Override
