@@ -84,6 +84,7 @@ public class Session extends AbstractEntity{
     protected List<IValidator> buildValidators() {
         List<IValidator> validators = new ArrayList<IValidator>();
         validators.addAll(ValidationBuilder.of("User", this.userId).required().build());
+        validators.addAll(ValidationBuilder.of("Token", this.token).required().build());
         return validators;
     }
 }
