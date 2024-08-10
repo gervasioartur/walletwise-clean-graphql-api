@@ -14,7 +14,9 @@ public class AuthenticateUserImpl implements AuthenticateUser {
     private final FindByEmail findByEmail;
     private final AuthenticateUserGateway authenticateUserGateway;
 
-    public AuthenticateUserImpl(FindByUsername findByUsername, FindByEmail findByEmail, AuthenticateUserGateway authenticateUserGateway) {
+    public AuthenticateUserImpl(FindByUsername findByUsername,
+                                FindByEmail findByEmail,
+                                AuthenticateUserGateway authenticateUserGateway) {
         this.findByUsername = findByUsername;
         this.findByEmail = findByEmail;
         this.authenticateUserGateway = authenticateUserGateway;
@@ -22,20 +24,13 @@ public class AuthenticateUserImpl implements AuthenticateUser {
 
     @Override
     public String authenticate(String usernameOrEmail, String password) {
-        Optional<User> userResult ;
-
-        if(usernameOrEmail.contains("@"))
-            userResult = this.findByEmail.find(usernameOrEmail);
-        else
-            userResult = this.findByUsername.find(usernameOrEmail);
+        Optional<User> userResult =  usernameOrEmail.contains("@") ?
+                findByUsername.find(usernameOrEmail)
+                : findByEmail.find(usernameOrEmail);
 
         if(userResult.isEmpty()) throw  new UnauthorizedException("Bad credentials.");
-
-        String token = this.authenticateUserGateway
-                .authenticate(userResult.get().getUsername(), password);
-
+        String token = this.authenticateUserGateway.authenticate(userResult.get().getUsername(), password);
         if(token == null) throw  new UnauthorizedException("Bad credentials.");
-
         return token;
     }
 }
