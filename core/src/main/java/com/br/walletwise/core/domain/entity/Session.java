@@ -32,6 +32,9 @@ public class Session extends AbstractEntity{
         this.token = token;
         this.expirationDate = expirationDate;
         this.creationDate = creationDate;
+
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public UUID getId() {
