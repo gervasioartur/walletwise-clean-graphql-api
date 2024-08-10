@@ -36,6 +36,6 @@ public class AuthenticateUserImpl implements AuthenticateUser {
 
         if(token == null) throw  new UnauthorizedException("Bad credentials.");
 
-        return "";
+        return token;
     }
 }
