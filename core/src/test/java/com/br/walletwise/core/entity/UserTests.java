@@ -407,21 +407,18 @@ class UserTests {
     }
 
     @Test
-    @DisplayName("Should return correct values on update id and active success")
+    @DisplayName("Should return correct values on active success")
     void shouldReturnCorrectValuesOnUpdateIdAndActiveSuccess() {
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String username = faker.name().username();
         String email = faker.internet().emailAddress();
         String password = strongPassword;
-        UUID id = UUID.randomUUID();
         boolean active = true;
 
         User user = new User(firstName, lastName, username, email, password);
-        user.setId(id);
         user.setActive(active);
 
-        assertThat(user.getId()).isEqualTo(id);
         assertThat(user.getFirstname()).isEqualTo(firstName);
         assertThat(user.getLastname()).isEqualTo(lastName);
         assertThat(user.getUsername()).isEqualTo(username);
