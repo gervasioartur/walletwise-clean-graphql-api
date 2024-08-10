@@ -74,4 +74,27 @@ class AuthenticateUserImplTests {
         else
             verify(this.findByUsername, times(1)).find(usernameOrEmail);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"any_username","any_username@test.com"})
+    @DisplayName("Should authenticate user")
+    void shouldAuthenticateUser(String usernameOrEmail) {
+        String password = "any_password";
+        String accessToken = UUID.randomUUID().toString();
+        User user = MocksFactory.userFactory();
+
+        when(this.findByUsername.find(usernameOrEmail)).thenReturn(Optional.of(user));
+        when(this.findByEmail.find(usernameOrEmail)).thenReturn(Optional.of(user));
+        when(this.authenticateUserGateway.authenticate(user.getUsername(), password)).thenReturn(accessToken);
+
+        String  result = this.authenticateUser.authenticate(usernameOrEmail, password);
+
+        assertThat(result).isEqualTo(accessToken);
+        if(usernameOrEmail.contains("@"))
+            verify(this.findByEmail, times(1)).find(usernameOrEmail);
+        else
+            verify(this.findByUsername, times(1)).find(usernameOrEmail);
+
+        verify(this.authenticateUserGateway, times(1)).authenticate(user.getUsername(), password);
+    }
 }
