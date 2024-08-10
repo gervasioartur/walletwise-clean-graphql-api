@@ -51,6 +51,9 @@ public class Session extends AbstractEntity{
 
     public void setUserId(UUID userId) {
         this.userId = userId;
+
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public String getToken() {
