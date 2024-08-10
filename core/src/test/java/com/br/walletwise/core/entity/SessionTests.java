@@ -91,4 +91,21 @@ public class SessionTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Token is required.");
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if token is null or empty on update token")
+    void shouldThrowDomainExceptionIfTokenIsNullOrEmptyOnUpdateToken(String tokenParam){
+        UUID userId = UUID.randomUUID();
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expirationDate = LocalDateTime.now();
+        LocalDateTime creationDate = LocalDateTime.now().plusMinutes(15);
+
+        Session session = new Session(userId, token, expirationDate, creationDate);
+        Throwable exception = catchThrowable(() ->  session.setToken(null));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Token is required.");
+    }
+
 }
