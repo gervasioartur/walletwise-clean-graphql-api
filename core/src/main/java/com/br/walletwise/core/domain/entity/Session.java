@@ -62,6 +62,8 @@ public class Session extends AbstractEntity{
 
     public void setToken(String token) {
         this.token = token;
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public LocalDateTime getExpirationDate() {
