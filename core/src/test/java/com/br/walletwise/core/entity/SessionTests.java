@@ -5,6 +5,9 @@ import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -44,7 +47,7 @@ public class SessionTests {
     }
 
     @Test
-    @DisplayName("Should throw DomainException user id is null on update user id")
+    @DisplayName("Should throw DomainException if user id is null on update user id")
     void shouldThrowDomainExceptionIfUserIdIsNullOnUpdateUserId() {
         UUID userId = UUID.randomUUID();
         String token = UUID.randomUUID().toString();
@@ -56,5 +59,20 @@ public class SessionTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("User is required.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if token is null or empty on build session with id")
+    void shouldThrowsDomainExceptionIfTokenIsNullOrEmptyOnBuildSessionWithId(String tokenParam){
+        UUID userId = UUID.randomUUID();
+        String token = tokenParam;
+        LocalDateTime expirationDate = LocalDateTime.now();
+        LocalDateTime creationDate = LocalDateTime.now().plusMinutes(15);
+
+        Throwable exception = catchThrowable(() -> new Session(userId, token, expirationDate, creationDate));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Token is required.");
     }
 }
