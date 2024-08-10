@@ -38,6 +38,22 @@ public class SessionTests {
         LocalDateTime creationDate = LocalDateTime.now().plusMinutes(15);
 
         Throwable exception = catchThrowable(() -> new  Session(userId, token, expirationDate, creationDate));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("User is required.");
+    }
+
+    @Test
+    @DisplayName("Should throw DomainException user id is null on update user id")
+    void shouldThrowDomainExceptionIfUserIdIsNullOnUpdateUserId() {
+        UUID userId = UUID.randomUUID();
+        String token = UUID.randomUUID().toString();
+        LocalDateTime expirationDate = LocalDateTime.now();
+        LocalDateTime creationDate = LocalDateTime.now().plusMinutes(15);
+
+        Session session =  new Session(userId, token, expirationDate, creationDate);
+        Throwable exception = catchThrowable(() -> session.setUserId(null));
+
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("User is required.");
     }
