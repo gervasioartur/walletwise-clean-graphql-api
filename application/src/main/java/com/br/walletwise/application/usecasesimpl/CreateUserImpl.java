@@ -29,7 +29,7 @@ public class CreateUserImpl implements CreateUser {
     @Override
     public void create(User user) {
         if (this.findByUsername.find(user.getUsername()).isPresent())
-            throw new ConflictException("Username already exists.");
+            throw new ConflictException("Username already taken.");
 
         if (this.findByEmail.find(user.getEmail()).isPresent())
             throw new ConflictException("E-mail already in use.");

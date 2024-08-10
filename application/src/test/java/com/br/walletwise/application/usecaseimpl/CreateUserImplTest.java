@@ -49,7 +49,7 @@ class CreateUserImplTest {
         Throwable exception = catchThrowable(() -> this.createUser.create(user));
 
         assertThat(exception).isInstanceOf(ConflictException.class);
-        assertThat(exception.getMessage()).isEqualTo("Username already exists.");
+        assertThat(exception.getMessage()).isEqualTo("Username already taken.");
         verify(this.findByUsername, times(1)).find(user.getUsername());
     }
 
