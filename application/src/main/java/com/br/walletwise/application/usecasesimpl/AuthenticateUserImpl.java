@@ -25,8 +25,8 @@ public class AuthenticateUserImpl implements AuthenticateUser {
     @Override
     public String authenticate(String usernameOrEmail, String password) {
         Optional<User> userResult =  usernameOrEmail.contains("@") ?
-                findByUsername.find(usernameOrEmail)
-                : findByEmail.find(usernameOrEmail);
+                findByEmail.find(usernameOrEmail)
+                : findByUsername.find(usernameOrEmail) ;
 
         if(userResult.isEmpty()) throw  new UnauthorizedException("Bad credentials.");
         String token = this.authenticateUserGateway.authenticate(userResult.get().getUsername(), password);
