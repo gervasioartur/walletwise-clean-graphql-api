@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.jpa.entity;
+package com.br.walletwise.infra.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

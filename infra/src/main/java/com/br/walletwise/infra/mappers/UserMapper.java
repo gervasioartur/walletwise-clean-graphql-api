@@ -2,7 +2,7 @@ package com.br.walletwise.infra.mappers;
 
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
-import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
+import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import org.springframework.stereotype.Component;
 
 @Component

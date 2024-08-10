@@ -1,6 +1,6 @@
-package com.br.walletwise.infra.jpa.repository;
+package com.br.walletwise.infra.persistence.repository;
 
-import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
+import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

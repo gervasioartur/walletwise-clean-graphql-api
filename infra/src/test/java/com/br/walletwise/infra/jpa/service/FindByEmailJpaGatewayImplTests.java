@@ -1,10 +1,11 @@
 package com.br.walletwise.infra.jpa.service;
 
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.infra.jpa.entity.UserJpaEntity;
-import com.br.walletwise.infra.jpa.repository.IUserJpaRepository;
+import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
+import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
+import com.br.walletwise.infra.service.FindByEmailJpaGatewayImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

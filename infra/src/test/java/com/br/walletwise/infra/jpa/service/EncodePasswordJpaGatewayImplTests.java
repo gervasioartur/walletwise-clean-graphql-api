@@ -1,5 +1,6 @@
 package com.br.walletwise.infra.jpa.service;
 
+import com.br.walletwise.infra.service.EncodePasswordJpaGatewayImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

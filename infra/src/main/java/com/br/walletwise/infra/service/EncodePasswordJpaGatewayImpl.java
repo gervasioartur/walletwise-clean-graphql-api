@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.jpa.service;
+package com.br.walletwise.infra.service;
 
 import com.br.walletwise.application.gateway.EncodePasswordGateway;
 import lombok.RequiredArgsConstructor;
