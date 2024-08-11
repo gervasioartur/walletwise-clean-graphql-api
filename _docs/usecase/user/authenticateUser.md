@@ -1,6 +1,6 @@
 ## Feature: Authenticate user
 
-### Scenario: User authentication fails when an unexpected exception occurs
+### Scenario: User authentication fails when an unexpected exception occurs [✅]
     When I attempt to authenticate a user with
 
         | usenameOremail               | password        |
