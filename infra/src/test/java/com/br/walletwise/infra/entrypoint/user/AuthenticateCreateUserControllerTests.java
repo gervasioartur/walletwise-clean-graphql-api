@@ -24,6 +24,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.UUID;
+
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -126,6 +128,35 @@ public class AuthenticateCreateUserControllerTests {
                         Matchers.is("Password is required.")));
 
         verify(usecase, times(0))
+                .authenticate(requestParams.usernameOrEmail(), requestParams.password());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"any_username", "anyuser@email.com"})
+    @DisplayName("Should return token on authenticate success")
+    public void shouldReturnTokenOnAuthenticateSuccess(String usernameOrEmail) throws Exception {
+        String token = UUID.randomUUID().toString();
+
+        AuthenticateUserRequest requestParams = new AuthenticateUserRequest
+                (usernameOrEmail, MocksFactory.faker.internet().password());
+
+        String json = new ObjectMapper().writeValueAsString(requestParams);
+
+        when(this.usecase.authenticate(requestParams.usernameOrEmail(), requestParams.password())).thenReturn(token);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(this.URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc
+                .perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("body",
+                        Matchers.is(token)));
+
+        verify(usecase, times(1))
                 .authenticate(requestParams.usernameOrEmail(), requestParams.password());
     }
 }
