@@ -1,7 +1,10 @@
 package com.br.walletwise.infra.entrypoint.controller.user;
 
+import com.br.walletwise.core.exception.BusinessException;
 import com.br.walletwise.core.exception.ConflictException;
-import com.br.walletwise.core.exception.DomainException;
+import com.br.walletwise.core.validation.ValidationBuilder;
+import com.br.walletwise.core.validation.validator.contracts.IValidator;
+import com.br.walletwise.infra.entrypoint.controller.AbstractController;
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.usecase.AuthenticateUser;
@@ -14,13 +17,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/users/authenticate")
 @Tag(name = "User")
 @RequiredArgsConstructor
-public class AuthenticateUserController {
+public class AuthenticateUserController extends AbstractController<Response, AuthenticateUserRequest> {
     private final AuthenticateUser usecase;
 
+    @Override
     @PostMapping
     @Operation(summary = "Authenticate User")
     @ResponseStatus(HttpStatus.OK)
@@ -31,12 +38,18 @@ public class AuthenticateUserController {
             @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
     })
 
-    public ResponseEntity<Response> authenticateUser(@RequestBody AuthenticateUserRequest request) {
+    public ResponseEntity<Response> perform(@RequestBody AuthenticateUserRequest request) {
+        String error = this.validate(request);
+        if(error != null) {
+            Response response = Response.builder().body(error).build();
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
         try {
             String token = this.usecase.authenticate(request.usernameOrEmail(), request.password());
             Response response = Response.builder().body(token).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (DomainException ex) {
+        } catch (BusinessException ex) {
             Response response = Response.builder().body(ex.getMessage()).build();
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (ConflictException ex) {
@@ -47,5 +60,12 @@ public class AuthenticateUserController {
                     .builder().body("An unexpected error occurred. Please try again later.").build();
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Override
+    protected List<IValidator> buildValidators(AuthenticateUserRequest request) {
+        List<IValidator> validators = new ArrayList<>();
+        validators.addAll(ValidationBuilder.of("Username or E-mail",request.usernameOrEmail()).required().build());
+        return validators;
     }
 }
