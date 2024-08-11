@@ -1,11 +1,17 @@
 package com.br.walletwise.infra.mocks;
 
+import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
+import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import com.github.javafaker.Faker;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public class MocksFactory {
@@ -65,7 +71,8 @@ public class MocksFactory {
                 "Password!1234H",
                 true,
                 LocalDateTime.now(),
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                List.of()
         );
     }
 
@@ -104,5 +111,76 @@ public class MocksFactory {
                 faker.name().username(),
                 faker.internet().emailAddress(),
                 "Password!1234H");
+    }
+
+    public static Authentication authenticationFactory (){
+        return new Authentication() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return List.of();
+            }
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return null;
+            }
+
+            @Override
+            public boolean isAuthenticated() {
+                return true;
+            }
+
+            @Override
+            public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+
+            }
+
+            @Override
+            public String getName() {
+                return "";
+            }
+        };
+    }
+
+    public static Session sessionFactoryWithNoId(){
+        return new Session(UUID.randomUUID(),UUID.randomUUID().toString());
+    }
+
+    public static Session sessionFactory(SessionJpaEntity entity){
+        return new Session(entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate());
+    }
+
+    public static SessionJpaEntity sessionJpaEntityFactory(Session session){
+        return  SessionJpaEntity
+                .builder()
+                .id(session.getId())
+                .user(UserJpaEntity.builder().id(session.getUserId()).build())
+                .token(session.getToken())
+                .creationDate(session.getCreationDate())
+                .build();
+    }
+
+    public static SessionJpaEntity sessionJpaEntityFactory(SessionJpaEntity entity){
+        return  SessionJpaEntity
+                .builder()
+                .id(UUID.randomUUID())
+                .id(entity.getId())
+                .user(UserJpaEntity.builder().id(entity.getUser().getId()).build())
+                .token(entity.getToken())
+                .creationDate(entity.getCreationDate())
+                .active(true)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
     }
 }

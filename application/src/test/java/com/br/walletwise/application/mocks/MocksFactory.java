@@ -1,5 +1,6 @@
 package com.br.walletwise.application.mocks;
 
+import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.github.javafaker.Faker;
 
@@ -28,5 +29,13 @@ public class MocksFactory {
                 faker.internet().emailAddress(),
                 "Password!1234H",
                 true);
+    }
+
+    public static Session sessionWithNoIdFactory() {
+        return new Session(UUID.randomUUID(), UUID.randomUUID().toString());
+    }
+
+    public static Session sessionFactory(Session session) {
+        return new Session(UUID.randomUUID(), session.getUserId(),session.getToken(),session.getCreationDate());
     }
 }
