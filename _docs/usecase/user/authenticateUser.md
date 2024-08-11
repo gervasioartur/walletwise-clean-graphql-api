@@ -33,7 +33,7 @@
     And the status code should be 401
     And the response body should contain "Bad credentials."
 
-### Scenario: User authentication fails when username or email is blank
+### Scenario: User authentication fails when username or email is blank [✅]
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
