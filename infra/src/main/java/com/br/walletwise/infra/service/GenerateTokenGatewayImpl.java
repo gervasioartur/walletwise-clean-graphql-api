@@ -1,0 +1,21 @@
+package com.br.walletwise.infra.service;
+
+import com.br.walletwise.application.gateway.GenerateTokenGateway;
+import com.br.walletwise.infra.helpers.CreateToken;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
+@RequiredArgsConstructor
+public class GenerateTokenGatewayImpl implements GenerateTokenGateway {
+    private final CreateToken createToken;
+
+    @Override
+    public String generate(String username) {
+        Map<String, Object> claims = new HashMap<>();
+        return this.createToken.create(claims, username);
+    }
+}
