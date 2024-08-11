@@ -14,15 +14,17 @@ public class Session extends AbstractEntity{
     private UUID userId;
     private String token;
     private LocalDateTime  creationDate;
+    private boolean active;
 
-    public Session(UUID id, UUID userId, String token, LocalDateTime creationDate) {
+    public Session(UUID id, UUID userId, String token, LocalDateTime creationDate, boolean active) {
         this.id = id;
         this.userId = userId;
         this.token = token;
         this.creationDate = creationDate;
+        this.active = active;
 
-        String error = this.validate();
-        if(error != null) throw new  DomainException(error);
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public Session(UUID userId, String token) {
@@ -61,6 +63,14 @@ public class Session extends AbstractEntity{
 
     public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

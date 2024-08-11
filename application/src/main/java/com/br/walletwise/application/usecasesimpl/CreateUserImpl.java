@@ -35,6 +35,7 @@ public class CreateUserImpl implements CreateUser {
             throw new ConflictException("E-mail already in use.");
 
         String encodedPassword = this.encodePassword.encode(user.getPassword());
+        user.setActive(true);
         user.setPassword(encodedPassword);
         this.createUserGateway.create(user);
     }

@@ -36,6 +36,6 @@ public class MocksFactory {
     }
 
     public static Session sessionFactory(Session session) {
-        return new Session(UUID.randomUUID(), session.getUserId(),session.getToken(),session.getCreationDate());
+        return new Session(UUID.randomUUID(), session.getUserId(),session.getToken(),session.getCreationDate(),true);
     }
 }

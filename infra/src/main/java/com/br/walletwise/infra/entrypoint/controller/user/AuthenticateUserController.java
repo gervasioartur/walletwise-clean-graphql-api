@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
             String token = this.usecase.authenticate(request.usernameOrEmail(), request.password());
             Response response = Response.builder().body(token).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (UnauthorizedException ex) {
+        } catch (UnauthorizedException | AuthenticationException ex) {
             Response response = Response.builder().body(ex.getMessage()).build();
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         } catch (Exception ex) {

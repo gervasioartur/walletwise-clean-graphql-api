@@ -25,7 +25,7 @@ class SessionTests {
         String token = UUID.randomUUID().toString();
         LocalDateTime creationDate =  LocalDateTime.now();
 
-        Throwable exception = catchThrowable(() -> new  Session(id ,userId, token, creationDate));
+        Throwable exception = catchThrowable(() -> new  Session(id ,userId, token, creationDate,true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("User is required.");
@@ -79,7 +79,7 @@ class SessionTests {
         String token = tokenParam;
         LocalDateTime creationDate =  LocalDateTime.now();
 
-        Throwable exception = catchThrowable(() -> new Session(id,userId, token, creationDate));
+        Throwable exception = catchThrowable(() -> new Session(id,userId, token, creationDate, true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Token is required.");
@@ -134,11 +134,12 @@ class SessionTests {
         String token = UUID.randomUUID().toString();
         LocalDateTime creationDate =  LocalDateTime.now();
 
-        Session session = new Session(id,userId, token, creationDate);
+        Session session = new Session(id,userId, token, creationDate,true);
 
         assertThat(session.getId()).isEqualTo(id);
         assertThat(session.getUserId()).isEqualTo(userId);
         assertThat(session.getToken()).isEqualTo(token);
         assertThat(session.getCreationDate()).isEqualTo(creationDate);
+        assertThat(session.isActive()).isTrue();
     }
 }

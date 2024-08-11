@@ -13,6 +13,7 @@ public class SaveSessionImpl implements SaveSession {
 
     @Override
     public Session save(Session session) {
+        session.setActive(true);
         return this.sessionGateway.save(session);
     }
 }

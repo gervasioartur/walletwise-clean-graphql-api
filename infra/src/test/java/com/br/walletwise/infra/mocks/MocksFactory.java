@@ -157,11 +157,11 @@ public class MocksFactory {
     }
 
     public static Session sessionFactoryId(){
-        return new Session(UUID.randomUUID(),UUID.randomUUID(),UUID.randomUUID().toString(),LocalDateTime.now());
+        return new Session(UUID.randomUUID(),UUID.randomUUID(),UUID.randomUUID().toString(),LocalDateTime.now(),true);
     }
 
     public static Session sessionFactory(SessionJpaEntity entity){
-        return new Session(entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate());
+        return new Session(entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate(),true);
     }
 
     public static SessionJpaEntity sessionJpaEntityFactory(Session session){

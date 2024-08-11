@@ -14,10 +14,12 @@ public class SessionMapper {
                 .user(UserJpaEntity.builder().id(session.getUserId()).build())
                 .token(session.getToken())
                 .creationDate(session.getCreationDate())
+                .active(session.isActive())
                 .build();
     }
 
     public Session map(SessionJpaEntity entity){
-        return new Session(entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate());
+        return new Session
+                (entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate(),entity.isActive());
     }
 }
