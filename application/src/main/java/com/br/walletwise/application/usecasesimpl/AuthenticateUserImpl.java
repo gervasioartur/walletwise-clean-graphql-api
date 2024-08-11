@@ -1,29 +1,30 @@
 package com.br.walletwise.application.usecasesimpl;
 
 import com.br.walletwise.application.gateway.AuthenticateUserGateway;
+import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.UnauthorizedException;
-import com.br.walletwise.usecase.AuthenticateUser;
-import com.br.walletwise.usecase.FindByEmail;
-import com.br.walletwise.usecase.FindByUsername;
-import com.br.walletwise.usecase.GenerateToken;
+import com.br.walletwise.usecase.*;
 
 import java.util.Optional;
 
 public class AuthenticateUserImpl implements AuthenticateUser {
     private final FindByUsername findByUsername;
     private final FindByEmail findByEmail;
-    private GenerateToken generateToken;
+    private final GenerateToken generateToken;
     private final AuthenticateUserGateway authenticateUserGateway;
+    private final SaveSession saveSession;
 
     public AuthenticateUserImpl(FindByUsername findByUsername,
                                 FindByEmail findByEmail,
                                 GenerateToken generateToken,
-                                AuthenticateUserGateway authenticateUserGateway) {
+                                AuthenticateUserGateway authenticateUserGateway,
+                                SaveSession saveSession) {
         this.findByUsername = findByUsername;
         this.findByEmail = findByEmail;
         this.generateToken = generateToken;
         this.authenticateUserGateway = authenticateUserGateway;
+        this.saveSession = saveSession;
     }
 
     @Override
@@ -36,6 +37,8 @@ public class AuthenticateUserImpl implements AuthenticateUser {
         String token = this.generateToken.generate(userResult.get().getUsername());
         if(token == null) throw  new UnauthorizedException("Bad credentials.");
         this.authenticateUserGateway.authenticate(userResult.get().getUsername(), password);
-        return token;
+        Session session =  new Session(userResult.get().getId(), token);
+        session = this.saveSession.save(session);
+        return session.getToken();
     }
 }

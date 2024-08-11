@@ -3,12 +3,10 @@ package com.br.walletwise.application.usecaseimpl;
 import com.br.walletwise.application.gateway.AuthenticateUserGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.AuthenticateUserImpl;
+import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.UnauthorizedException;
-import com.br.walletwise.usecase.AuthenticateUser;
-import com.br.walletwise.usecase.FindByEmail;
-import com.br.walletwise.usecase.FindByUsername;
-import com.br.walletwise.usecase.GenerateToken;
+import com.br.walletwise.usecase.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,6 +25,7 @@ class AuthenticateUserImplTests {
     private FindByEmail findByEmail;
     private GenerateToken generateToken;
     private AuthenticateUserGateway authenticateUserGateway;
+    private SaveSession saveSession;
 
     @BeforeEach
     void setUp() {
@@ -34,11 +33,14 @@ class AuthenticateUserImplTests {
         this.findByEmail =  mock(FindByEmail.class);
         this.generateToken =  mock(GenerateToken.class);
         this.authenticateUserGateway = mock(AuthenticateUserGateway.class);
+        this.saveSession = mock(SaveSession.class);
+
         this.authenticateUser = new AuthenticateUserImpl(
                 findByUsername,
                 findByEmail,
                 generateToken,
-                authenticateUserGateway);
+                authenticateUserGateway,
+                saveSession);
     }
 
     @ParameterizedTest
@@ -89,10 +91,14 @@ class AuthenticateUserImplTests {
         String accessToken = UUID.randomUUID().toString();
         User user = MocksFactory.userFactory();
 
+        Session session = new Session(user.getId(), accessToken);
+        Session savedSession = MocksFactory.sessionFactory(session);
+
         when(this.findByUsername.find(usernameOrEmail)).thenReturn(Optional.of(user));
         when(this.findByEmail.find(usernameOrEmail)).thenReturn(Optional.of(user));
-        doNothing().when(this.authenticateUserGateway).authenticate(user.getUsername(), password);
         when(this.generateToken.generate(user.getUsername())).thenReturn(accessToken);
+        doNothing().when(this.authenticateUserGateway).authenticate(user.getUsername(),password);
+        when(this.saveSession.save(any(Session.class))).thenReturn(savedSession);
 
         String  result = this.authenticateUser.authenticate(usernameOrEmail, password);
 
@@ -103,5 +109,6 @@ class AuthenticateUserImplTests {
             verify(this.findByUsername, times(1)).find(usernameOrEmail);
 
         verify(this.authenticateUserGateway, times(1)).authenticate(user.getUsername(), password);
+        verify(this.saveSession, times(1)).save(any(Session.class));
     }
 }
