@@ -1,5 +1,8 @@
 package com.br.walletwise.infra.entrypoint.controller.user;
 
+import com.br.walletwise.core.exception.BusinessException;
+import com.br.walletwise.core.exception.ConflictException;
+import com.br.walletwise.core.exception.UnauthorizedException;
 import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contracts.IValidator;
 import com.br.walletwise.infra.entrypoint.controller.AbstractController;
@@ -47,6 +50,9 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
             String token = this.usecase.authenticate(request.usernameOrEmail(), request.password());
             Response response = Response.builder().body(token).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (UnauthorizedException ex) {
+            Response response = Response.builder().body(ex.getMessage()).build();
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         } catch (Exception ex) {
             Response response = Response
                     .builder().body("An unexpected error occurred. Please try again later.").build();
