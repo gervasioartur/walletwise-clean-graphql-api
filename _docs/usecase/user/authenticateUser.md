@@ -44,7 +44,7 @@
     And the status code should be 400
     And the response body should contain "Username or email is required."
 
-### Scenario: User authentication fails when password is blank
+### Scenario: User authentication fails when password is blank [✅]
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
@@ -55,7 +55,7 @@
     And the status code should be 400
     And the response body should contain "Password is required."
 
-### Scenario: User authentication succeeds when with valid authentication info
+### Scenario: User authentication succeeds when with valid authentication info ´[✅]
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
