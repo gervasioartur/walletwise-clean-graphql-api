@@ -36,7 +36,6 @@ public class CreateUserImpl implements CreateUser {
 
         String encodedPassword = this.encodePassword.encode(user.getPassword());
         user.setPassword(encodedPassword);
-
         this.createUserGateway.create(user);
     }
 }
