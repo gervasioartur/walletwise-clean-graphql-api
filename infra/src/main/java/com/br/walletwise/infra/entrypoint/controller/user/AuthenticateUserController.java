@@ -66,6 +66,7 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
     protected List<IValidator> buildValidators(AuthenticateUserRequest request) {
         List<IValidator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("Username or E-mail",request.usernameOrEmail()).required().build());
+        validators.addAll(ValidationBuilder.of("Password",request.password()).required().build());
         return validators;
     }
 }
