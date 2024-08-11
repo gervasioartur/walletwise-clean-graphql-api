@@ -1,7 +1,5 @@
 package com.br.walletwise.infra.entrypoint.controller.user;
 
-import com.br.walletwise.core.exception.BusinessException;
-import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.core.exception.UnauthorizedException;
 import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contracts.IValidator;
