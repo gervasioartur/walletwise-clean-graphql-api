@@ -33,7 +33,7 @@ public class CreateUserController {
             @ApiResponse(responseCode = "409", description = "Conflict with business rules"),
             @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
     })
-    public ResponseEntity<Response> creteUser(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<Response> perform(@RequestBody CreateUserRequest request) {
         try {
             User user = mapper.map(request);
             this.usecase.create(user);
