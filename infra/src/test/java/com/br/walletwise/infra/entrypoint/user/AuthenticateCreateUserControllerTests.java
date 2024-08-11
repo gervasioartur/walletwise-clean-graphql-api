@@ -1,6 +1,7 @@
 package com.br.walletwise.infra.entrypoint.user;
 
 
+import com.br.walletwise.core.exception.UnauthorizedException;
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.usecase.AuthenticateUser;
@@ -72,6 +73,34 @@ public class AuthenticateCreateUserControllerTests {
                 .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("body",
                         Matchers.is("An unexpected error occurred. Please try again later.")));
+
+        verify(usecase, times(1))
+                .authenticate(requestParams.usernameOrEmail(), requestParams.password());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"any_username", "anyuser@email.com"})
+    @DisplayName("Should throw Unauthorized if user credentials are wrong")
+    void shouldThrowUnauthorizedIfUserCredentialsAreWrong(String password) throws Exception {
+        AuthenticateUserRequest requestParams = new AuthenticateUserRequest
+                (MocksFactory.faker.name().username(), password);
+
+        String json = new ObjectMapper().writeValueAsString(requestParams);
+
+        doThrow(new UnauthorizedException("Bad credentials.")).when(this.usecase)
+                .authenticate(requestParams.usernameOrEmail(), requestParams.password());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(this.URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc
+                .perform(request)
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("body",
+                        Matchers.is("Bad credentials.")));
 
         verify(usecase, times(1))
                 .authenticate(requestParams.usernameOrEmail(), requestParams.password());
