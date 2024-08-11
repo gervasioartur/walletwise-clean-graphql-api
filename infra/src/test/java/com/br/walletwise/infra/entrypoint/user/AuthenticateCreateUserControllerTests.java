@@ -103,4 +103,29 @@ public class AuthenticateCreateUserControllerTests {
         verify(usecase, times(0))
                 .authenticate(requestParams.usernameOrEmail(), requestParams.password());
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw BadRequest if password is empty or null")
+    void shouldThrowBadRequestIfPasswordIsEmptyOrNull(String password) throws Exception {
+        AuthenticateUserRequest requestParams = new AuthenticateUserRequest
+                (MocksFactory.faker.name().username(), password);
+
+        String json = new ObjectMapper().writeValueAsString(requestParams);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(this.URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc
+                .perform(request)
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("body",
+                        Matchers.is("Password is required.")));
+
+        verify(usecase, times(0))
+                .authenticate(requestParams.usernameOrEmail(), requestParams.password());
+    }
 }
