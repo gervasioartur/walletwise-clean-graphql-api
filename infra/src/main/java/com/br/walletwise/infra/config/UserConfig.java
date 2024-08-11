@@ -1,15 +1,8 @@
 package com.br.walletwise.infra.config;
 
-import com.br.walletwise.application.gateway.CreateUserGateway;
-import com.br.walletwise.application.gateway.FindByEmailGateway;
-import com.br.walletwise.application.gateway.FindByUsernameGateway;
-import com.br.walletwise.application.usecasesimpl.CreateUserImpl;
-import com.br.walletwise.application.usecasesimpl.FindByEmailImpl;
-import com.br.walletwise.application.usecasesimpl.FindByUsernameImpl;
-import com.br.walletwise.usecase.CreateUser;
-import com.br.walletwise.usecase.EncodePassword;
-import com.br.walletwise.usecase.FindByEmail;
-import com.br.walletwise.usecase.FindByUsername;
+import com.br.walletwise.application.gateway.*;
+import com.br.walletwise.application.usecasesimpl.*;
+import com.br.walletwise.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,5 +26,24 @@ public class UserConfig {
     @Bean
     public FindByEmail findByEmail(FindByEmailGateway findByEmailGateway) {
         return new FindByEmailImpl(findByEmailGateway);
+    }
+
+    @Bean
+    public GenerateToken generateToken(GenerateTokenGateway generateTokenGateway){
+        return new GenerateTokenImpl(generateTokenGateway);
+    }
+
+    @Bean
+    public SaveSession saveSession(SaveSessionGateway saveSessionGateway){
+        return new SaveSessionImpl(saveSessionGateway);
+    }
+
+    @Bean
+    public AuthenticateUser authenticateUser(FindByUsername findByUsername,
+                                             FindByEmail findByEmail,
+                                             GenerateToken generateToken,
+                                             AuthenticateUserGateway authenticateUserGateway,
+                                             SaveSession saveSession){
+        return new AuthenticateUserImpl(findByUsername, findByEmail, generateToken, authenticateUserGateway, saveSession);
     }
 }
