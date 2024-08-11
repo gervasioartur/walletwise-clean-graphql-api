@@ -56,6 +56,20 @@ class SessionTests {
         assertThat(exception.getMessage()).isEqualTo("User is required.");
     }
 
+    @Test
+    @DisplayName("Should return null if user id is not blank on update user id")
+    void shouldReturnNullIfUserIdIsNotBlankOnUpdateUserId() {
+        UUID userId = UUID.randomUUID();
+        String token = UUID.randomUUID().toString();
+        UUID updatedUserId = UUID.randomUUID();
+
+        Session session =  new Session(userId, token);
+        session.setUserId(updatedUserId);
+
+        assertThat(session.getUserId()).isEqualTo(updatedUserId);
+        assertThat(session.getToken()).isEqualTo(token);
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("Should throw DomainException if token is null or empty on build session with id")
@@ -96,6 +110,20 @@ class SessionTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Token is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null if token is not blank on update token")
+    void shouldReturnNullIfTokenIsNotBlankOnUpdateToken() {
+        UUID userId = UUID.randomUUID();
+        String token = UUID.randomUUID().toString();
+        String updatedString = UUID.randomUUID().toString();
+
+        Session session =  new Session(userId, token);
+        session.setToken(updatedString);
+
+        assertThat(session.getUserId()).isEqualTo(userId);
+        assertThat(session.getToken()).isEqualTo(updatedString);
     }
 
     @Test

@@ -156,6 +156,10 @@ public class MocksFactory {
         return new Session(UUID.randomUUID(),UUID.randomUUID().toString());
     }
 
+    public static Session sessionFactoryId(){
+        return new Session(UUID.randomUUID(),UUID.randomUUID(),UUID.randomUUID().toString(),LocalDateTime.now());
+    }
+
     public static Session sessionFactory(SessionJpaEntity entity){
         return new Session(entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate());
     }
@@ -167,6 +171,16 @@ public class MocksFactory {
                 .user(UserJpaEntity.builder().id(session.getUserId()).build())
                 .token(session.getToken())
                 .creationDate(session.getCreationDate())
+                .build();
+    }
+
+    public static SessionJpaEntity sessionJpaEntityFactory(){
+        return  SessionJpaEntity
+                .builder()
+                .id(UUID.randomUUID())
+                .user(UserJpaEntity.builder().id(UUID.randomUUID()).build())
+                .token(UUID.randomUUID().toString())
+                .creationDate(LocalDateTime.now())
                 .build();
     }
 

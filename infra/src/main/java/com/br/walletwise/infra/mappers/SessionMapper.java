@@ -12,6 +12,7 @@ public class SessionMapper {
                 .builder()
                 .id(session.getId())
                 .user(UserJpaEntity.builder().id(session.getUserId()).build())
+                .token(session.getToken())
                 .creationDate(session.getCreationDate())
                 .build();
     }
