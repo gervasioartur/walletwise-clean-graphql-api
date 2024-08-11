@@ -2,7 +2,6 @@ package com.br.walletwise.infra.entrypoint.user;
 
 
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
-import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.usecase.AuthenticateUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,8 +41,6 @@ public class AuthenticateCreateUserControllerTests {
 
     @MockBean
     private AuthenticateUser usecase;
-    @MockBean
-    private UserMapper mapper;
 
     @BeforeEach
     public void setup() {
