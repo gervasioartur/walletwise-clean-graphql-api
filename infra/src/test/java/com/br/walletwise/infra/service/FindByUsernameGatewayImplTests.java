@@ -2,10 +2,10 @@ package com.br.walletwise.infra.service;
 
 import com.br.walletwise.application.gateway.FindByUsernameGateway;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
-import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
+import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
+import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class FindByUsernameGatewayImplTests {
+class FindByUsernameGatewayImplTests {
     @Autowired
     FindByUsernameGateway findByUsernameGateway;
 
