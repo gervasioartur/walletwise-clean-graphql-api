@@ -1,5 +1,6 @@
 package com.br.walletwise.infra.entrypoint.user;
 
+import com.br.walletwise.core.exception.BusinessException;
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
@@ -8,7 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -73,6 +76,31 @@ public class AuthenticateCreateUserControllerTests {
                         Matchers.is("An unexpected error occurred. Please try again later.")));
 
         verify(usecase, times(1))
+                .authenticate(requestParams.usernameOrEmail(), requestParams.password());
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw BadRequest if username Or email is empty or null")
+    void shouldThrowBadRequestIfUsernameOrEmailIsEmptyOrNull(String usernameOrEmail) throws Exception {
+        AuthenticateUserRequest requestParams = new AuthenticateUserRequest
+                (usernameOrEmail, MocksFactory.faker.internet().password());
+
+        String json = new ObjectMapper().writeValueAsString(requestParams);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(this.URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc
+                .perform(request)
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("body",
+                        Matchers.is("Username or E-mail is required.")));
+
+        verify(usecase, times(0))
                 .authenticate(requestParams.usernameOrEmail(), requestParams.password());
     }
 }
