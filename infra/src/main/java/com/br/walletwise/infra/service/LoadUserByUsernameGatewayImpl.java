@@ -1,6 +1,6 @@
 package com.br.walletwise.infra.service;
 
-import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
+import com.br.walletwise.infra.persistence.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LoadUserByUsernameGatewayImpl implements UserDetailsService {
-    private final IUserJpaRepository userJpaRepository;
+    private final UserJpaRepository userJpaRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

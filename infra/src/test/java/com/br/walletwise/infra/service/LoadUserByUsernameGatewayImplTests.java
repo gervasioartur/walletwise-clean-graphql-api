@@ -2,7 +2,7 @@ package com.br.walletwise.infra.service;
 
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
-import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
+import com.br.walletwise.infra.persistence.repository.UserJpaRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class LoadUserByUsernameGatewayImplTests {
     @Autowired
     private LoadUserByUsernameGatewayImpl loadUserByUsernameGateway;
     @MockBean
-    private IUserJpaRepository  userJpaRepository;
+    private UserJpaRepository userJpaRepository;
 
     @Test
     @DisplayName("Should throw UsernameNotFoundException if user does no exist on find by username")

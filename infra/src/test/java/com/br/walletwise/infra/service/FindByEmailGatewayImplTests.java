@@ -4,7 +4,7 @@ import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
-import com.br.walletwise.infra.persistence.repository.IUserJpaRepository;
+import com.br.walletwise.infra.persistence.repository.UserJpaRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ class FindByEmailGatewayImplTests {
     FindByEmailGatewayImpl findByEmailJpaGateway;
 
     @MockBean
-    private IUserJpaRepository userJpaRepository;
+    private UserJpaRepository userJpaRepository;
     @MockBean
     private UserMapper mapper;
 
