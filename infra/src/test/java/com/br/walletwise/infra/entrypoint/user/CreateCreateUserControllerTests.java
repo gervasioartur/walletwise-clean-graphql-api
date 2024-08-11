@@ -69,7 +69,7 @@ public class CreateCreateUserControllerTests {
         mvc
                 .perform(request)
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("body", 
+                .andExpect(jsonPath("body",
                         Matchers.is("An unexpected error occurred. Please try again later.")));
 
         verify(createUser, times(1)).create(user);

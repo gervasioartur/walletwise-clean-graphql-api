@@ -44,7 +44,7 @@ public class User extends AbstractEntity {
     public UUID getId() {
         return id;
     }
-    
+
     public String getFirstname() {
         return firstname;
     }
