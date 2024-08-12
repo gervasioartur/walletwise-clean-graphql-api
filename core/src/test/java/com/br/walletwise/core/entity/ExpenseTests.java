@@ -100,4 +100,21 @@ class ExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Description is required.");
     }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if category empty or null on build with all arguments")
+    void shouldThrowDomainExceptionIfCategoryIsNullOnBuildWithAllArguments(String category) {
+        Throwable exception = catchThrowable(() -> new Expense(
+                null,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                category,
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(faker.number().randomNumber()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Category is required.");
+    }
 }
