@@ -1,5 +1,6 @@
 package com.br.walletwise.core.validation;
 
+import com.br.walletwise.core.validation.validator.CategoryValidator;
 import com.br.walletwise.core.validation.validator.EmailValidator;
 import com.br.walletwise.core.validation.validator.RequiredFieldValidator;
 import com.br.walletwise.core.validation.validator.UsernameValidator;
@@ -34,6 +35,11 @@ public class ValidationBuilder {
 
     public ValidationBuilder email() {
         this.validators.add(new EmailValidator(this.fieldValue));
+        return this;
+    }
+
+    public ValidationBuilder category() {
+        this.validators.add(new CategoryValidator(this.fieldValue));
         return this;
     }
 
