@@ -226,4 +226,20 @@ class ExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Amount is required.");
     }
+
+    @ParameterizedTest
+    @ValueSource(longs = {0})
+    @DisplayName("Should throw DomainException if amount is zero(0) on build with no id")
+    void shouldThrowDomainExceptionIfAmountIsZeroOnBuildWithNoId(Long amount) {
+        Throwable exception = catchThrowable(() ->  new Expense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(amount),
+                true) );
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Amount is required.");
+    }
 }
