@@ -57,6 +57,9 @@ public class Expense extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
+
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public String getCategory() {
