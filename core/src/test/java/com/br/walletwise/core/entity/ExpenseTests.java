@@ -189,4 +189,24 @@ class ExpenseTests {
                 .isEqualTo("Category is invalid. These are available categories : "
                         +  CategoryEnum.RENT.getValue() +"," + CategoryEnum.SCHOOL.getValue());
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"any_category","invalid_category"})
+    @DisplayName("Should throw DomainException if category is invalid on update category")
+    void shouldThrowDomainExceptionIfCategoryIsInvalidOnUpdateCategory(String category) {
+        Expense expense = new Expense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                CategoryEnum.RENT.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(faker.number().randomNumber()),
+                true);
+
+        Throwable exception = catchThrowable(() -> expense.setCategory(category));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage())
+                .isEqualTo("Category is invalid. These are available categories : "
+                        +  CategoryEnum.RENT.getValue() +"," + CategoryEnum.SCHOOL.getValue());
+    }
 }
