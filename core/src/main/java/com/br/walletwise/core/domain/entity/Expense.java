@@ -101,7 +101,7 @@ public class Expense extends AbstractEntity {
         validators.addAll(ValidationBuilder.of("User info",this.userId).required().build());
         validators.addAll(ValidationBuilder.of("Description",this.description).required().build());
         validators.addAll(ValidationBuilder.of("Category",this.category).required().category().build());
-
+        validators.addAll(ValidationBuilder.of("Amount",this.amount).required().build());
         return validators;
     }
 }
