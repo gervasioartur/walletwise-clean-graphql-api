@@ -29,7 +29,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -44,7 +44,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -61,7 +61,7 @@ class ExpenseTests {
                 description,
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -77,7 +77,7 @@ class ExpenseTests {
                 description,
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -93,7 +93,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true);
 
         Throwable exception = catchThrowable(() -> expense.setDescription(description));
@@ -112,7 +112,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 category,
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -128,7 +128,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 category,
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -144,7 +144,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true);
 
         Throwable exception = catchThrowable(() -> expense.setCategory(category) );
@@ -163,7 +163,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 category,
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true) );
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -181,7 +181,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 category,
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true) );
 
         assertThat(exception).isInstanceOf(DomainException.class);
@@ -199,7 +199,7 @@ class ExpenseTests {
                 faker.lorem().word(),
                 CategoryEnum.RENT.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(faker.number().randomNumber()),
+                new BigDecimal(200),
                 true);
 
         Throwable exception = catchThrowable(() -> expense.setCategory(category));
@@ -238,6 +238,24 @@ class ExpenseTests {
                 ExpenseTypeEnum.FIXED.getValue(),
                 new BigDecimal(amount),
                 true) );
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Amount is required.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(longs = {0})
+    @DisplayName("Should throw DomainException if amount is zero(0) on update amount")
+    void shouldThrowDomainExceptionIfAmountIsZeroOnUpdateAmount(Long amount) {
+        Expense expense = new Expense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        Throwable exception = catchThrowable(() -> expense.setAmount(new BigDecimal(amount)));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Amount is required.");
