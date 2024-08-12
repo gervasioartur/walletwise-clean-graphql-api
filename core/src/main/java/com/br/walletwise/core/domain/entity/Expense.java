@@ -95,6 +95,7 @@ public class Expense extends AbstractEntity {
     protected List<IValidator> buildValidators() {
         List<IValidator> validators = new ArrayList<IValidator>();
         validators.addAll(ValidationBuilder.of("User info",this.userId).required().build());
+        validators.addAll(ValidationBuilder.of("Description",this.description).required().build());
         return validators;
     }
 }
