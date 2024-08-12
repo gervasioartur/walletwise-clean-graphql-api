@@ -311,4 +311,27 @@ class ExpenseTests {
 
         assertThat(expense.getAmount()).isEqualTo(updatedAmount);
     }
+
+    @Test
+    @DisplayName("Should build expense with correct values")
+    void shouldBuildExpenseWithCorrectValues() {
+        Long id =  null;
+        UUID userId =  UUID.randomUUID();
+        String description = faker.lorem().word();
+        String category = CategoryEnum.RENT.getValue();
+        String type = ExpenseTypeEnum.FIXED.getValue();
+        BigDecimal amount = new BigDecimal(200);
+        boolean isActive = true;
+
+        Expense expense = new Expense(id, userId, description, category, type, amount, isActive);
+
+        assertThat(expense.getId()).isEqualTo(id);
+        assertThat(expense.getUserId()).isEqualTo(userId);
+        assertThat(expense.getDescription()).isEqualTo(description);
+        assertThat(expense.getCategory()).isEqualTo(category);
+        assertThat(expense.getType()).isEqualTo(type);
+        assertThat(expense.getAmount()).isEqualTo(amount);
+        assertThat(expense.isActive()).isEqualTo(isActive);
+    }
+
 }
