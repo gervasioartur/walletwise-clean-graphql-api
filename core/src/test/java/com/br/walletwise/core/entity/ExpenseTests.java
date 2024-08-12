@@ -102,6 +102,23 @@ class ExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Description is required.");
     }
 
+    @Test
+    @DisplayName("Should return null when trying to update description with correct values")
+    void shouldReturnNullWhenTryingToUpdateDescriptionWithCorrectValues() {
+        Expense expense = new Expense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                CategoryEnum.RENT.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        String updatedDescription = faker.lorem().paragraph();
+        expense.setDescription(updatedDescription);
+
+        assertThat(expense.getDescription()).isEqualTo(updatedDescription);
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("Should throw DomainException if category empty or null on build with all arguments")
@@ -151,6 +168,23 @@ class ExpenseTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Category is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null when trying to update category with correct values")
+    void shouldReturnNullWhenTryingToUpdateCategoryWithCorrectValues() {
+        Expense expense = new Expense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                CategoryEnum.RENT.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        String updatedCategory = CategoryEnum.SCHOOL.getValue();
+        expense.setCategory(updatedCategory);
+
+        assertThat(expense.getCategory()).isEqualTo(updatedCategory);
     }
 
     @ParameterizedTest
@@ -259,5 +293,22 @@ class ExpenseTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Amount is required.");
+    }
+
+    @Test
+    @DisplayName("Should return null when trying to update amount with correct values")
+    void shouldReturnNullWhenTryingToUpdateAmountWithCorrectValues() {
+        Expense expense = new Expense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                CategoryEnum.RENT.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        BigDecimal updatedAmount = new BigDecimal(200);
+        expense.setAmount(updatedAmount);
+
+        assertThat(expense.getAmount()).isEqualTo(updatedAmount);
     }
 }
