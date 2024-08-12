@@ -85,6 +85,8 @@ public class Expense extends AbstractEntity {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public boolean isActive() {
