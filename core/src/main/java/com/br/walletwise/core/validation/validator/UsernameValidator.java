@@ -1,7 +1,5 @@
 package com.br.walletwise.core.validation.validator;
 
-import com.br.walletwise.core.validation.AbstractValidator;
-
 public class UsernameValidator extends AbstractValidator {
     private final String returnMessage;
 

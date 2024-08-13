@@ -2,7 +2,7 @@ package com.br.walletwise.core.domain.entity;
 
 import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.validation.ValidationBuilder;
-import com.br.walletwise.core.validation.validator.contracts.IValidator;
+import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,8 +104,8 @@ public class User extends AbstractEntity {
     }
 
     @Override
-    protected List<IValidator> buildValidators() {
-        List<IValidator> validators = new ArrayList<>();
+    protected List<Validator> buildValidators() {
+        List<Validator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("Firstname", this.firstname).required().build());
         validators.addAll(ValidationBuilder.of("Lastname", this.lastname).required().build());
         validators.addAll(ValidationBuilder.of("Username", this.username).required().username().build());

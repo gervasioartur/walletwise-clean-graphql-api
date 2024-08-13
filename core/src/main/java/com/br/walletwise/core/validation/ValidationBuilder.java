@@ -4,13 +4,13 @@ import com.br.walletwise.core.validation.validator.CategoryValidator;
 import com.br.walletwise.core.validation.validator.EmailValidator;
 import com.br.walletwise.core.validation.validator.RequiredFieldValidator;
 import com.br.walletwise.core.validation.validator.UsernameValidator;
-import com.br.walletwise.core.validation.validator.contracts.IValidator;
+import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationBuilder {
-    private final List<IValidator> validators = new ArrayList<>();
+    private final List<Validator> validators = new ArrayList<>();
     private final String fieldName;
     private final Object fieldValue;
 
@@ -43,7 +43,7 @@ public class ValidationBuilder {
         return this;
     }
 
-    public List<IValidator> build() {
+    public List<Validator> build() {
         return this.validators;
     }
 }

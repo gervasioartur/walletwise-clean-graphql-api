@@ -2,7 +2,7 @@ package com.br.walletwise.core.domain.entity;
 
 import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.validation.ValidationBuilder;
-import com.br.walletwise.core.validation.validator.contracts.IValidator;
+import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -74,8 +74,8 @@ public class Session extends AbstractEntity{
     }
 
     @Override
-    protected List<IValidator> buildValidators() {
-        List<IValidator> validators = new ArrayList<IValidator>();
+    protected List<Validator> buildValidators() {
+        List<Validator> validators = new ArrayList<Validator>();
         validators.addAll(ValidationBuilder.of("User", this.userId).required().build());
         validators.addAll(ValidationBuilder.of("Token", this.token).required().build());
         return validators;

@@ -1,7 +1,6 @@
 package com.br.walletwise.core.validation.validator;
 
 import com.br.walletwise.core.domain.model.GeneralEnumString;
-import com.br.walletwise.core.validation.AbstractValidator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

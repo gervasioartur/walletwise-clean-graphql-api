@@ -2,7 +2,7 @@ package com.br.walletwise.infra.entrypoint.controller.user;
 
 import com.br.walletwise.core.exception.UnauthorizedException;
 import com.br.walletwise.core.validation.ValidationBuilder;
-import com.br.walletwise.core.validation.validator.contracts.IValidator;
+import com.br.walletwise.core.validation.validator.contract.Validator;
 import com.br.walletwise.infra.entrypoint.controller.AbstractController;
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
 import com.br.walletwise.infra.entrypoint.dto.Response;
@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -61,8 +60,8 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
     }
 
     @Override
-    protected List<IValidator> buildValidators(AuthenticateUserRequest request) {
-        List<IValidator> validators = new ArrayList<>();
+    protected List<Validator> buildValidators(AuthenticateUserRequest request) {
+        List<Validator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("Username or E-mail",request.usernameOrEmail()).required().build());
         validators.addAll(ValidationBuilder.of("Password",request.password()).required().build());
         return validators;

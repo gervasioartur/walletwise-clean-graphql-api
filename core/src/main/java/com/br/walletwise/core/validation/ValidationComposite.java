@@ -1,19 +1,19 @@
 package com.br.walletwise.core.validation;
 
-import com.br.walletwise.core.validation.validator.contracts.IValidator;
+import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.util.List;
 
-public class ValidationComposite implements IValidator {
-    private final List<IValidator> validators;
+public class ValidationComposite implements Validator {
+    private final List<Validator> validators;
 
-    public ValidationComposite(List<IValidator> validators) {
+    public ValidationComposite(List<Validator> validators) {
         this.validators = validators;
     }
 
     @Override
     public String validate() {
-        for (IValidator validator : validators) {
+        for (Validator validator : validators) {
             String error = validator.validate();
             if (error != null) {
                 return error;
