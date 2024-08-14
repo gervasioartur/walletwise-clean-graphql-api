@@ -82,6 +82,7 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if description is null on build with all arguments")
     void shouldThrowDomainExceptionIfDescriptionIsNullOnBuildWithAllArguments(String description) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
+                0,
                 UUID.randomUUID(),
                 description,
                 1,
@@ -95,6 +96,23 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Description is required.");
     }
 
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if description is null on build with no Id")
+    void shouldThrowDomainExceptionIfDescriptionIsNullOnBuildWithNoId(String description) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                UUID.randomUUID(),
+                description,
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Description is required.");
+    }
 
 
 
