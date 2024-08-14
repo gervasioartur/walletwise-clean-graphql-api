@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Expense extends AbstractEntity {
-    private Long id;
+    private long id;
     private UUID userId;
     private String description;
     private String category;
@@ -18,7 +18,7 @@ public class Expense extends AbstractEntity {
     private BigDecimal amount;
     private boolean isActive;
 
-    public Expense(Long id, UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive) {
+    public Expense(long id, UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive) {
         this.id = id;
         this.userId = userId;
         this.description = description;
@@ -43,7 +43,7 @@ public class Expense extends AbstractEntity {
         if(error != null) throw new DomainException(error);
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

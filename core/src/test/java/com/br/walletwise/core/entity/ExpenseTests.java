@@ -24,7 +24,7 @@ class ExpenseTests {
     @DisplayName("Should throw DomainException if user id is null on build with all arguments")
     void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithAllArguments() {
         Throwable exception = catchThrowable(() -> new Expense(
-                null,
+                0,
                 null,
                 faker.lorem().word(),
                 CategoryEnum.RENT.getValue(),
@@ -56,7 +56,7 @@ class ExpenseTests {
     @DisplayName("Should throw DomainException if description is empty or null on build with all arguments")
     void shouldThrowDomainExceptionIfDescriptionIsEmptyOrNullOnBuildWithAllArguments(String description) {
         Throwable exception = catchThrowable(() -> new Expense(
-                null,
+                0,
                 UUID.randomUUID(),
                 description,
                 CategoryEnum.RENT.getValue(),
@@ -124,7 +124,7 @@ class ExpenseTests {
     @DisplayName("Should throw DomainException if category empty or null on build with all arguments")
     void shouldThrowDomainExceptionIfCategoryIsNullOnBuildWithAllArguments(String category) {
         Throwable exception = catchThrowable(() -> new Expense(
-                null,
+                0,
                 UUID.randomUUID(),
                 faker.lorem().word(),
                 category,
@@ -192,7 +192,7 @@ class ExpenseTests {
     @DisplayName("Should throw DomainException if category is invalid on build with all arguments")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithAllArguments(String category) {
         Throwable exception = catchThrowable(() ->  new Expense(
-                null,
+                0,
                 UUID.randomUUID(),
                 faker.lorem().word(),
                 category,
@@ -249,7 +249,7 @@ class ExpenseTests {
     @DisplayName("Should throw DomainException if amount is zero(0) on build with all arguments")
     void shouldThrowDomainExceptionIfAmountIsZeroOnBuildWithAllArguments(Long amount) {
         Throwable exception = catchThrowable(() ->  new Expense(
-                null,
+                0,
                 UUID.randomUUID(),
                 faker.lorem().word(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -315,7 +315,7 @@ class ExpenseTests {
     @Test
     @DisplayName("Should build expense with correct values")
     void shouldBuildExpenseWithCorrectValues() {
-        Long id =  null;
+        long id =  0;
         UUID userId =  UUID.randomUUID();
         String description = faker.lorem().word();
         String category = CategoryEnum.RENT.getValue();
@@ -333,5 +333,4 @@ class ExpenseTests {
         assertThat(expense.getAmount()).isEqualTo(amount);
         assertThat(expense.isActive()).isEqualTo(isActive);
     }
-
 }
