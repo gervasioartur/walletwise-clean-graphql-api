@@ -517,6 +517,27 @@ class FixedExpenseTests {
                 + CategoryEnum.RENT.getValue() + "," + CategoryEnum.SCHOOL.getValue());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"any_category","any_invalid_category"})
+    @DisplayName("Should throw DomainException if category is invalid on build with all arguments")
+    void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithNoId(String category) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                20,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                category,
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Category is invalid. These are available categories : "
+                + CategoryEnum.RENT.getValue() + "," + CategoryEnum.SCHOOL.getValue());
+    }
+
     @Test
     @DisplayName("Should build FixedExpense with correct values")
     void shouldBuildFixedExpenseWithCorrectValues() {
