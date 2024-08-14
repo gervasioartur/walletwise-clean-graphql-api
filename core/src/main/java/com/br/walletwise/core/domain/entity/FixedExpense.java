@@ -86,6 +86,8 @@ public class FixedExpense extends Expense {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+        String error = this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     @Override
