@@ -403,7 +403,23 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Amount is required.");
     }
 
+    @Test
+    @DisplayName("Should throw DomainException if amount is less than zero on build with all arguments")
+    void shouldThrowDomainExceptionIfAmountIsLessThanZeroOnBuildWithAllArguments() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                12,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(-1),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
 
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Invalid value for amount.");
+    }
 
 
     @Test
