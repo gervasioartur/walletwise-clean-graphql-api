@@ -99,10 +99,6 @@ public class User extends AbstractEntity {
         return active;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     @Override
     protected List<Validator> buildValidators() {
         List<Validator> validators = new ArrayList<>();
