@@ -348,7 +348,24 @@ class FixedExpenseTests {
     }
 
 
+    @ParameterizedTest
+    @ValueSource(strings = {"invalid_category","category", "any_category"})
+    @DisplayName("Should throw DomainException if amount is zero on build with all arguments")
+    void shouldThrowDomainExceptionIfAmountIsZeroOnBuildWithAllArguments() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                12,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(0),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
 
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Amount is required.");
+    }
 
 
 
