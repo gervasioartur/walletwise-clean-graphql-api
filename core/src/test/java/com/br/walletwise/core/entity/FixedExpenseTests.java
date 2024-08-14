@@ -230,6 +230,42 @@ class FixedExpenseTests {
     }
 
 
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if category is null or empty on build with all arguments")
+    void shouldThrowDomainExceptionIfDueDayIsZeroOnBuildWithAllArguments(String category) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                12,
+                category,
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Category is required.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if category is null or empty on build with no id")
+    void shouldThrowDomainExceptionIfDueDayIsZeroOnBuildWithNoId(String category) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                12,
+                category,
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Category is required.");
+    }
 
 
 
@@ -289,12 +325,12 @@ class FixedExpenseTests {
                 (id,userId,description,dueDay,category,amount,startDate,endDate,active);
 
         assertThat(fixedExpense.getId()).isEqualTo(id);
-        assertThat(fixedExpense.getDueDay()).isEqualTo(dueDay);
-        assertThat(fixedExpense.getStartDate()).isEqualTo(startDate);
-        assertThat(fixedExpense.getEndDate()).isEqualTo(endDate);
         assertThat(fixedExpense.getUserId()).isEqualTo(userId);
         assertThat(fixedExpense.getDescription()).isEqualTo(description);
+        assertThat(fixedExpense.getDueDay()).isEqualTo(dueDay);
         assertThat(fixedExpense.getCategory()).isEqualTo(category);
+        assertThat(fixedExpense.getStartDate()).isEqualTo(startDate);
+        assertThat(fixedExpense.getEndDate()).isEqualTo(endDate);
         assertThat(fixedExpense.isActive()).isEqualTo(active);
     }
 }
