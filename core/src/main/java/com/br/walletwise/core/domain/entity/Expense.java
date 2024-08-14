@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Expense extends AbstractEntity {
-    private long id;
+    private long expenseId;
     private UUID userId;
     private String description;
     private String category;
@@ -18,8 +18,8 @@ public class Expense extends AbstractEntity {
     private BigDecimal amount;
     private boolean isActive;
 
-    public Expense(long id, UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive) {
-        this.id = id;
+    public Expense(long expenseId, UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive) {
+        this.expenseId = expenseId;
         this.userId = userId;
         this.description = description;
         this.category = category;
@@ -37,8 +37,8 @@ public class Expense extends AbstractEntity {
         this.isActive = isActive;
     }
 
-    public long getId() {
-        return id;
+    public long getExpenseId() {
+        return expenseId;
     }
 
     public UUID getUserId() {

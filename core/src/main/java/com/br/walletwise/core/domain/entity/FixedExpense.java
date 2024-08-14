@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 public class FixedExpense extends Expense {
-    private long id;
+    private long fixedExpenseId;
     private int dueDay;
     private Date startDate;
     private Date endDate;
 
-    public FixedExpense(long id,
+    public FixedExpense(long fixedExpenseId,
                         int dueDay,
                         Date startDate,
                         Date endDate,
@@ -28,7 +28,7 @@ public class FixedExpense extends Expense {
                         BigDecimal amount,
                         boolean isActive) {
         super(expenseId, userId, description, category, type, amount, isActive);
-        this.id =  id;
+        this.fixedExpenseId = fixedExpenseId;
         this.dueDay = dueDay;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -57,9 +57,8 @@ public class FixedExpense extends Expense {
         if(error != null) throw new DomainException(error);
     }
 
-    @Override
-    public long getId() {
-        return id;
+    public long getFixedExpenseId() {
+        return fixedExpenseId;
     }
 
     public int getDueDay() {
@@ -91,6 +90,8 @@ public class FixedExpense extends Expense {
         String error = this.validate();
         if(error != null) throw new DomainException(error);
     }
+
+
 
     @Override
     protected List<Validator> buildValidators() {
