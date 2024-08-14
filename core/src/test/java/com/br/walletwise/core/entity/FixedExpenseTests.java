@@ -577,6 +577,26 @@ class FixedExpenseTests {
     }
 
     @Test
+    @DisplayName("Should throw DomainException if amount is less than zero on build with all arguments")
+    void shouldThrowDomainExceptionIfCategoryIsLessThanZerOnBuildWithAllArguments() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                1,
+                20,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                1,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(-1),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Invalid value for amount.");
+    }
+
+    @Test
     @DisplayName("Should build FixedExpense with correct values")
     void shouldBuildFixedExpenseWithCorrectValues() {
         long fixedExpenseId = 1;
