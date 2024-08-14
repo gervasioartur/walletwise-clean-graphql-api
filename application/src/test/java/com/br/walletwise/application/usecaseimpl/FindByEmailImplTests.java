@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecaseimpl;
 
 import com.br.walletwise.application.gateway.FindByEmailGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
-import com.br.walletwise.application.usecasesimpl.FindByEmailImpl;
+import com.br.walletwise.application.usecasesimpl.user.FindByEmailImpl;
 import com.br.walletwise.core.domain.entity.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

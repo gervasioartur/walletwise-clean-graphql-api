@@ -1,7 +1,7 @@
 package com.br.walletwise.application.usecaseimpl;
 
 import com.br.walletwise.application.gateway.GenerateTokenGateway;
-import com.br.walletwise.application.usecasesimpl.GenerateTokenImpl;
+import com.br.walletwise.application.usecasesimpl.user.GenerateTokenImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

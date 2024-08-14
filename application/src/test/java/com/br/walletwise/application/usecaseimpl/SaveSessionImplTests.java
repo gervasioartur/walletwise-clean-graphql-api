@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecaseimpl;
 
 import com.br.walletwise.application.gateway.SaveSessionGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
-import com.br.walletwise.application.usecasesimpl.SaveSessionImpl;
+import com.br.walletwise.application.usecasesimpl.user.SaveSessionImpl;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.usecase.user.SaveSession;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.br.walletwise.application.usecasesimpl;
+package com.br.walletwise.application.usecasesimpl.user;
 
 import com.br.walletwise.application.gateway.GenerateTokenGateway;
 import com.br.walletwise.usecase.user.GenerateToken;

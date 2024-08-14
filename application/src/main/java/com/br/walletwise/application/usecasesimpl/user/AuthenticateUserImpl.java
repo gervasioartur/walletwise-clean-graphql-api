@@ -1,4 +1,4 @@
-package com.br.walletwise.application.usecasesimpl;
+package com.br.walletwise.application.usecasesimpl.user;
 
 import com.br.walletwise.application.gateway.AuthenticateUserGateway;
 import com.br.walletwise.core.domain.entity.Session;

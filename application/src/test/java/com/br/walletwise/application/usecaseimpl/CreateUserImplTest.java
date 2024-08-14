@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecaseimpl;
 
 import com.br.walletwise.application.gateway.CreateUserGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
-import com.br.walletwise.application.usecasesimpl.CreateUserImpl;
+import com.br.walletwise.application.usecasesimpl.user.CreateUserImpl;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.usecase.user.CreateUser;

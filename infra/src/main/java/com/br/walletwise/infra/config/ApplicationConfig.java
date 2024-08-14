@@ -1,7 +1,7 @@
 package com.br.walletwise.infra.config;
 
 import com.br.walletwise.application.gateway.EncodePasswordGateway;
-import com.br.walletwise.application.usecasesimpl.EncodePasswordImpl;
+import com.br.walletwise.application.usecasesimpl.user.EncodePasswordImpl;
 import com.br.walletwise.usecase.user.EncodePassword;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
