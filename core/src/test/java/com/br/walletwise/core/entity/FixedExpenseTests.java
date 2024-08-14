@@ -32,7 +32,7 @@ class FixedExpenseTests {
                 20,
                 null,
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -51,7 +51,7 @@ class FixedExpenseTests {
                 20,
                 null,
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                 01,
+                 1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -70,7 +70,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -91,7 +91,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -113,7 +113,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 null,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -132,7 +132,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 null,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -151,7 +151,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -175,7 +175,7 @@ class FixedExpenseTests {
                 20,
                 startDate,
                 endDate,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -194,7 +194,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -220,7 +220,7 @@ class FixedExpenseTests {
                 0,
                 startDate,
                 endDate,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -243,7 +243,7 @@ class FixedExpenseTests {
                 0,
                 startDate,
                 endDate,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -310,7 +310,7 @@ class FixedExpenseTests {
                 20,
                 startDate,
                 endDate,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -336,7 +336,7 @@ class FixedExpenseTests {
                 20,
                 startDate,
                 endDate,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -360,7 +360,7 @@ class FixedExpenseTests {
                 20,
                 startDate,
                 endDate,
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -382,7 +382,7 @@ class FixedExpenseTests {
                20,
                new Date(),
                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-               01,
+               1,
                null,
                faker.lorem().paragraph(),
                CategoryEnum.SCHOOL.getValue(),
@@ -401,7 +401,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 null,
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -422,7 +422,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 description,
                 CategoryEnum.SCHOOL.getValue(),
@@ -442,7 +442,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 description,
                 CategoryEnum.SCHOOL.getValue(),
@@ -463,7 +463,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 category,
@@ -483,7 +483,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 category,
@@ -504,7 +504,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 category,
@@ -525,7 +525,7 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 category,
@@ -538,7 +538,6 @@ class FixedExpenseTests {
                 + CategoryEnum.RENT.getValue() + "," + CategoryEnum.SCHOOL.getValue());
     }
 
-
     @Test
     @DisplayName("Should throw DomainException if amount is zero(0) on build with all arguments")
     void shouldThrowDomainExceptionIfCategoryIsZeroOnBuildWithAllArguments() {
@@ -547,7 +546,26 @@ class FixedExpenseTests {
                 20,
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                01,
+                1,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(0),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Amount is required.");
+    }
+
+    @Test
+    @DisplayName("Should throw DomainException if amount is zero(0) on build with no id")
+    void shouldThrowDomainExceptionIfCategoryIsZeroOnBuildWithNoId() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                20,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                1,
                 UUID.randomUUID(),
                 faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -571,7 +589,7 @@ class FixedExpenseTests {
         String description = faker.lorem().paragraph();
         String category = CategoryEnum.SCHOOL.getValue();
         String type = ExpenseTypeEnum.FIXED.getValue();
-        BigDecimal amount = new BigDecimal(200.0);
+        BigDecimal amount = new BigDecimal(200);
         boolean active = true;
 
 
