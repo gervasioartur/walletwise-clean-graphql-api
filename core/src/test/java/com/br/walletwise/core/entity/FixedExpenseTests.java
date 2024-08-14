@@ -79,4 +79,25 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Start date is required.");
     }
+
+    @Test
+    @DisplayName("Should return null if start date is not null on update stat date")
+    void shouldReturnNullIfStartDateIsNullOnUpdateStatDate() {
+        FixedExpense fixedExpense =  new FixedExpense(
+                20,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+            Date updatedStartDate =  new Date();
+            fixedExpense.setStartDate(updatedStartDate);
+
+        assertThat(fixedExpense.getStartDate()).isEqualTo(updatedStartDate);
+    }
 }
