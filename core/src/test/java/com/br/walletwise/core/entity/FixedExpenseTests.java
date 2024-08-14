@@ -6,6 +6,8 @@ import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 
 import java.math.BigDecimal;
@@ -75,7 +77,23 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("User info is required.");
     }
 
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if description is null on build with all arguments")
+    void shouldThrowDomainExceptionIfDescriptionIsNullOnBuildWithAllArguments(String description) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                UUID.randomUUID(),
+                description,
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
 
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Description is required.");
+    }
 
 
 
