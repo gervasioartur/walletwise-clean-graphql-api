@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 class FixedExpenseTests {
     private final Faker faker = new Faker();
@@ -25,7 +26,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should throw Domain exception if start date is null on build with all arguments")
     void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithAllArguments() {
-        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 0,
                 20,
                 null,
@@ -45,7 +46,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should throw DomainException if start date is null on build with no id")
     void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithNoId() {
-        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 20,
                 null,
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
@@ -76,7 +77,7 @@ class FixedExpenseTests {
                 new BigDecimal(200),
                 true);
 
-        Throwable exception = Assertions.catchThrowable(() -> fixedExpense.setStartDate(null));
+        Throwable exception = catchThrowable(() -> fixedExpense.setStartDate(null));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Start date is required.");
@@ -106,7 +107,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should throw Domain exception if end date is null on build with all arguments")
     void shouldThrowDomainExceptionIfEndDateIsNullOnBuildWithAllArguments() {
-        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 0,
                 20,
                 new Date(),
@@ -126,7 +127,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should throw DomainException if end date is null on build with no id")
     void shouldThrowDomainExceptionIfEndDateIsNullOnBuildWithNoId() {
-        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 20,
                 new Date(),
                 null,
@@ -157,7 +158,7 @@ class FixedExpenseTests {
                 new BigDecimal(200),
                 true);
 
-        Throwable exception = Assertions.catchThrowable(() -> fixedExpense.setEndDate(null));
+        Throwable exception = catchThrowable(() -> fixedExpense.setEndDate(null));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("End date is required.");
@@ -169,7 +170,7 @@ class FixedExpenseTests {
         Date startDate = new Date();
         Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
 
-        Throwable exception = Assertions.catchThrowable(() ->  new FixedExpense(
+        Throwable exception = catchThrowable(() ->  new FixedExpense(
                 20,
                 startDate,
                 endDate,
@@ -213,7 +214,7 @@ class FixedExpenseTests {
         Date startDate = new Date();
         Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
 
-        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 0,
                 0,
                 startDate,
@@ -237,7 +238,7 @@ class FixedExpenseTests {
         Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
 
 
-        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 0,
                 startDate,
                 endDate,
@@ -260,7 +261,7 @@ class FixedExpenseTests {
         Date startDate = new Date();
         Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
 
-        Throwable exception = Assertions.catchThrowable(() ->  new FixedExpense(
+        Throwable exception = catchThrowable(() ->  new FixedExpense(
                 dueDay,
                 startDate,
                 endDate,
@@ -317,7 +318,7 @@ class FixedExpenseTests {
                 true);
 
         int updatedDueDay =  0;
-        Throwable exception = Assertions.catchThrowable(() -> fixedExpense.setDueDay(updatedDueDay));
+        Throwable exception = catchThrowable(() -> fixedExpense.setDueDay(updatedDueDay));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day is required.");
@@ -342,7 +343,7 @@ class FixedExpenseTests {
                 new BigDecimal(200),
                 true);
 
-        Throwable exception = Assertions.catchThrowable(() -> fixedExpense.setDueDay(dueDay));
+        Throwable exception = catchThrowable(() -> fixedExpense.setDueDay(dueDay));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day must be between 1 and 31.");
@@ -371,6 +372,26 @@ class FixedExpenseTests {
 
         assertThat(fixedExpense.getDueDay()).isEqualTo(updatedDueDay);
     }
+
+    @Test
+    @DisplayName("Should throw DomainException if user id is null on build with all arguments")
+    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithAllArguments() {
+       Throwable exception = catchThrowable(() -> new FixedExpense(
+               20,
+               new Date(),
+               Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+               01,
+               null,
+               faker.lorem().paragraph(),
+               CategoryEnum.SCHOOL.getValue(),
+               ExpenseTypeEnum.FIXED.getValue(),
+               new BigDecimal(200),
+               true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("User info is required.");
+    }
+
 
     @Test
     @DisplayName("Should build FixedExpense with correct values")
