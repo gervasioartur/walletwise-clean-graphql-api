@@ -38,6 +38,45 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("User info is required.");
     }
 
+    @Test
+    @DisplayName("Should throw DomainException if user id is null on build with no id")
+    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithNoId() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                null,
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                null,
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("User info is required.");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test
     @DisplayName("Should throw Domain exception if start date is null on build with all arguments")
