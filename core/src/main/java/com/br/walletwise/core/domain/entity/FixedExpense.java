@@ -95,7 +95,7 @@ public class FixedExpense extends Expense {
 
     @Override
     protected List<Validator> buildValidators() {
-        List<Validator> validators = new ArrayList<Validator>();
+        List<Validator> validators = new ArrayList();
         validators.addAll(ValidationBuilder.of("Due day", this.dueDay).required().dueDay().build());
         validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
         validators.addAll(ValidationBuilder.of("End date", this.endDate).required().endDate(this.startDate).build());

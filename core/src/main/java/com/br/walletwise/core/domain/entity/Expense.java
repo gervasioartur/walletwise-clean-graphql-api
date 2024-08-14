@@ -69,10 +69,6 @@ public class Expense extends AbstractEntity {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public BigDecimal getAmount() {
         return amount;
     }
@@ -93,7 +89,7 @@ public class Expense extends AbstractEntity {
 
     @Override
     protected List<Validator> buildValidators() {
-        List<Validator> validators = new ArrayList<Validator>();
+        List<Validator> validators = new ArrayList();
         validators.addAll(ValidationBuilder.of("User info",this.userId).required().build());
         validators.addAll(ValidationBuilder.of("Description",this.description).required().build());
         validators.addAll(ValidationBuilder.of("Category",this.category).required().category().build());
