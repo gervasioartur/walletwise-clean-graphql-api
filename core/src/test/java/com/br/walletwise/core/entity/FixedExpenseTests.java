@@ -152,8 +152,22 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Due day is required.");
     }
 
+    @Test
+    @DisplayName("Should throw DomainException if due day is zero(0) on build with no id")
+    void shouldThrowDomainExceptionIfDueDayIsZeroOnBuildWithNoId() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                0,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
 
-
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Due day is required.");
+    }
 
 
 
