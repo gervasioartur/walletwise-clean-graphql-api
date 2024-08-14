@@ -17,7 +17,14 @@ public class User extends AbstractEntity {
     private String password;
     private boolean active;
 
-    public User(UUID id, String firstname, String lastname, String username, String email, String password, boolean active) {
+    public User(UUID id,
+                String firstname,
+                String lastname,
+                String username,
+                String email,
+                String password,
+                boolean active)
+    {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -30,7 +37,12 @@ public class User extends AbstractEntity {
         if (error != null) throw new DomainException(error);
     }
 
-    public User(String firstname, String lastname, String username, String email, String password) {
+    public User(String firstname,
+                String lastname,
+                String username,
+                String email,
+                String password)
+    {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
