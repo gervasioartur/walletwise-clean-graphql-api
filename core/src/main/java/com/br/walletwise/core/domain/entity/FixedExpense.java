@@ -1,8 +1,11 @@
 package com.br.walletwise.core.domain.entity;
 
+import com.br.walletwise.core.exception.DomainException;
+import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +21,9 @@ public class FixedExpense extends Expense {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
+
+        String error = this.validate();
+        if(error !=  null) throw new DomainException(error);
     }
 
     public FixedExpense(UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive, Date startDate, Date endDate) {
@@ -57,6 +63,8 @@ public class FixedExpense extends Expense {
 
     @Override
     protected List<Validator> buildValidators() {
-        return super.buildValidators();
+        List<Validator> validators = new ArrayList<Validator>();
+        validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
+        return validators;
     }
 }
