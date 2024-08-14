@@ -120,4 +120,23 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("End date is required.");
     }
+
+    @Test
+    @DisplayName("Should throw DomainException if end date is null on build with no id")
+    void shouldThrowDomainExceptionIfEndDateIsNullOnBuildWithNoId() {
+        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+                20,
+                new Date(),
+                null,
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("End date is required.");
+    }
 }
