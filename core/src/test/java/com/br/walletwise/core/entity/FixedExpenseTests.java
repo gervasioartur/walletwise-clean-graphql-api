@@ -24,14 +24,36 @@ class FixedExpenseTests {
     @DisplayName("Should throw Domain exception if start date is null on build with all arguments")
     void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithAllArguments() {
         Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+                0,
+                20,
                 null,
-                faker.number().randomNumber(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                01,
                 UUID.randomUUID(),
-                faker.lorem().word(),
-                CategoryEnum.RENT.getValue(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
                 ExpenseTypeEnum.FIXED.getValue(),
                 new BigDecimal(200),
-                true,null, Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Start date is required.");
+    }
+
+    @Test
+    @DisplayName("Should throw DomainException if start date is null on build with no id")
+    void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithNoId() {
+        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+                20,
+                null,
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                 01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Start date is required.");
