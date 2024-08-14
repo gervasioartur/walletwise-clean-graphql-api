@@ -51,6 +51,11 @@ public class ValidationBuilder {
         return this;
     }
 
+    public ValidationBuilder amount(){
+        this.validators.add(new AmountValidator(this.fieldValue));
+        return this;
+    }
+
     public List<Validator> build() {
         return this.validators;
     }

@@ -100,7 +100,7 @@ public class FixedExpense extends Expense {
         validators.addAll(ValidationBuilder.of("User info",super.getUserId()).required().build());
         validators.addAll(ValidationBuilder.of("Description",super.getDescription()).required().build());
         validators.addAll(ValidationBuilder.of("Category",super.getCategory()).required().category().build());
-        validators.addAll(ValidationBuilder.of("Amount",super.getAmount()).required().build());
+        validators.addAll(ValidationBuilder.of("Amount",super.getAmount()).required().amount().build());
         return validators;
     }
 }
