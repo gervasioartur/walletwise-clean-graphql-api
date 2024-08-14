@@ -1,4 +1,4 @@
-package com.br.walletwise.application.usecaseimpl;
+package com.br.walletwise.application.usecaseimpl.user;
 
 import com.br.walletwise.application.gateway.FindByUsernameGateway;
 import com.br.walletwise.application.mocks.MocksFactory;

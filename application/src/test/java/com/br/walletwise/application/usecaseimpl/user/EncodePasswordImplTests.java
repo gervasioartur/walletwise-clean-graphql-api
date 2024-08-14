@@ -1,4 +1,4 @@
-package com.br.walletwise.application.usecaseimpl;
+package com.br.walletwise.application.usecaseimpl.user;
 
 import com.br.walletwise.application.gateway.EncodePasswordGateway;
 import com.br.walletwise.application.usecasesimpl.user.EncodePasswordImpl;
