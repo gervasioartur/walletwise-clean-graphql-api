@@ -26,9 +26,6 @@ public class Expense extends AbstractEntity {
         this.type = type;
         this.amount = amount;
         this.isActive = isActive;
-
-        String error =  this.validate();
-        if(error != null) throw new DomainException(error);
     }
 
     public Expense(UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive) {
@@ -38,9 +35,6 @@ public class Expense extends AbstractEntity {
         this.type = type;
         this.amount = amount;
         this.isActive = isActive;
-
-        String error =  this.validate();
-        if(error != null) throw new DomainException(error);
     }
 
     public long getId() {

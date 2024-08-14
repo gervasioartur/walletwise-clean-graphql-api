@@ -20,70 +20,6 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 class ExpenseTests {
     private final Faker faker = new Faker();
 
-    @Test
-    @DisplayName("Should throw DomainException if user id is null on build with all arguments")
-    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithAllArguments() {
-        Throwable exception = catchThrowable(() -> new Expense(
-                0,
-                null,
-                faker.lorem().word(),
-                CategoryEnum.RENT.getValue(),
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("User info is required.");
-    }
-
-    @Test
-    @DisplayName("Should throw DomainException if user info is null on build with no id")
-    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithNoId() {
-        Throwable exception = catchThrowable(() -> new Expense(
-                null,
-                faker.lorem().word(),
-                CategoryEnum.RENT.getValue(),
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("User info is required.");
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("Should throw DomainException if description is empty or null on build with all arguments")
-    void shouldThrowDomainExceptionIfDescriptionIsEmptyOrNullOnBuildWithAllArguments(String description) {
-        Throwable exception = catchThrowable(() -> new Expense(
-                0,
-                UUID.randomUUID(),
-                description,
-                CategoryEnum.RENT.getValue(),
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Description is required.");
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("Should throw DomainException if description is empty or null on build with no id")
-    void shouldThrowDomainExceptionIfDescriptionIsEmptyOrNullOnBuildWithNoId(String description) {
-        Throwable exception = catchThrowable(() -> new Expense(
-                UUID.randomUUID(),
-                description,
-                CategoryEnum.RENT.getValue(),
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Description is required.");
-    }
-
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("Should throw DomainException if description is empty or null on update description")
@@ -117,39 +53,6 @@ class ExpenseTests {
         expense.setDescription(updatedDescription);
 
         assertThat(expense.getDescription()).isEqualTo(updatedDescription);
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("Should throw DomainException if category empty or null on build with all arguments")
-    void shouldThrowDomainExceptionIfCategoryIsNullOnBuildWithAllArguments(String category) {
-        Throwable exception = catchThrowable(() -> new Expense(
-                0,
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                category,
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Category is required.");
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("Should throw DomainException if category empty or null on build with no id")
-    void shouldThrowDomainExceptionIfCategoryIsNullOnBuildWithNoId(String category) {
-        Throwable exception = catchThrowable(() -> new Expense(
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                category,
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Category is required.");
     }
 
     @ParameterizedTest
@@ -189,43 +92,6 @@ class ExpenseTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"any_category","invalid_category"})
-    @DisplayName("Should throw DomainException if category is invalid on build with all arguments")
-    void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithAllArguments(String category) {
-        Throwable exception = catchThrowable(() ->  new Expense(
-                0,
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                category,
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true) );
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage())
-                .isEqualTo("Category is invalid. These are available categories : "
-                +  CategoryEnum.RENT.getValue() +"," + CategoryEnum.SCHOOL.getValue());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"any_category","invalid_category"})
-    @DisplayName("Should throw DomainException if category is invalid on build with no id")
-    void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithNoId(String category) {
-        Throwable exception = catchThrowable(() ->  new Expense(
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                category,
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(200),
-                true) );
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage())
-                .isEqualTo("Category is invalid. These are available categories : "
-                        +  CategoryEnum.RENT.getValue() +"," + CategoryEnum.SCHOOL.getValue());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"any_category","invalid_category"})
     @DisplayName("Should throw DomainException if category is invalid on update category")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnUpdateCategory(String category) {
         Expense expense = new Expense(
@@ -242,39 +108,6 @@ class ExpenseTests {
         assertThat(exception.getMessage())
                 .isEqualTo("Category is invalid. These are available categories : "
                         +  CategoryEnum.RENT.getValue() +"," + CategoryEnum.SCHOOL.getValue());
-    }
-
-    @ParameterizedTest
-    @ValueSource(longs = {0})
-    @DisplayName("Should throw DomainException if amount is zero(0) on build with all arguments")
-    void shouldThrowDomainExceptionIfAmountIsZeroOnBuildWithAllArguments(Long amount) {
-        Throwable exception = catchThrowable(() ->  new Expense(
-                0,
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                CategoryEnum.SCHOOL.getValue(),
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(amount),
-                true) );
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Amount is required.");
-    }
-
-    @ParameterizedTest
-    @ValueSource(longs = {0})
-    @DisplayName("Should throw DomainException if amount is zero(0) on build with no id")
-    void shouldThrowDomainExceptionIfAmountIsZeroOnBuildWithNoId(Long amount) {
-        Throwable exception = catchThrowable(() ->  new Expense(
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                CategoryEnum.SCHOOL.getValue(),
-                ExpenseTypeEnum.FIXED.getValue(),
-                new BigDecimal(amount),
-                true) );
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("Amount is required.");
     }
 
     @ParameterizedTest
