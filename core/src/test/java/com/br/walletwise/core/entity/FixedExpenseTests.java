@@ -5,7 +5,6 @@ import com.br.walletwise.core.domain.model.CategoryEnum;
 import com.br.walletwise.core.domain.model.ExpenseTypeEnum;
 import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
