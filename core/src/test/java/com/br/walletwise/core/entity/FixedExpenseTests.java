@@ -458,6 +458,27 @@ class FixedExpenseTests {
     }
 
     @Test
+    @DisplayName("Should return null if amount is valid on update amount")
+    void shouldReturnNullIfAmountIsValidOnUpdateAmount() {
+        BigDecimal amount = new BigDecimal(200);
+
+        FixedExpense fixedExpense = new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                amount,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true);
+
+        fixedExpense.getAmount();
+
+        assertThat(fixedExpense.getAmount()).isEqualTo(amount);
+    }
+
+    @Test
     @DisplayName("Should throw Domain exception if start date is null on build with all arguments")
     void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithAllArguments() {
         Throwable exception = catchThrowable(() -> new FixedExpense(
@@ -475,6 +496,7 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Start date is required.");
     }
 
+
     @Test
     @DisplayName("Should throw DomainException if start date is null on build with no id")
     void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithNoId() {
@@ -491,6 +513,7 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Start date is required.");
     }
+
 
     @Test
     @DisplayName("Should build FixedExpense with correct values")
