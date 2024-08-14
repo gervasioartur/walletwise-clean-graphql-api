@@ -160,4 +160,25 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("End date is required.");
     }
+
+    @Test
+    @DisplayName("Should return null if end date is not null on update end date")
+    void shouldReturnNullIfEndDateIsNullOnUpdateStatDate() {
+        FixedExpense fixedExpense =  new FixedExpense(
+                20,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        Date updatedEndDate =  new Date();
+        fixedExpense.setEndDate(updatedEndDate);
+
+        assertThat(fixedExpense.getEndDate()).isEqualTo(updatedEndDate);
+    }
 }
