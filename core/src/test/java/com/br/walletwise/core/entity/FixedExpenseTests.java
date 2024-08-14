@@ -267,6 +267,26 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Category is required.");
     }
 
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if category is null or empty on update category")
+    void shouldThrowDomainExceptionIfCategoryOnUpdateCategory(String category) {
+        FixedExpense fixedExpense = new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                12,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true);
+
+        Throwable exception = catchThrowable(() -> fixedExpense.setCategory(category));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Category is required.");
+    }
+
 
 
 
