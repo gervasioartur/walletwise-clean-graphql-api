@@ -79,8 +79,8 @@ class FixedExpenseTests {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Should throw DomainException if description is null on build with all arguments")
-    void shouldThrowDomainExceptionIfDescriptionIsNullOnBuildWithAllArguments(String description) {
+    @DisplayName("Should throw DomainException if description is null or empty on build with all arguments")
+    void shouldThrowDomainExceptionIfDescriptionIsNullOrEmptyOnBuildWithAllArguments(String description) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
                 0,
                 UUID.randomUUID(),
@@ -98,8 +98,8 @@ class FixedExpenseTests {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Should throw DomainException if description is null on build with no Id")
-    void shouldThrowDomainExceptionIfDescriptionIsNullOnBuildWithNoId(String description) {
+    @DisplayName("Should throw DomainException if description is null or empty on build with no Id")
+    void shouldThrowDomainExceptionIfDescriptionIsNullOrEmptyOnBuildWithNoId(String description) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
                 UUID.randomUUID(),
                 description,
@@ -109,6 +109,26 @@ class FixedExpenseTests {
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
                 true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Description is required.");
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("Should throw DomainException if description is null or empty on update description")
+    void shouldThrowDomainExceptionIfDescriptionIsNullOrEmptyOnUpdateDescription(String description) {
+        FixedExpense fixedExpense = new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true);
+
+        Throwable exception = catchThrowable(() -> fixedExpense.setDescription(null));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Description is required.");
