@@ -1,5 +1,6 @@
 package com.br.walletwise.core.domain.entity;
 
+import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contract.Validator;
 
@@ -30,6 +31,10 @@ public class FixedExpense extends Expense {
         this.id =  id;
         this.dueDay = dueDay;
         this.startDate = startDate;
+        this.endDate = endDate;
+
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public FixedExpense(int dueDay,
@@ -42,9 +47,14 @@ public class FixedExpense extends Expense {
                         String type,
                         BigDecimal amount,
                         boolean isActive) {
+
         super(expenseId, userId, description, category, type, amount, isActive);
         this.dueDay = dueDay;
         this.startDate = startDate;
+        this.endDate = endDate;
+
+        String error =  this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     @Override
@@ -66,6 +76,8 @@ public class FixedExpense extends Expense {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+        String error = this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public Date getEndDate() {
