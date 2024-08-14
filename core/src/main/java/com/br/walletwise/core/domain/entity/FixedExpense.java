@@ -99,6 +99,10 @@ public class FixedExpense extends Expense {
         validators.addAll(ValidationBuilder.of("Due day", this.dueDay).required().dueDay().build());
         validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
         validators.addAll(ValidationBuilder.of("End date", this.endDate).required().endDate(this.startDate).build());
+        validators.addAll(ValidationBuilder.of("User info",super.getUserId()).required().build());
+        validators.addAll(ValidationBuilder.of("Description",super.getDescription()).required().build());
+        validators.addAll(ValidationBuilder.of("Category",super.getCategory()).required().category().build());
+        validators.addAll(ValidationBuilder.of("Amount",super.getAmount()).required().build());
         return validators;
     }
 }
