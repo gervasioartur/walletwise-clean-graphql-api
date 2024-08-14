@@ -275,4 +275,51 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day must be between 1 and 31.");
     }
+
+    @Test
+    @DisplayName("Should throw DomainException if due day is invalid")
+    void shouldReturnNullOnBuildWithInvalidDueDay() {
+        Date startDate = new Date();
+        Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        int dueDay = 30;
+        FixedExpense fixedExpense = new FixedExpense(
+                dueDay,
+                startDate,
+                endDate,
+                32,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        assertThat(fixedExpense.getDueDay()).isEqualTo(dueDay);
+    }
+
+    @Test
+    @DisplayName("Should throw DomainException if due day is zero(0) on update due day")
+    void shouldThrowDomainExceptionIfDueDayIsZeroOnUpdateDueDay() {
+        Date startDate = new Date();
+        Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        FixedExpense fixedExpense = new FixedExpense(
+                20,
+                startDate,
+                endDate,
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        int updatedDueDay =  0;
+        Throwable exception = Assertions.catchThrowable(() -> fixedExpense.setDueDay(updatedDueDay));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Due day is required.");
+    }
 }
