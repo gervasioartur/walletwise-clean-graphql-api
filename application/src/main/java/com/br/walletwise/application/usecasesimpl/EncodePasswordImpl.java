@@ -1,7 +1,7 @@
 package com.br.walletwise.application.usecasesimpl;
 
 import com.br.walletwise.application.gateway.EncodePasswordGateway;
-import com.br.walletwise.usecase.EncodePassword;
+import com.br.walletwise.usecase.user.EncodePassword;
 
 public class EncodePasswordImpl implements EncodePassword {
     private final EncodePasswordGateway encodePasswordGateway;

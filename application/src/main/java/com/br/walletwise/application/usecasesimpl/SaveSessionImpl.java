@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecasesimpl;
 
 import com.br.walletwise.application.gateway.SaveSessionGateway;
 import com.br.walletwise.core.domain.entity.Session;
-import com.br.walletwise.usecase.SaveSession;
+import com.br.walletwise.usecase.user.SaveSession;
 
 public class SaveSessionImpl implements SaveSession {
    private final SaveSessionGateway sessionGateway;

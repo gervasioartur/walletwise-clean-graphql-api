@@ -6,7 +6,7 @@ import com.br.walletwise.application.usecasesimpl.AuthenticateUserImpl;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.UnauthorizedException;
-import com.br.walletwise.usecase.*;
+import com.br.walletwise.usecase.user.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

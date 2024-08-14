@@ -6,7 +6,7 @@ import com.br.walletwise.core.validation.validator.contract.Validator;
 import com.br.walletwise.infra.entrypoint.controller.AbstractController;
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
 import com.br.walletwise.infra.entrypoint.dto.Response;
-import com.br.walletwise.usecase.AuthenticateUser;
+import com.br.walletwise.usecase.user.AuthenticateUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

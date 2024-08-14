@@ -3,10 +3,10 @@ package com.br.walletwise.application.usecasesimpl;
 import com.br.walletwise.application.gateway.CreateUserGateway;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.ConflictException;
-import com.br.walletwise.usecase.CreateUser;
-import com.br.walletwise.usecase.EncodePassword;
-import com.br.walletwise.usecase.FindByEmail;
-import com.br.walletwise.usecase.FindByUsername;
+import com.br.walletwise.usecase.user.CreateUser;
+import com.br.walletwise.usecase.user.EncodePassword;
+import com.br.walletwise.usecase.user.FindByEmail;
+import com.br.walletwise.usecase.user.FindByUsername;
 
 
 public class CreateUserImpl implements CreateUser {

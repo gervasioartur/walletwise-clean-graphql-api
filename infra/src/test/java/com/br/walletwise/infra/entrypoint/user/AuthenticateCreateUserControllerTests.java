@@ -4,7 +4,7 @@ package com.br.walletwise.infra.entrypoint.user;
 import com.br.walletwise.core.exception.UnauthorizedException;
 import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
 import com.br.walletwise.infra.mocks.MocksFactory;
-import com.br.walletwise.usecase.AuthenticateUser;
+import com.br.walletwise.usecase.user.AuthenticateUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;

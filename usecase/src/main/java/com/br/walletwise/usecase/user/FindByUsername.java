@@ -1,4 +1,4 @@
-package com.br.walletwise.usecase;
+package com.br.walletwise.usecase.user;
 
 import com.br.walletwise.core.domain.entity.User;
 

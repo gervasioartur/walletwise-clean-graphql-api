@@ -4,7 +4,7 @@ import com.br.walletwise.application.gateway.AuthenticateUserGateway;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.UnauthorizedException;
-import com.br.walletwise.usecase.*;
+import com.br.walletwise.usecase.user.*;
 
 import java.util.Optional;
 

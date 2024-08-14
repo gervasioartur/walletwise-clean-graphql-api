@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecaseimpl;
 
 import com.br.walletwise.application.gateway.EncodePasswordGateway;
 import com.br.walletwise.application.usecasesimpl.EncodePasswordImpl;
-import com.br.walletwise.usecase.EncodePassword;
+import com.br.walletwise.usecase.user.EncodePassword;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

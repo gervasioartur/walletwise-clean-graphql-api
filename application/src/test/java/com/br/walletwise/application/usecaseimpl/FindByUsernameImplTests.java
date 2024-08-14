@@ -4,7 +4,7 @@ import com.br.walletwise.application.gateway.FindByUsernameGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.FindByUsernameImpl;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.usecase.FindByUsername;
+import com.br.walletwise.usecase.user.FindByUsername;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -2,7 +2,7 @@ package com.br.walletwise.infra.config;
 
 import com.br.walletwise.application.gateway.*;
 import com.br.walletwise.application.usecasesimpl.*;
-import com.br.walletwise.usecase.*;
+import com.br.walletwise.usecase.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

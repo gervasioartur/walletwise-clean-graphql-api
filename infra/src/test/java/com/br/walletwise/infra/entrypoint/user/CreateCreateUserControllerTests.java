@@ -6,7 +6,7 @@ import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
-import com.br.walletwise.usecase.CreateUser;
+import com.br.walletwise.usecase.user.CreateUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;

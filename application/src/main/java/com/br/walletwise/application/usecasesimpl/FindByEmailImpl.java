@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecasesimpl;
 
 import com.br.walletwise.application.gateway.FindByEmailGateway;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.usecase.FindByEmail;
+import com.br.walletwise.usecase.user.FindByEmail;
 
 import java.util.Optional;
 

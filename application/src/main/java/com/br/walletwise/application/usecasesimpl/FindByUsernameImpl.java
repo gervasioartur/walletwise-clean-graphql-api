@@ -2,7 +2,7 @@ package com.br.walletwise.application.usecasesimpl;
 
 import com.br.walletwise.application.gateway.FindByUsernameGateway;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.usecase.FindByUsername;
+import com.br.walletwise.usecase.user.FindByUsername;
 
 import java.util.Optional;
 

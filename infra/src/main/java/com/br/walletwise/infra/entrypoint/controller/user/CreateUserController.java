@@ -6,7 +6,7 @@ import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.infra.mappers.UserMapper;
-import com.br.walletwise.usecase.CreateUser;
+import com.br.walletwise.usecase.user.CreateUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
