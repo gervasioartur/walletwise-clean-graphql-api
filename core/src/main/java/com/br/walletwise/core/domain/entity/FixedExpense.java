@@ -68,6 +68,8 @@ public class FixedExpense extends Expense {
 
     public void setDueDay(int dueDay) {
         this.dueDay = dueDay;
+        String error = this.validate();
+        if(error != null) throw new DomainException(error);
     }
 
     public Date getStartDate() {
