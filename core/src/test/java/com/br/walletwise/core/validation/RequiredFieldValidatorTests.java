@@ -38,6 +38,29 @@ class RequiredFieldValidatorTests {
     }
 
     @ParameterizedTest
+    @ValueSource(longs = {0})
+    @DisplayName("Should return error message if the field value is zero")
+    void shouldReturnErrorMessageIfFieldValueIsZero(long fieldValue) {
+        String fieName = "any_field_name";
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
+
+        Assertions.assertThat(error).isNotEmpty();
+        Assertions.assertThat(error).isEqualTo("any_field_name is required.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(longs = {1})
+    @DisplayName("Should return null if the field value is valid ")
+    void shouldReturnNullIfTheFieldValueIsValidLong(long fieldValue) {
+        String fieName = "any_field_name";
+        this.validator = new RequiredFieldValidator(fieName, fieldValue);
+        String error = this.validator.validate();
+
+        Assertions.assertThat(error).isNull();
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {0})
     @DisplayName("Should return error message if the field value is zero")
     void shouldReturnErrorMessageIfFieldValueIsZero(int fieldValue) {

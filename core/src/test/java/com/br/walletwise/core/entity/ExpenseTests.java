@@ -157,6 +157,7 @@ class ExpenseTests {
         boolean isActive = true;
 
         Expense expense = new Expense(id, userId, description, category, type, amount, isActive);
+        expense.setActive(false);
 
         assertThat(expense.getExpenseId()).isEqualTo(id);
         assertThat(expense.getUserId()).isEqualTo(userId);
@@ -164,6 +165,6 @@ class ExpenseTests {
         assertThat(expense.getCategory()).isEqualTo(category);
         assertThat(expense.getType()).isEqualTo(type);
         assertThat(expense.getAmount()).isEqualTo(amount);
-        assertThat(expense.isActive()).isEqualTo(isActive);
+        assertThat(expense.isActive()).isFalse();
     }
 }
