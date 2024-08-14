@@ -8,6 +8,8 @@ import com.github.javafaker.Faker;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -249,5 +251,28 @@ class FixedExpenseTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day is required.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1,32})
+    @DisplayName("Should throw DomainException if due day is invalid")
+    void shouldThrowDomainExceptionIfDueDayIsInvalid(int dueDay) {
+        Date startDate = new Date();
+        Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        Throwable exception = Assertions.catchThrowable(() ->  new FixedExpense(
+                dueDay,
+                startDate,
+                endDate,
+                32,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Due day must be between 1 and 31.");
     }
 }
