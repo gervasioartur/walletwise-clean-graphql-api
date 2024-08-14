@@ -30,7 +30,7 @@ class FixedExpenseTests {
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
-                null,
+                new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
                 true));
 
@@ -47,7 +47,7 @@ class FixedExpenseTests {
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
-                null,
+                new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
                 true));
 
@@ -55,7 +55,25 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("User info is required.");
     }
 
+    @Test
+    @DisplayName("Should throw DomainException if user id is null on update user id")
+    void shouldThrowDomainExceptionIfUserIdIsNullOnUpdateUserId() {
+        FixedExpense fixedExpense = new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true);
 
+        Throwable exception = catchThrowable(() -> fixedExpense.setUserId(null));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("User info is required.");
+    }
 
 
 
