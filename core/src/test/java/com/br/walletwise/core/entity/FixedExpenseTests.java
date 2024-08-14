@@ -78,6 +78,27 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("User info is required.");
     }
 
+    @Test
+    @DisplayName("Should return null if user id is valid")
+    void shouldReturnNulIfUserIdIsValid() {
+        UUID userId = UUID.randomUUID();
+
+        FixedExpense fixedExpense = new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true);
+
+        fixedExpense.setUserId(userId);
+
+        assertThat(fixedExpense.getUserId()).isEqualTo(userId);
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("Should throw DomainException if description is null or empty on build with all arguments")
@@ -625,11 +646,11 @@ class FixedExpenseTests {
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
-                startDate,
+                new Date(),
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
                 true);
 
-
+        fixedExpense.setStartDate(startDate);
         assertThat(fixedExpense.getStartDate()).isEqualTo(startDate);
     }
 
@@ -650,7 +671,6 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("End date is required.");
     }
-
 
     @Test
     @DisplayName("Should throw DomainException if end date is null on build with no id")
@@ -690,6 +710,66 @@ class FixedExpenseTests {
     }
 
     @Test
+    @DisplayName("Should throw Domain exception if end date is invalid on build with all arguments")
+    void shouldThrowDomainExceptionIfEndDateIsInvalidOnBuildWithAllArguments() {
+        Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                endDate,
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("End date must be after start date.");
+    }
+
+    @Test
+    @DisplayName("Should throw DomainException if end date is invalid on build with no id")
+    void shouldThrowDomainExceptionIfEndDateIsInvalidOnBuildWithNoId() {
+        Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                endDate,
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("End date must be after start date.");
+    }
+
+    @Test
+    @DisplayName("Should throw DomainException if End date is invalid on update end date")
+    void shouldThrowDomainExceptionIfEndDateIsInvalidOnUpdateENdDate() {
+        Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        FixedExpense fixedExpense = new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                1,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                true);
+
+        Throwable exception = catchThrowable(() -> fixedExpense.setEndDate(endDate));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("End date must be after start date.");
+    }
+
+    @Test
     @DisplayName("Should return null if end date is valid")
     void shouldReturnNullIfEndDateIsValid() {
         Date endDate = Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant());
@@ -701,9 +781,10 @@ class FixedExpenseTests {
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                endDate,
+                Date.from(LocalDateTime.now().plusDays(10).atZone(ZoneId.systemDefault()).toInstant()),
                 true);
 
+        fixedExpense.setEndDate(endDate);
         assertThat(fixedExpense.getEndDate()).isEqualTo(endDate);
     }
 
@@ -723,6 +804,7 @@ class FixedExpenseTests {
         FixedExpense fixedExpense = new FixedExpense
                 (id,userId,description,dueDay,category,amount,startDate,endDate,active);
 
+        fixedExpense.setActive(false);
         assertThat(fixedExpense.getId()).isEqualTo(id);
         assertThat(fixedExpense.getUserId()).isEqualTo(userId);
         assertThat(fixedExpense.getDescription()).isEqualTo(description);
@@ -730,6 +812,6 @@ class FixedExpenseTests {
         assertThat(fixedExpense.getCategory()).isEqualTo(category);
         assertThat(fixedExpense.getStartDate()).isEqualTo(startDate);
         assertThat(fixedExpense.getEndDate()).isEqualTo(endDate);
-        assertThat(fixedExpense.isActive()).isEqualTo(active);
+        assertThat(fixedExpense.isActive()).isFalse();
     }
 }
