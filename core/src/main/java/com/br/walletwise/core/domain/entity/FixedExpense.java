@@ -95,6 +95,7 @@ public class FixedExpense extends Expense {
         List<Validator> validators = new ArrayList<Validator>();
         validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
         validators.addAll(ValidationBuilder.of("End date", this.endDate).required().build());
+        validators.addAll(ValidationBuilder.of("End date", this.endDate).required().endDate(this.startDate).build());
         return validators;
     }
 }

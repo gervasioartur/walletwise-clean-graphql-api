@@ -1,12 +1,10 @@
 package com.br.walletwise.core.validation;
 
-import com.br.walletwise.core.validation.validator.CategoryValidator;
-import com.br.walletwise.core.validation.validator.EmailValidator;
-import com.br.walletwise.core.validation.validator.RequiredFieldValidator;
-import com.br.walletwise.core.validation.validator.UsernameValidator;
+import com.br.walletwise.core.validation.validator.*;
 import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ValidationBuilder {
@@ -40,6 +38,11 @@ public class ValidationBuilder {
 
     public ValidationBuilder category() {
         this.validators.add(new CategoryValidator(this.fieldValue));
+        return this;
+    }
+
+    public ValidationBuilder endDate(Date start){
+        this.validators.add(new EndDateValidator(this.fieldValue,start));
         return this;
     }
 
