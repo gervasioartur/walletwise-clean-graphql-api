@@ -100,4 +100,24 @@ class FixedExpenseTests {
 
         assertThat(fixedExpense.getStartDate()).isEqualTo(updatedStartDate);
     }
+
+    @Test
+    @DisplayName("Should throw Domain exception if end date is null on build with all arguments")
+    void shouldThrowDomainExceptionIfEndDateIsNullOnBuildWithAllArguments() {
+        Throwable exception = Assertions.catchThrowable(() -> new FixedExpense(
+                0,
+                20,
+                new Date(),
+                null,
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("End date is required.");
+    }
 }
