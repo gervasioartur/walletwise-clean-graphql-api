@@ -347,4 +347,28 @@ class FixedExpenseTests {
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day must be between 1 and 31.");
     }
+
+    @Test
+    @DisplayName("Should return null if due day is valid on update due day")
+    void shouldReturnNullIfDueDayIsValidOnUpdateDueDay() {
+        Date startDate = new Date();
+        Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        FixedExpense fixedExpense = new FixedExpense(
+                20,
+                startDate,
+                endDate,
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true);
+
+        int updatedDueDay =  20;
+        fixedExpense.setDueDay(updatedDueDay);
+
+        assertThat(fixedExpense.getDueDay()).isEqualTo(updatedDueDay);
+    }
 }
