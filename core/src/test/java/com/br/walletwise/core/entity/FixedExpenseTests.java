@@ -287,6 +287,32 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("Category is required.");
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"invalid_category","category", "any_category"})
+    @DisplayName("Should throw DomainException if category is invalid on build with all arguments")
+    void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithAllArguments(String category) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                12,
+                category,
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Category is invalid. These are available categories : " +
+                        "" + CategoryEnum.RENT.getValue() + ","+ CategoryEnum.SCHOOL.getValue());
+    }
+
+
+
+
+
+
+
+
 
 
 
