@@ -158,7 +158,7 @@ class ExpenseTests {
 
         Expense expense = new Expense(id, userId, description, category, type, amount, isActive);
 
-        assertThat(expense.getId()).isEqualTo(id);
+        assertThat(expense.getExpenseId()).isEqualTo(id);
         assertThat(expense.getUserId()).isEqualTo(userId);
         assertThat(expense.getDescription()).isEqualTo(description);
         assertThat(expense.getCategory()).isEqualTo(category);

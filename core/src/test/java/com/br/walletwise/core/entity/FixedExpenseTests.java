@@ -371,4 +371,36 @@ class FixedExpenseTests {
 
         assertThat(fixedExpense.getDueDay()).isEqualTo(updatedDueDay);
     }
+
+    @Test
+    @DisplayName("Should build FixedExpense with correct values")
+    void shouldBuildFixedExpenseWithCorrectValues() {
+        long fixedExpenseId = 1;
+        int dueDay = 1;
+        Date startDate = new Date();
+        Date endDate = Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+        long expenseId = 2;
+        UUID userId = UUID.randomUUID();
+        String description = faker.lorem().paragraph();
+        String category = CategoryEnum.SCHOOL.getValue();
+        String type = ExpenseTypeEnum.FIXED.getValue();
+        BigDecimal amount = new BigDecimal(200.0);
+        boolean active = true;
+
+
+        FixedExpense fixedExpense = new FixedExpense
+                (fixedExpenseId,dueDay,startDate,endDate,expenseId,userId,description,category,type,amount,active);
+
+        assertThat(fixedExpense.getFixedExpenseId()).isEqualTo(fixedExpenseId);
+        assertThat(fixedExpense.getDueDay()).isEqualTo(dueDay);
+        assertThat(fixedExpense.getStartDate()).isEqualTo(startDate);
+        assertThat(fixedExpense.getEndDate()).isEqualTo(endDate);
+        assertThat(fixedExpense.getExpenseId()).isEqualTo(expenseId);
+        assertThat(fixedExpense.getUserId()).isEqualTo(userId);
+        assertThat(fixedExpense.getDescription()).isEqualTo(description);
+        assertThat(fixedExpense.getCategory()).isEqualTo(category);
+        assertThat(fixedExpense.getType()).isEqualTo(type);
+        assertThat(fixedExpense.getType()).isEqualTo(type);
+        assertThat(fixedExpense.isActive()).isEqualTo(active);
+    }
 }
