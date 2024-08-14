@@ -175,6 +175,25 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if due day is invalid on build with all arguments")
     void shouldThrowDomainExceptionIfDueDayIsInvalidOnBuildWithAllArguments(int dueDay) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
+                0,
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                dueDay,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("Due day must be between 1 and 31.");
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1,32})
+    @DisplayName("Should throw DomainException if due day is invalid on build with no id")
+    void shouldThrowDomainExceptionIfDueDayIsInvalidOnBuildWithNoId(int dueDay) {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
                 UUID.randomUUID(),
                 faker.lorem().word(),
                 dueDay,
