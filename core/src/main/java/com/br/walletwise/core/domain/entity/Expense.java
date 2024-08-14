@@ -41,6 +41,10 @@ public class Expense extends AbstractEntity {
         return expenseId;
     }
 
+    public void setExpenseId(long expenseId) {
+        this.expenseId = expenseId;
+    }
+
     public UUID getUserId() {
         return userId;
     }

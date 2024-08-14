@@ -1,6 +1,6 @@
 package com.br.walletwise.infra.service;
 
-import com.br.walletwise.application.gateway.FindByEmailGateway;
+import com.br.walletwise.application.gateway.user.FindByEmailGateway;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.persistence.repository.UserJpaRepository;

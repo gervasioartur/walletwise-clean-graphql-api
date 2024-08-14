@@ -1,6 +1,6 @@
 package com.br.walletwise.application.usecasesimpl.user;
 
-import com.br.walletwise.application.gateway.CreateUserGateway;
+import com.br.walletwise.application.gateway.user.CreateUserGateway;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.usecase.user.CreateUser;

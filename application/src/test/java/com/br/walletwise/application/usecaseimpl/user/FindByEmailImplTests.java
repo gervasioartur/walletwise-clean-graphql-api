@@ -1,6 +1,6 @@
 package com.br.walletwise.application.usecaseimpl.user;
 
-import com.br.walletwise.application.gateway.FindByEmailGateway;
+import com.br.walletwise.application.gateway.user.FindByEmailGateway;
 import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.user.FindByEmailImpl;
 import com.br.walletwise.core.domain.entity.User;

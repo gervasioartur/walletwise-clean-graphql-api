@@ -1,6 +1,6 @@
 package com.br.walletwise.infra.service;
 
-import com.br.walletwise.application.gateway.GenerateTokenGateway;
+import com.br.walletwise.application.gateway.user.GenerateTokenGateway;
 import com.br.walletwise.infra.helpers.CreateToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

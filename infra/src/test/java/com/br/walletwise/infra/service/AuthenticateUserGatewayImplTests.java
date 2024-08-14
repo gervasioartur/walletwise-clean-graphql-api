@@ -1,6 +1,6 @@
 package com.br.walletwise.infra.service;
 
-import com.br.walletwise.application.gateway.AuthenticateUserGateway;
+import com.br.walletwise.application.gateway.user.AuthenticateUserGateway;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

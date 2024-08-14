@@ -1,6 +1,6 @@
 package com.br.walletwise.application.usecasesimpl.user;
 
-import com.br.walletwise.application.gateway.SaveSessionGateway;
+import com.br.walletwise.application.gateway.user.SaveSessionGateway;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.usecase.user.SaveSession;
 

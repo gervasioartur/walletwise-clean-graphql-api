@@ -1,6 +1,6 @@
 package com.br.walletwise.application.usecasesimpl.user;
 
-import com.br.walletwise.application.gateway.AuthenticateUserGateway;
+import com.br.walletwise.application.gateway.user.AuthenticateUserGateway;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.UnauthorizedException;
