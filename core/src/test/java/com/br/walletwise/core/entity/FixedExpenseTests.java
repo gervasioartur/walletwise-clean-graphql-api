@@ -162,6 +162,28 @@ class FixedExpenseTests {
     }
 
     @Test
+    @DisplayName("Should throw DomainException if end date is before start date")
+    void shouldThrowDomainExceptionIfEndDateIsBeforeStartDate() {
+        Date startDate = new Date();
+        Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
+
+        Throwable exception = Assertions.catchThrowable(() ->  new FixedExpense(
+                20,
+                startDate,
+                endDate,
+                01,
+                UUID.randomUUID(),
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("End date must be after start date.");
+    }
+
+    @Test
     @DisplayName("Should return null if end date is not null on update end date")
     void shouldReturnNullIfEndDateIsNullOnUpdateStatDate() {
         FixedExpense fixedExpense =  new FixedExpense(
