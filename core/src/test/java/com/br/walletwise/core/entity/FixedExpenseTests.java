@@ -377,6 +377,7 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if user id is null on build with all arguments")
     void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithAllArguments() {
        Throwable exception = catchThrowable(() -> new FixedExpense(
+               10,
                20,
                new Date(),
                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
@@ -392,6 +393,24 @@ class FixedExpenseTests {
         assertThat(exception.getMessage()).isEqualTo("User info is required.");
     }
 
+    @Test
+    @DisplayName("Should throw DomainException if user id is null on build with no id")
+    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithNoId() {
+        Throwable exception = catchThrowable(() -> new FixedExpense(
+                20,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                01,
+                null,
+                faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                ExpenseTypeEnum.FIXED.getValue(),
+                new BigDecimal(200),
+                true));
+
+        assertThat(exception).isInstanceOf(DomainException.class);
+        assertThat(exception.getMessage()).isEqualTo("User info is required.");
+    }
 
     @Test
     @DisplayName("Should build FixedExpense with correct values")
