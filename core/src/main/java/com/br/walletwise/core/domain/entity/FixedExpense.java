@@ -1,6 +1,5 @@
 package com.br.walletwise.core.domain.entity;
 
-import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contract.Validator;
 
@@ -11,29 +10,45 @@ import java.util.List;
 import java.util.UUID;
 
 public class FixedExpense extends Expense {
-    private Long id;
+    private long id;
     private int dueDay;
     private Date startDate;
     private Date endDate;
 
-    public FixedExpense(Long id,Long expenseId, UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive,Date startDate, Date endDate) {
+    public FixedExpense(long id,
+                        int dueDay,
+                        Date startDate,
+                        Date endDate,
+                        long expenseId,
+                        UUID userId,
+                        String description,
+                        String category,
+                        String type,
+                        BigDecimal amount,
+                        boolean isActive) {
         super(expenseId, userId, description, category, type, amount, isActive);
-        this.id = id;
+        this.id =  id;
+        this.dueDay = dueDay;
         this.startDate = startDate;
-        this.endDate = endDate;
-
-        String error = this.validate();
-        if(error !=  null) throw new DomainException(error);
     }
 
-    public FixedExpense(UUID userId, String description, String category, String type, BigDecimal amount, boolean isActive, Date startDate, Date endDate) {
-        super(userId, description, category, type, amount, isActive);
+    public FixedExpense(int dueDay,
+                        Date startDate,
+                        Date endDate,
+                        long expenseId,
+                        UUID userId,
+                        String description,
+                        String category,
+                        String type,
+                        BigDecimal amount,
+                        boolean isActive) {
+        super(expenseId, userId, description, category, type, amount, isActive);
+        this.dueDay = dueDay;
         this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
