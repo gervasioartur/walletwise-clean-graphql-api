@@ -11,10 +11,10 @@ import java.util.UUID;
 
 public class Expense extends AbstractEntity {
     private long expenseId;
-    private UUID userId;
+    private final UUID userId;
     private String description;
     private String category;
-    private String type;
+    private final String type;
     private BigDecimal amount;
     private boolean isActive;
 
@@ -89,7 +89,7 @@ public class Expense extends AbstractEntity {
 
     @Override
     protected List<Validator> buildValidators() {
-        List<Validator> validators = new ArrayList();
+        List<Validator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("User info",this.userId).required().build());
         validators.addAll(ValidationBuilder.of("Description",this.description).required().build());
         validators.addAll(ValidationBuilder.of("Category",this.category).required().category().build());

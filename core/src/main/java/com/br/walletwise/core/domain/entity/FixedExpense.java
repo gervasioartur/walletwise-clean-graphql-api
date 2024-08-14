@@ -91,11 +91,9 @@ public class FixedExpense extends Expense {
         if(error != null) throw new DomainException(error);
     }
 
-
-
     @Override
     protected List<Validator> buildValidators() {
-        List<Validator> validators = new ArrayList();
+        List<Validator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("Due day", this.dueDay).required().dueDay().build());
         validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
         validators.addAll(ValidationBuilder.of("End date", this.endDate).required().endDate(this.startDate).build());
