@@ -1,6 +1,6 @@
 package com.br.walletwise.infra.helpers;
 
-import com.br.walletwise.core.domain.model.GeneralEnumInt;
+import com.br.walletwise.core.domain.enums.GeneralEnumInt;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
 import com.br.walletwise.infra.persistence.repository.SessionJpaRepository;

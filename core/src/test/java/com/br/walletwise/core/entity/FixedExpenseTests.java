@@ -1,7 +1,7 @@
 package com.br.walletwise.core.entity;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
-import com.br.walletwise.core.domain.model.CategoryEnum;
+import com.br.walletwise.core.domain.enums.CategoryEnum;
 import com.br.walletwise.core.exception.DomainException;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,6 @@
 package com.br.walletwise.core.validation.validator;
 
-import com.br.walletwise.core.domain.model.CategoryEnum;
+import com.br.walletwise.core.domain.enums.CategoryEnum;
 
 public class CategoryValidator extends AbstractValidator {
     private final String returnMessage;

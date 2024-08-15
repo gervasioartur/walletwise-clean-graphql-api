@@ -1,4 +1,4 @@
-package com.br.walletwise.core.domain.model;
+package com.br.walletwise.core.domain.enums;
 
 public enum GeneralEnumInt {
     JWT_TOKEN_EXPIRATION(1);

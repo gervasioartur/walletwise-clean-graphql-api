@@ -4,7 +4,7 @@ import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 
-import com.br.walletwise.core.domain.model.CategoryEnum;
+import com.br.walletwise.core.domain.enums.CategoryEnum;
 import com.github.javafaker.Faker;
 
 import java.math.BigDecimal;

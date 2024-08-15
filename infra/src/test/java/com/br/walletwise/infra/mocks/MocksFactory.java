@@ -3,7 +3,7 @@ package com.br.walletwise.infra.mocks;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.core.domain.model.CategoryEnum;
+import com.br.walletwise.core.domain.enums.CategoryEnum;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
