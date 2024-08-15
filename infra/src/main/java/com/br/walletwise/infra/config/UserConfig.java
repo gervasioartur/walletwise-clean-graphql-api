@@ -39,6 +39,11 @@ public class UserConfig {
     }
 
     @Bean
+    public GetLoggedUser getLoggedUser(GetLoggedUserGateway getLoggedUserGateway) {
+        return new GetLoggedUserImpl(getLoggedUserGateway);
+    }
+
+    @Bean
     public AuthenticateUser authenticateUser(FindByUsername findByUsername,
                                              FindByEmail findByEmail,
                                              GenerateToken generateToken,
