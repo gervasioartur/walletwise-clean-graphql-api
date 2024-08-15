@@ -1,16 +1,22 @@
 package com.br.walletwise.infra.mocks;
 
+import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.domain.model.CategoryEnum;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
+import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import com.github.javafaker.Faker;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -195,6 +201,34 @@ public class MocksFactory {
                 .active(true)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static FixedExpense fixedExpenseFactory(){
+        return new FixedExpense(
+                UUID.randomUUID(),
+                faker.lorem().word(),
+                20,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                true
+        );
+    }
+
+    public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(FixedExpense fixedExpense){
+        return  FixedExpenseJpaEntity
+                .builder()
+                .id(fixedExpense.getId())
+                .user(UserJpaEntity.builder().id(fixedExpense.getUserId()).build())
+                .description(fixedExpense.getDescription())
+                .dueDay(fixedExpense.getDueDay())
+                .amount(fixedExpense.getAmount())
+                .category(fixedExpense.getCategory())
+                .starDate(fixedExpense.getStartDate())
+                .endDate(fixedExpense.getEndDate())
+                .active(fixedExpense.isActive())
                 .build();
     }
 }
