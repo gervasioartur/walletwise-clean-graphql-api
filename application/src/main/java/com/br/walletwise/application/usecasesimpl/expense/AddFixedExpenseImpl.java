@@ -19,6 +19,7 @@ public class AddFixedExpenseImpl implements AddFixedExpense {
     public void add(FixedExpense fixedExpense) {
         User user =  this.getLoggedUser.get();
         fixedExpense.setUserId(user.getId());
+        fixedExpense.setActive(true);
         this.addFixedExpenseGateway.add(fixedExpense);
     }
 }
