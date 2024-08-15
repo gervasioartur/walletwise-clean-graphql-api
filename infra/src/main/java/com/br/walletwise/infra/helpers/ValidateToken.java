@@ -22,7 +22,8 @@ public class ValidateToken {
         if (username.equals(userDetails.getUsername())) {
             final Optional<SessionJpaEntity> entity = this.sessionJpaRepository.findByToken(token);
             if (entity.isPresent()) {
-                if (LocalDateTime.now().isAfter(entity.get().getCreationDate().plusHours(GeneralEnumInt.JWT_TOKEN_EXPIRATION.getValue()))) {
+                if (LocalDateTime.now().isAfter(entity.get()
+                        .getCreationDate().plusHours(GeneralEnumInt.JWT_TOKEN_EXPIRATION.getValue()))) {
                     entity.get().setActive(false);
                     this.sessionJpaRepository.save(entity.get());
                 } else {
