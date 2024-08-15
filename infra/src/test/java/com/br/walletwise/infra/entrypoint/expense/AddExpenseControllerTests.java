@@ -1,15 +1,11 @@
 package com.br.walletwise.infra.entrypoint.expense;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
-import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
-import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
 import com.br.walletwise.infra.mappers.FixedExpenseMapper;
-import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.usecase.expense.AddFixedExpense;
-import com.br.walletwise.usecase.user.CreateUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +23,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -131,5 +126,4 @@ public class AddExpenseControllerTests {
 
         verify(this.usecase, times(1)).add(fixedExpense);
     }
-
 }
