@@ -1,6 +1,8 @@
 package com.br.walletwise.infra.mappers;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
+import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
@@ -49,4 +51,24 @@ class FixedExpenseMapperTests {
         assertThat(result.getStartDate()).isEqualTo(request.starDate());
         assertThat(result.getEndDate()).isEqualTo(request.endDate());
     }
+
+    @Test
+    @DisplayName("Should return Fixed eExpense Model")
+    void shouldReturnFixedExpenseModel() {
+        User user = MocksFactory.userFactory();
+        FixedExpenseJpaEntity entity =  MocksFactory.fixedExpenseJpaEntityFactory(user);
+
+        FixedExpenseModel result = this.mapper.map(entity);
+
+        assertThat(result).isNotNull();
+        assertThat(result.getOwnerFullName())
+                .isEqualTo(entity.getUser().getFirstname() + " " + entity.getUser().getLastname());
+        assertThat(result.getDescription()).isEqualTo(entity.getDescription());
+        assertThat(result.getDueDay()).isEqualTo(entity.getDueDay());
+        assertThat(result.getAmount()).isEqualTo(entity.getAmount());
+        assertThat(result.getCategory()).isEqualTo(entity.getCategory());
+        assertThat(result.getStartDate()).isEqualTo(entity.getStarDate());
+        assertThat(result.getEndDate()).isEqualTo(entity.getEndDate());
+    }
 }
+
