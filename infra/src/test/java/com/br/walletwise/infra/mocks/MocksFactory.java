@@ -240,4 +240,14 @@ public class MocksFactory {
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
         );
     }
+
+    public static FixedExpense fixedExpenseFactory(AddFixedExpenseRequest  request){
+        return  new FixedExpense(
+                request.description(),
+                request.dueDay(),
+                request.category(),
+                request.amount(),
+                request.starDate(),
+                request.endDate());
+    }
 }
