@@ -255,6 +255,7 @@ public class MocksFactory {
     public static FixedExpenseModel fixedExpenseModelFactory(FixedExpenseJpaEntity entity) {
         String ownerFullName = entity.getUser().getFirstname() + " " + entity.getUser().getLastname();
         return new FixedExpenseModel(
+                entity.getId(),
                 ownerFullName,
                 entity.getDescription(),
                 entity.getDueDay(),
@@ -267,6 +268,7 @@ public class MocksFactory {
 
     public static FixedExpenseModel fixedExpenseModelFactory(User user) {
         return new FixedExpenseModel(
+                faker.number().randomNumber(),
                 user.getFirstname() + " " + user.getLastname(),
                 faker.lorem().paragraph(),
                 2,

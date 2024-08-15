@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class FixedExpenseModel {
+    private long expenseCode;
     private String ownerFullName;
     private String description;
     private int dueDay;
@@ -12,7 +13,8 @@ public class FixedExpenseModel {
     private Date startDate;
     private Date endDate;
 
-    public FixedExpenseModel(String ownerFullName,
+    public FixedExpenseModel(long expenseCode,
+                             String ownerFullName,
                              String description,
                              int dueDay,
                              String category,
@@ -20,6 +22,7 @@ public class FixedExpenseModel {
                              Date startDate,
                              Date endDate) {
 
+        this.expenseCode = expenseCode;
         this.ownerFullName = ownerFullName;
         this.description = description;
         this.dueDay = dueDay;
@@ -27,6 +30,10 @@ public class FixedExpenseModel {
         this.amount = amount;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public long getExpenseCode() {
+        return expenseCode;
     }
 
     public String getOwnerFullName() {
