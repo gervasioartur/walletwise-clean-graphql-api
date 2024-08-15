@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -34,5 +36,21 @@ class ValidateTokenTests {
 
         assertThat(result).isFalse();
         verify(this.getUsernameFromToken, times(1)).get(token);
+    }
+
+    @Test
+    @DisplayName("Should return false if session does not exist on find by token")
+    void shouldReturnFalseIfSessionDoesNotExistOnFindByToken() {
+        String token = MocksFactory.faker.lorem().word();
+        UserDetails userDetails =  MocksFactory.userJpaEntityFactory();
+
+        when(this.getUsernameFromToken.get(token)).thenReturn(userDetails.getUsername());
+        when(this.repository.findByToken(token)).thenReturn(Optional.empty());
+
+        boolean result = this.validateToken.isValid(token, userDetails);
+
+        assertThat(result).isFalse();
+        verify(this.getUsernameFromToken, times(1)).get(token);
+        verify(this.repository, times(1)).findByToken(token);
     }
 }
