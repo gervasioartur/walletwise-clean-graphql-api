@@ -35,7 +35,7 @@ public class FixedExpenseMapper {
                 request.endDate());
     }
 
-    public FixedExpenseModel map(FixedExpenseJpaEntity entity){
+    public FixedExpenseModel map(FixedExpenseJpaEntity entity) {
         return new FixedExpenseModel(
                 entity.getUser().getFirstname() + " " + entity.getUser().getLastname(),
                 entity.getDescription(),

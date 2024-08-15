@@ -33,12 +33,12 @@ class GetFixedExpensesGatewayImplTests {
         User user = MocksFactory.userFactory();
 
         List<FixedExpenseJpaEntity> expenseJpaEntities =
-                List.of( MocksFactory.fixedExpenseJpaEntityFactory(user)
-                        ,MocksFactory.fixedExpenseJpaEntityFactory(user));
+                List.of(MocksFactory.fixedExpenseJpaEntityFactory(user)
+                        , MocksFactory.fixedExpenseJpaEntityFactory(user));
 
         List<FixedExpenseModel> fixedExpenseModelList =
                 List.of(MocksFactory.fixedExpenseModelFactory(expenseJpaEntities.getFirst())
-                        ,MocksFactory.fixedExpenseModelFactory(expenseJpaEntities.getLast()));
+                        , MocksFactory.fixedExpenseModelFactory(expenseJpaEntities.getLast()));
 
         when(this.fixedExpenseJpaRepository.findByUserId(user.getId())).thenReturn(expenseJpaEntities);
         when(this.mapper.map(expenseJpaEntities.getFirst())).thenReturn(fixedExpenseModelList.getFirst());

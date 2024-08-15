@@ -56,7 +56,7 @@ class FixedExpenseMapperTests {
     @DisplayName("Should return Fixed eExpense Model")
     void shouldReturnFixedExpenseModel() {
         User user = MocksFactory.userFactory();
-        FixedExpenseJpaEntity entity =  MocksFactory.fixedExpenseJpaEntityFactory(user);
+        FixedExpenseJpaEntity entity = MocksFactory.fixedExpenseJpaEntityFactory(user);
 
         FixedExpenseModel result = this.mapper.map(entity);
 

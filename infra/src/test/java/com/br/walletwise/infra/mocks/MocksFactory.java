@@ -277,7 +277,7 @@ public class MocksFactory {
         );
     }
 
-    public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(User user){
+    public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(User user) {
         return FixedExpenseJpaEntity
                 .builder()
                 .id(faker.number().randomNumber())
@@ -287,7 +287,7 @@ public class MocksFactory {
                 .amount(new BigDecimal(faker.number().randomNumber()))
                 .category(CategoryEnum.SCHOOL.getValue())
                 .starDate(new Date())
-                .endDate( Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()))
+                .endDate(Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()))
                 .active(true)
                 .build();
     }
