@@ -71,4 +71,3 @@ class FixedExpenseMapperTests {
         assertThat(result.getEndDate()).isEqualTo(entity.getEndDate());
     }
 }
-
