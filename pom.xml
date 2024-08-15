@@ -80,6 +80,7 @@
                     <excludes>
                         <exclude>**/Abstract*</exclude>
                         <exclude>**/BaseEntity*</exclude>
+                        <exclude>**/GetUsernameFromToken*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

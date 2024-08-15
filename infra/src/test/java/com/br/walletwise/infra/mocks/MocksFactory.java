@@ -4,6 +4,7 @@ import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.CategoryEnum;
+import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
@@ -206,15 +207,12 @@ public class MocksFactory {
 
     public static FixedExpense fixedExpenseFactory(){
         return new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 20,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                true
-        );
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(FixedExpense fixedExpense){
@@ -230,5 +228,16 @@ public class MocksFactory {
                 .endDate(fixedExpense.getEndDate())
                 .active(fixedExpense.isActive())
                 .build();
+    }
+
+    public static AddFixedExpenseRequest addFixedExpenseRequestFactory(){
+        return new AddFixedExpenseRequest(
+                MocksFactory.faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(MocksFactory.faker.number().randomNumber()),
+                10,
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
+        );
     }
 }
