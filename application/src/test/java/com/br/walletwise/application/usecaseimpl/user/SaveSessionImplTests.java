@@ -24,7 +24,7 @@ class SaveSessionImplTests {
         when(sessionGateway.save(session)).thenReturn(savedSession);
 
         SaveSession saveSession = new SaveSessionImpl(sessionGateway);
-        Session result =  saveSession.save(session);
+        Session result = saveSession.save(session);
 
         assertThat(result.getId()).isEqualTo(savedSession.getId());
         assertThat(result.getUserId()).isEqualTo(savedSession.getUserId());

@@ -29,19 +29,19 @@ class FindByEmailGatewayImplTests {
     @Test
     @DisplayName("Should return optional of user")
     void shouldReturnOptionalOfUser() {
-       User user = MocksFactory.userFactory();
+        User user = MocksFactory.userFactory();
 
         UserJpaEntity entity = MocksFactory.userJpaEntityFactory(user);
 
-       when(this.userJpaRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(entity));
-       when(this.mapper.map(entity)).thenReturn(user);
+        when(this.userJpaRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(entity));
+        when(this.mapper.map(entity)).thenReturn(user);
 
-       Optional<User> result = this.findByEmailJpaGateway.find(user.getEmail());
+        Optional<User> result = this.findByEmailJpaGateway.find(user.getEmail());
 
-       assertThat(result).isPresent();
-       assertThat(result.get().getId()).isEqualTo(user.getId());
-       assertThat(result.get().getEmail()).isEqualTo(user.getEmail());
-       verify(this.userJpaRepository, times(1)).findByEmail(user.getEmail());
-       verify(this.mapper, times(1)).map(entity);
+        assertThat(result).isPresent();
+        assertThat(result.get().getId()).isEqualTo(user.getId());
+        assertThat(result.get().getEmail()).isEqualTo(user.getEmail());
+        verify(this.userJpaRepository, times(1)).findByEmail(user.getEmail());
+        verify(this.mapper, times(1)).map(entity);
     }
 }

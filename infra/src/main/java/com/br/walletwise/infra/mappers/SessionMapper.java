@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SessionMapper {
-    public SessionJpaEntity map(Session session){
-        return  SessionJpaEntity
+    public SessionJpaEntity map(Session session) {
+        return SessionJpaEntity
                 .builder()
                 .id(session.getId())
                 .user(UserJpaEntity.builder().id(session.getUserId()).build())
@@ -18,8 +18,8 @@ public class SessionMapper {
                 .build();
     }
 
-    public Session map(SessionJpaEntity entity){
+    public Session map(SessionJpaEntity entity) {
         return new Session
-                (entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate(),entity.isActive());
+                (entity.getId(), entity.getUser().getId(), entity.getToken(), entity.getCreationDate(), entity.isActive());
     }
 }

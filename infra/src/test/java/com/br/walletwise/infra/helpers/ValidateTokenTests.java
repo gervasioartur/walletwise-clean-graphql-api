@@ -31,7 +31,7 @@ class ValidateTokenTests {
     @DisplayName("Should return false if username from token is different of username form user details")
     void shouldReturnFalseIfUsernameFromTokenIsDifferentOfUsernameFormUserDetails() {
         String token = MocksFactory.faker.lorem().word();
-        UserDetails userDetails =  MocksFactory.userJpaEntityFactory();
+        UserDetails userDetails = MocksFactory.userJpaEntityFactory();
 
         when(this.getUsernameFromToken.get(token)).thenReturn(MocksFactory.faker.name().username());
 
@@ -45,7 +45,7 @@ class ValidateTokenTests {
     @DisplayName("Should return false if session does not exist on find by token")
     void shouldReturnFalseIfSessionDoesNotExistOnFindByToken() {
         String token = MocksFactory.faker.lorem().word();
-        UserDetails userDetails =  MocksFactory.userJpaEntityFactory();
+        UserDetails userDetails = MocksFactory.userJpaEntityFactory();
 
         when(this.getUsernameFromToken.get(token)).thenReturn(userDetails.getUsername());
         when(this.repository.findByToken(token)).thenReturn(Optional.empty());
@@ -61,9 +61,9 @@ class ValidateTokenTests {
     @DisplayName("Should return false if token has expired")
     void shouldReturnFalseIfTokenHasExpired() {
         String token = MocksFactory.faker.lorem().word();
-        UserDetails userDetails =  MocksFactory.userJpaEntityFactory();
+        UserDetails userDetails = MocksFactory.userJpaEntityFactory();
 
-        SessionJpaEntity sessionEntity =  MocksFactory.sessionJpaEntityFactory();
+        SessionJpaEntity sessionEntity = MocksFactory.sessionJpaEntityFactory();
         sessionEntity.setCreationDate(LocalDateTime.now().minusHours(GeneralEnumInt.JWT_TOKEN_EXPIRATION.getValue()));
 
         when(this.getUsernameFromToken.get(token)).thenReturn(userDetails.getUsername());
@@ -83,9 +83,9 @@ class ValidateTokenTests {
     @DisplayName("Should return true if token is valid")
     void shouldReturnTruIfTokenIsValid() {
         String token = MocksFactory.faker.lorem().word();
-        UserDetails userDetails =  MocksFactory.userJpaEntityFactory();
+        UserDetails userDetails = MocksFactory.userJpaEntityFactory();
 
-        SessionJpaEntity sessionEntity =  MocksFactory.sessionJpaEntityFactory();
+        SessionJpaEntity sessionEntity = MocksFactory.sessionJpaEntityFactory();
 
         when(this.getUsernameFromToken.get(token)).thenReturn(userDetails.getUsername());
         when(this.repository.findByToken(token)).thenReturn(Optional.of(sessionEntity));

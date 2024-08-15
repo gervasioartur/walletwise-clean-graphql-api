@@ -29,9 +29,9 @@ class AuthenticateUserImplTests {
 
     @BeforeEach
     void setUp() {
-        this.findByUsername =  mock(FindByUsername.class);
-        this.findByEmail =  mock(FindByEmail.class);
-        this.generateToken =  mock(GenerateToken.class);
+        this.findByUsername = mock(FindByUsername.class);
+        this.findByEmail = mock(FindByEmail.class);
+        this.generateToken = mock(GenerateToken.class);
         this.authenticateUserGateway = mock(AuthenticateUserGateway.class);
         this.saveSession = mock(SaveSession.class);
 
@@ -44,7 +44,7 @@ class AuthenticateUserImplTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"any_username","any_username@test.com"})
+    @ValueSource(strings = {"any_username", "any_username@test.com"})
     @DisplayName("Should throw UnauthorizedException if user does not exist by username or email")
     void shouldThrowUnauthorizedExceptionIfUserDoesNotExistByUsernameOrEmail(String usernameOrEmail) {
         String password = "any_password";
@@ -56,14 +56,14 @@ class AuthenticateUserImplTests {
 
         assertThat(exception).isInstanceOf(UnauthorizedException.class);
         assertThat(exception.getMessage()).isEqualTo("Bad credentials.");
-        if(usernameOrEmail.contains("@"))
+        if (usernameOrEmail.contains("@"))
             verify(this.findByEmail, times(1)).find(usernameOrEmail);
         else
             verify(this.findByUsername, times(1)).find(usernameOrEmail);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"any_username","any_username@test.com"})
+    @ValueSource(strings = {"any_username", "any_username@test.com"})
     @DisplayName("Should throw UnauthorizedException if password is wrong")
     void shouldThrowUnauthorizedExceptionIfPasswordIsWrong(String usernameOrEmail) {
         String password = "any_password";
@@ -77,14 +77,14 @@ class AuthenticateUserImplTests {
 
         assertThat(exception).isInstanceOf(UnauthorizedException.class);
         assertThat(exception.getMessage()).isEqualTo("Bad credentials.");
-        if(usernameOrEmail.contains("@"))
+        if (usernameOrEmail.contains("@"))
             verify(this.findByEmail, times(1)).find(usernameOrEmail);
         else
             verify(this.findByUsername, times(1)).find(usernameOrEmail);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"any_username","any_username@test.com"})
+    @ValueSource(strings = {"any_username", "any_username@test.com"})
     @DisplayName("Should authenticate user")
     void shouldAuthenticateUser(String usernameOrEmail) {
         String password = "any_password";
@@ -97,13 +97,13 @@ class AuthenticateUserImplTests {
         when(this.findByUsername.find(usernameOrEmail)).thenReturn(Optional.of(user));
         when(this.findByEmail.find(usernameOrEmail)).thenReturn(Optional.of(user));
         when(this.generateToken.generate(user.getUsername())).thenReturn(accessToken);
-        doNothing().when(this.authenticateUserGateway).authenticate(user.getUsername(),password);
+        doNothing().when(this.authenticateUserGateway).authenticate(user.getUsername(), password);
         when(this.saveSession.save(any(Session.class))).thenReturn(savedSession);
 
-        String  result = this.authenticateUser.authenticate(usernameOrEmail, password);
+        String result = this.authenticateUser.authenticate(usernameOrEmail, password);
 
         assertThat(result).isEqualTo(accessToken);
-        if(usernameOrEmail.contains("@"))
+        if (usernameOrEmail.contains("@"))
             verify(this.findByEmail, times(1)).find(usernameOrEmail);
         else
             verify(this.findByUsername, times(1)).find(usernameOrEmail);

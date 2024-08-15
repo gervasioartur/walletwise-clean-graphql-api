@@ -19,7 +19,7 @@ public class SessionMapperTests {
     @DisplayName("Should return SessionJpaEntity")
     public void shouldReturnSessionJpaEntity() {
         Session session = MocksFactory.sessionFactoryId();
-        SessionJpaEntity entity =  this.mapper.map(session);
+        SessionJpaEntity entity = this.mapper.map(session);
 
         assertThat(entity.getId()).isEqualTo(session.getId());
         assertThat(entity.getUser().getId()).isEqualTo(session.getUserId());
@@ -31,7 +31,7 @@ public class SessionMapperTests {
     @DisplayName("Should return Session entity")
     public void shouldReturnSessionEntity() {
         SessionJpaEntity entity = MocksFactory.sessionJpaEntityFactory();
-        Session session =  this.mapper.map(entity);
+        Session session = this.mapper.map(entity);
 
         assertThat(entity.getId()).isEqualTo(session.getId());
         assertThat(entity.getUser().getId()).isEqualTo(session.getUserId());

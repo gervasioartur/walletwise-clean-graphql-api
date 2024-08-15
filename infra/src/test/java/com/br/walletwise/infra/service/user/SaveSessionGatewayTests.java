@@ -27,21 +27,21 @@ class SaveSessionGatewayTests {
     @Test
     @DisplayName("Should save session")
     public void shouldSaveSession() {
-       Session session = MocksFactory.sessionFactoryWithNoId();
-       SessionJpaEntity sessionJpaEntity =  MocksFactory.sessionJpaEntityFactory(session);
+        Session session = MocksFactory.sessionFactoryWithNoId();
+        SessionJpaEntity sessionJpaEntity = MocksFactory.sessionJpaEntityFactory(session);
 
-       SessionJpaEntity savedSessionEntity =  MocksFactory.sessionJpaEntityFactory(sessionJpaEntity);
-       Session savedSession =  MocksFactory.sessionFactory(savedSessionEntity);
+        SessionJpaEntity savedSessionEntity = MocksFactory.sessionJpaEntityFactory(sessionJpaEntity);
+        Session savedSession = MocksFactory.sessionFactory(savedSessionEntity);
 
-       when(this.mapper.map(session)).thenReturn(sessionJpaEntity);
-       when(this.sessionJpaRepository.save(sessionJpaEntity)).thenReturn(savedSessionEntity);
-       when(this.mapper.map(savedSessionEntity)).thenReturn(savedSession);
+        when(this.mapper.map(session)).thenReturn(sessionJpaEntity);
+        when(this.sessionJpaRepository.save(sessionJpaEntity)).thenReturn(savedSessionEntity);
+        when(this.mapper.map(savedSessionEntity)).thenReturn(savedSession);
 
-       Session result = saveSessionGateway.save(session);
+        Session result = saveSessionGateway.save(session);
 
-       assertThat(result.getId()).isEqualTo(savedSessionEntity.getId());
-       assertThat(result.getToken()).isEqualTo(savedSessionEntity.getToken());
-       assertThat(result.getUserId()).isEqualTo(savedSessionEntity.getUser().getId());
-       assertThat(result.getCreationDate()).isEqualTo(savedSessionEntity.getCreationDate());
+        assertThat(result.getId()).isEqualTo(savedSessionEntity.getId());
+        assertThat(result.getToken()).isEqualTo(savedSessionEntity.getToken());
+        assertThat(result.getUserId()).isEqualTo(savedSessionEntity.getUser().getId());
+        assertThat(result.getCreationDate()).isEqualTo(savedSessionEntity.getCreationDate());
     }
 }

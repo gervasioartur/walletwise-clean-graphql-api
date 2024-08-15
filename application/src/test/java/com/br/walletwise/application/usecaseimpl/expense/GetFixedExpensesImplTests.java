@@ -24,9 +24,9 @@ class GetFixedExpensesImplTests {
 
     @BeforeEach
     void setUp() {
-       this.getLoggedUser = mock(GetLoggedUser.class);
-       this.getFixedExpensesGateway = mock(GetFixedExpensesGateway.class);
-       this.GetFixedExpenses = new GetFixedExpensesImpl(getLoggedUser, getFixedExpensesGateway);
+        this.getLoggedUser = mock(GetLoggedUser.class);
+        this.getFixedExpensesGateway = mock(GetFixedExpensesGateway.class);
+        this.GetFixedExpenses = new GetFixedExpensesImpl(getLoggedUser, getFixedExpensesGateway);
     }
 
     @Test

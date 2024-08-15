@@ -122,7 +122,7 @@ public class AddExpenseControllerTests {
         mvc
                 .perform(request)
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("body",Matchers.is("Expense Added.")));
+                .andExpect(jsonPath("body", Matchers.is("Expense Added.")));
 
         verify(this.usecase, times(1)).add(fixedExpense);
     }

@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "t_sessions", schema = "security")
-public class SessionJpaEntity extends BaseEntity{
+public class SessionJpaEntity extends BaseEntity {
 
     @Id
     @Column(length = 32)
@@ -27,7 +27,7 @@ public class SessionJpaEntity extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "fk_user_id", nullable = false)
-    private UserJpaEntity  user;
+    private UserJpaEntity user;
 
     @Column(nullable = false)
     private LocalDateTime creationDate;

@@ -18,7 +18,7 @@ public class GenerateTokenImplTests {
         GenerateTokenGateway generateTokenGateway = mock(GenerateTokenGateway.class);
         GenerateTokenImpl generateToken = new GenerateTokenImpl(generateTokenGateway);
 
-        String username  =  "any_username";
+        String username = "any_username";
 
         String accessToken = UUID.randomUUID().toString();
 

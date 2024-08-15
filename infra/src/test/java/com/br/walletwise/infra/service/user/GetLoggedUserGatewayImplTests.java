@@ -36,7 +36,7 @@ class GetLoggedUserGatewayImplTests {
     @DisplayName("Should throw NotFoundException if user does not exist")
     void shouldThrowNotFoundException() {
         String username = MocksFactory.faker.name().username();
-        User user =  MocksFactory.userFactory();
+        User user = MocksFactory.userFactory();
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, "senha123");
         SecurityContext securityContext = mock(SecurityContext.class);
@@ -56,8 +56,8 @@ class GetLoggedUserGatewayImplTests {
     @DisplayName("Should return logged user")
     void shouldReturnLoggedUser() {
         String username = MocksFactory.faker.name().username();
-        User user =  MocksFactory.userFactory();
-        UserJpaEntity userJpaEntity =  MocksFactory.userJpaEntityFactory(user);
+        User user = MocksFactory.userFactory();
+        UserJpaEntity userJpaEntity = MocksFactory.userJpaEntityFactory(user);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, "senha123");
         SecurityContext securityContext = mock(SecurityContext.class);

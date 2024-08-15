@@ -83,7 +83,7 @@ public class MocksFactory {
         );
     }
 
-    public static UserJpaEntity userJpaEntityFactory(User user){
+    public static UserJpaEntity userJpaEntityFactory(User user) {
         return UserJpaEntity
                 .builder()
                 .id(user.getId())
@@ -96,7 +96,7 @@ public class MocksFactory {
                 .build();
     }
 
-    public static UserJpaEntity userJpaEntityFactory(UserJpaEntity user){
+    public static UserJpaEntity userJpaEntityFactory(UserJpaEntity user) {
         return UserJpaEntity
                 .builder()
                 .id(UUID.randomUUID())
@@ -111,7 +111,7 @@ public class MocksFactory {
                 .build();
     }
 
-    public  static CreateUserRequest createUserRequestFactory(){
+    public static CreateUserRequest createUserRequestFactory() {
         return new CreateUserRequest(
                 faker.name().firstName(),
                 faker.name().lastName(),
@@ -120,7 +120,7 @@ public class MocksFactory {
                 "Password!1234H");
     }
 
-    public static Authentication authenticationFactory (){
+    public static Authentication authenticationFactory() {
         return new Authentication() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -159,20 +159,20 @@ public class MocksFactory {
         };
     }
 
-    public static Session sessionFactoryWithNoId(){
-        return new Session(UUID.randomUUID(),UUID.randomUUID().toString());
+    public static Session sessionFactoryWithNoId() {
+        return new Session(UUID.randomUUID(), UUID.randomUUID().toString());
     }
 
-    public static Session sessionFactoryId(){
-        return new Session(UUID.randomUUID(),UUID.randomUUID(),UUID.randomUUID().toString(),LocalDateTime.now(),true);
+    public static Session sessionFactoryId() {
+        return new Session(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID().toString(), LocalDateTime.now(), true);
     }
 
-    public static Session sessionFactory(SessionJpaEntity entity){
-        return new Session(entity.getId(), entity.getUser().getId(),entity.getToken(), entity.getCreationDate(),true);
+    public static Session sessionFactory(SessionJpaEntity entity) {
+        return new Session(entity.getId(), entity.getUser().getId(), entity.getToken(), entity.getCreationDate(), true);
     }
 
-    public static SessionJpaEntity sessionJpaEntityFactory(Session session){
-        return  SessionJpaEntity
+    public static SessionJpaEntity sessionJpaEntityFactory(Session session) {
+        return SessionJpaEntity
                 .builder()
                 .id(session.getId())
                 .user(UserJpaEntity.builder().id(session.getUserId()).build())
@@ -181,8 +181,8 @@ public class MocksFactory {
                 .build();
     }
 
-    public static SessionJpaEntity sessionJpaEntityFactory(){
-        return  SessionJpaEntity
+    public static SessionJpaEntity sessionJpaEntityFactory() {
+        return SessionJpaEntity
                 .builder()
                 .id(UUID.randomUUID())
                 .user(UserJpaEntity.builder().id(UUID.randomUUID()).build())
@@ -191,8 +191,8 @@ public class MocksFactory {
                 .build();
     }
 
-    public static SessionJpaEntity sessionJpaEntityFactory(SessionJpaEntity entity){
-        return  SessionJpaEntity
+    public static SessionJpaEntity sessionJpaEntityFactory(SessionJpaEntity entity) {
+        return SessionJpaEntity
                 .builder()
                 .id(UUID.randomUUID())
                 .id(entity.getId())
@@ -205,7 +205,7 @@ public class MocksFactory {
                 .build();
     }
 
-    public static FixedExpense fixedExpenseFactory(){
+    public static FixedExpense fixedExpenseFactory() {
         return new FixedExpense(
                 faker.lorem().word(),
                 20,
@@ -215,8 +215,8 @@ public class MocksFactory {
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
     }
 
-    public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(FixedExpense fixedExpense){
-        return  FixedExpenseJpaEntity
+    public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(FixedExpense fixedExpense) {
+        return FixedExpenseJpaEntity
                 .builder()
                 .id(fixedExpense.getId())
                 .user(UserJpaEntity.builder().id(fixedExpense.getUserId()).build())
@@ -230,7 +230,7 @@ public class MocksFactory {
                 .build();
     }
 
-    public static AddFixedExpenseRequest addFixedExpenseRequestFactory(){
+    public static AddFixedExpenseRequest addFixedExpenseRequestFactory() {
         return new AddFixedExpenseRequest(
                 MocksFactory.faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
@@ -241,8 +241,8 @@ public class MocksFactory {
         );
     }
 
-    public static FixedExpense fixedExpenseFactory(AddFixedExpenseRequest  request){
-        return  new FixedExpense(
+    public static FixedExpense fixedExpenseFactory(AddFixedExpenseRequest request) {
+        return new FixedExpense(
                 request.description(),
                 request.dueDay(),
                 request.category(),

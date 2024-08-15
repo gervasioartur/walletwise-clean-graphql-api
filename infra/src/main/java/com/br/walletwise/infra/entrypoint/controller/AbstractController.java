@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public abstract class AbstractController<T,E> {
+public abstract class AbstractController<T, E> {
     public abstract ResponseEntity<T> perform(E request);
 
     protected List<Validator> buildValidators(E request) {

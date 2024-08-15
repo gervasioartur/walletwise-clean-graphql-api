@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class FixedExpenseMapper {
 
     public FixedExpenseJpaEntity map(FixedExpense fixedExpense) {
-        return  FixedExpenseJpaEntity
+        return FixedExpenseJpaEntity
                 .builder()
                 .id(fixedExpense.getId())
                 .user(UserJpaEntity.builder().id(fixedExpense.getUserId()).build())

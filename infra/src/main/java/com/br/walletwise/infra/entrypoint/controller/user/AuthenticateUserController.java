@@ -40,7 +40,7 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
 
     public ResponseEntity<Response> perform(@RequestBody AuthenticateUserRequest request) {
         String error = this.validate(request);
-        if(error != null) {
+        if (error != null) {
             Response response = Response.builder().body(error).build();
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
@@ -62,8 +62,8 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
     @Override
     protected List<Validator> buildValidators(AuthenticateUserRequest request) {
         List<Validator> validators = new ArrayList<>();
-        validators.addAll(ValidationBuilder.of("Username or E-mail",request.usernameOrEmail()).required().build());
-        validators.addAll(ValidationBuilder.of("Password",request.password()).required().build());
+        validators.addAll(ValidationBuilder.of("Username or E-mail", request.usernameOrEmail()).required().build());
+        validators.addAll(ValidationBuilder.of("Password", request.password()).required().build());
         return validators;
     }
 }

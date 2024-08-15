@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Session extends AbstractEntity{
+public class Session extends AbstractEntity {
     private UUID id;
     private UUID userId;
     private String token;
-    private LocalDateTime  creationDate;
+    private LocalDateTime creationDate;
     private boolean active;
 
     public Session(UUID id, UUID userId, String token, LocalDateTime creationDate, boolean active) {
@@ -23,8 +23,8 @@ public class Session extends AbstractEntity{
         this.creationDate = creationDate;
         this.active = active;
 
-        String error =  this.validate();
-        if(error != null) throw new DomainException(error);
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public Session(UUID userId, String token) {
@@ -32,8 +32,8 @@ public class Session extends AbstractEntity{
         this.token = token;
         this.creationDate = LocalDateTime.now();
 
-        String error =  this.validate();
-        if(error != null) throw new DomainException(error);
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public UUID getId() {
@@ -47,8 +47,8 @@ public class Session extends AbstractEntity{
     public void setUserId(UUID userId) {
         this.userId = userId;
 
-        String error =  this.validate();
-        if(error != null) throw new DomainException(error);
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public String getToken() {
@@ -57,8 +57,8 @@ public class Session extends AbstractEntity{
 
     public void setToken(String token) {
         this.token = token;
-        String error =  this.validate();
-        if(error != null) throw new DomainException(error);
+        String error = this.validate();
+        if (error != null) throw new DomainException(error);
     }
 
     public LocalDateTime getCreationDate() {

@@ -21,7 +21,7 @@ public class CreateTokenTests {
     public void shouldCreateToken() {
         String username = "any_username";
         Map<String, Object> claims = new HashMap<>();
-        String resul =  this.createToken.create(claims,username);
+        String resul = this.createToken.create(claims, username);
         assertThat(resul).isNotNull();
     }
 }

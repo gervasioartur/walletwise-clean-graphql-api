@@ -36,7 +36,7 @@ class UserMapperTests {
     void shouldReturnUserJpaEntityOnMapFromUser() {
         User user = MocksFactory.userFactory();
 
-        UserJpaEntity userJpaEntity =  this.mapper.map(user);
+        UserJpaEntity userJpaEntity = this.mapper.map(user);
 
         assertThat(userJpaEntity.getId()).isEqualTo(user.getId());
         assertThat(userJpaEntity.getFirstname()).isEqualTo(user.getFirstname());
@@ -50,9 +50,9 @@ class UserMapperTests {
     @Test
     @DisplayName("Should return user on map from UserJpaEntity")
     void shouldReturnUserOnMapFromUserJpaEntity() {
-        UserJpaEntity userJpaEntity  = MocksFactory.userJpaEntityFactory();
+        UserJpaEntity userJpaEntity = MocksFactory.userJpaEntityFactory();
 
-        User user  =  this.mapper.map(userJpaEntity);
+        User user = this.mapper.map(userJpaEntity);
 
         assertThat(userJpaEntity.getId()).isEqualTo(user.getId());
         assertThat(userJpaEntity.getFirstname()).isEqualTo(user.getFirstname());

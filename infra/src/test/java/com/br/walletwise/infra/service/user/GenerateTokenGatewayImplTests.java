@@ -27,7 +27,7 @@ public class GenerateTokenGatewayImplTests {
     @Test
     @DisplayName("Should return generated token")
     public void shouldReturnGeneratedToken() {
-        String username =  "any_username";
+        String username = "any_username";
         String token = UUID.randomUUID().toString();
         Map<String, Object> claims = new HashMap<>();
 

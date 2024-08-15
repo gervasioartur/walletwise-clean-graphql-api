@@ -23,8 +23,7 @@ public class User extends AbstractEntity {
                 String username,
                 String email,
                 String password,
-                boolean active)
-    {
+                boolean active) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -41,8 +40,7 @@ public class User extends AbstractEntity {
                 String lastname,
                 String username,
                 String email,
-                String password)
-    {
+                String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;

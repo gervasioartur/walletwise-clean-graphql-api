@@ -5,8 +5,6 @@ import com.br.walletwise.infra.helpers.ValidateToken;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import com.br.walletwise.infra.service.user.LoadUserByUsernameGatewayImpl;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,12 +20,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
@@ -54,10 +50,10 @@ public class JwtAuthenticationFilterTests {
     void shouldNotAuthenticateIfAuthorizationHeaderIsNull() throws ServletException, IOException {
         Mockito.when(request.getHeader("Authorization")).thenReturn(null);
 
-        jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-        verify(this.filterChain,times(1)).doFilter(request, response);
+        verify(this.filterChain, times(1)).doFilter(request, response);
     }
 
     @Test
@@ -65,10 +61,10 @@ public class JwtAuthenticationFilterTests {
     void shouldNotAuthenticateIfAuthorizationHeaderIsEmpty() throws ServletException, IOException {
         Mockito.when(request.getHeader("Authorization")).thenReturn("");
 
-        jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-        verify(this.filterChain,times(1)).doFilter(request, response);
+        verify(this.filterChain, times(1)).doFilter(request, response);
     }
 
     @Test
@@ -78,10 +74,10 @@ public class JwtAuthenticationFilterTests {
 
         Mockito.when(request.getHeader("Authorization")).thenReturn(authHeader);
 
-        jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-        verify(this.filterChain,times(1)).doFilter(request, response);
+        verify(this.filterChain, times(1)).doFilter(request, response);
     }
 
     @Test
@@ -91,10 +87,10 @@ public class JwtAuthenticationFilterTests {
 
         Mockito.when(request.getHeader("Authorization")).thenReturn(authHeader);
 
-        jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-        verify(this.filterChain,times(1)).doFilter(request, response);
+        verify(this.filterChain, times(1)).doFilter(request, response);
     }
 
     @Test
@@ -113,10 +109,10 @@ public class JwtAuthenticationFilterTests {
             when(securityContext.getAuthentication())
                     .thenReturn(new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList()));
 
-            jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+            jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNotNull();
-            verify(this.filterChain,times(1)).doFilter(request, response);
+            verify(this.filterChain, times(1)).doFilter(request, response);
         }
     }
 
@@ -137,12 +133,12 @@ public class JwtAuthenticationFilterTests {
             doThrow(UsernameNotFoundException.class).when(this.loadUserByUsername).loadUserByUsername(username);
 
             Throwable exception = Assertions
-                    .catchThrowable(()->  jwtAuthenticationFilter.doFilterInternal(request,response,filterChain));
+                    .catchThrowable(() -> jwtAuthenticationFilter.doFilterInternal(request, response, filterChain));
 
             Assertions.assertThat(exception).isInstanceOf(UsernameNotFoundException.class);
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-            verify(this.loadUserByUsername,times(1)).loadUserByUsername(username);
-            verify(this.filterChain,times(0)).doFilter(request, response);
+            verify(this.loadUserByUsername, times(1)).loadUserByUsername(username);
+            verify(this.filterChain, times(0)).doFilter(request, response);
         }
     }
 
@@ -162,13 +158,13 @@ public class JwtAuthenticationFilterTests {
             securityContextHolder.when(SecurityContextHolder::getContext).thenReturn(securityContext);
             when(securityContext.getAuthentication()).thenReturn(null);
             when(this.loadUserByUsername.loadUserByUsername(username)).thenReturn(userDetails);
-            when(this.validateToken.isValid(token,userDetails)).thenReturn(false);
+            when(this.validateToken.isValid(token, userDetails)).thenReturn(false);
 
-            jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+            jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-            verify(this.loadUserByUsername,times(1)).loadUserByUsername(username);
-            verify(this.filterChain,times(1)).doFilter(request, response);
+            verify(this.loadUserByUsername, times(1)).loadUserByUsername(username);
+            verify(this.filterChain, times(1)).doFilter(request, response);
         }
     }
 
@@ -188,15 +184,15 @@ public class JwtAuthenticationFilterTests {
             securityContextHolder.when(SecurityContextHolder::getContext).thenReturn(securityContext);
             when(securityContext.getAuthentication()).thenReturn(null);
             when(this.loadUserByUsername.loadUserByUsername(username)).thenReturn(userDetails);
-            when(this.validateToken.isValid(token,userDetails)).thenReturn(true);
+            when(this.validateToken.isValid(token, userDetails)).thenReturn(true);
             securityContextHolder.when(SecurityContextHolder::createEmptyContext).thenReturn(securityContext);
             doNothing().when(securityContext).setAuthentication(any());
 
-            jwtAuthenticationFilter.doFilterInternal(request,response,filterChain);
+            jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
-            verify(this.loadUserByUsername,times(1)).loadUserByUsername(username);
-            verify(this.filterChain,times(1)).doFilter(request, response);
+            verify(this.loadUserByUsername, times(1)).loadUserByUsername(username);
+            verify(this.filterChain, times(1)).doFilter(request, response);
         }
     }
 }

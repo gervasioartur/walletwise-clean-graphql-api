@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SaveSessionGatewayImpl implements SaveSessionGateway {
-   private final SessionJpaRepository sessionJpaRepository;
-   private final SessionMapper mapper;
+    private final SessionJpaRepository sessionJpaRepository;
+    private final SessionMapper mapper;
 
     @Override
     public Session save(Session session) {
-        SessionJpaEntity entity =  this.mapper.map(session);
+        SessionJpaEntity entity = this.mapper.map(session);
         return this.mapper.map(this.sessionJpaRepository.save(entity));
     }
 }

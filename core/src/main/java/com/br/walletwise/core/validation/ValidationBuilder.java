@@ -41,17 +41,17 @@ public class ValidationBuilder {
         return this;
     }
 
-    public ValidationBuilder endDate(Date start){
-        this.validators.add(new EndDateValidator(this.fieldValue,start));
+    public ValidationBuilder endDate(Date start) {
+        this.validators.add(new EndDateValidator(this.fieldValue, start));
         return this;
     }
 
-    public ValidationBuilder dueDay(){
+    public ValidationBuilder dueDay() {
         this.validators.add(new DueDayValidator(this.fieldValue));
         return this;
     }
 
-    public ValidationBuilder amount(){
+    public ValidationBuilder amount() {
         this.validators.add(new AmountValidator(this.fieldValue));
         return this;
     }

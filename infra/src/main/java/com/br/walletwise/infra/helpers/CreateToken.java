@@ -13,7 +13,7 @@ import java.util.Map;
 public class CreateToken {
     private final GetSignKey getSignKey;
 
-    public String create(Map<String, Object> claims, String username){
+    public String create(Map<String, Object> claims, String username) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)

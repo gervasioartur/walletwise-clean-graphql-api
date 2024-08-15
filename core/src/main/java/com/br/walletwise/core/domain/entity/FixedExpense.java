@@ -41,16 +41,16 @@ public class FixedExpense extends AbstractEntity {
         this.isActive = isActive;
 
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public FixedExpense(
-                        String description,
-                        int dueDay,
-                        String category,
-                        BigDecimal amount,
-                        Date startDate,
-                        Date endDate) {
+            String description,
+            int dueDay,
+            String category,
+            BigDecimal amount,
+            Date startDate,
+            Date endDate) {
 
         this.description = description;
         this.dueDay = dueDay;
@@ -60,7 +60,7 @@ public class FixedExpense extends AbstractEntity {
         this.endDate = endDate;
 
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public long getId() {
@@ -82,7 +82,7 @@ public class FixedExpense extends AbstractEntity {
     public void setDescription(String description) {
         this.description = description;
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public int getDueDay() {
@@ -92,7 +92,7 @@ public class FixedExpense extends AbstractEntity {
     public void setDueDay(int dueDay) {
         this.dueDay = dueDay;
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public String getCategory() {
@@ -102,7 +102,7 @@ public class FixedExpense extends AbstractEntity {
     public void setCategory(String category) {
         this.category = category;
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public BigDecimal getAmount() {
@@ -112,7 +112,7 @@ public class FixedExpense extends AbstractEntity {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public Date getStartDate() {
@@ -122,7 +122,7 @@ public class FixedExpense extends AbstractEntity {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public Date getEndDate() {
@@ -132,7 +132,7 @@ public class FixedExpense extends AbstractEntity {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
         String error = this.validate();
-        if(error != null) throw new DomainException(error);
+        if (error != null) throw new DomainException(error);
     }
 
     public boolean isActive() {
@@ -146,9 +146,9 @@ public class FixedExpense extends AbstractEntity {
     @Override
     protected List<Validator> buildValidators() {
         List<Validator> validators = new ArrayList<>();
-        validators.addAll(ValidationBuilder.of("Description",this.description).required().build());
-        validators.addAll(ValidationBuilder.of("Category",this.category).required().category().build());
-        validators.addAll(ValidationBuilder.of("Amount",this.amount).required().amount().build());
+        validators.addAll(ValidationBuilder.of("Description", this.description).required().build());
+        validators.addAll(ValidationBuilder.of("Category", this.category).required().category().build());
+        validators.addAll(ValidationBuilder.of("Amount", this.amount).required().amount().build());
         validators.addAll(ValidationBuilder.of("Due day", this.dueDay).required().dueDay().build());
         validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
         validators.addAll(ValidationBuilder.of("End date", this.endDate).required().endDate(this.startDate).build());

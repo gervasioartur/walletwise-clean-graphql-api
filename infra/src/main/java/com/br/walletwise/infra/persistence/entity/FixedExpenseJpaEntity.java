@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "t_fixed_expenses", schema = "walletwise")
-public class FixedExpenseJpaEntity extends BaseEntity{
+public class FixedExpenseJpaEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class FixedExpenseJpaEntity extends BaseEntity{
     private String description;
 
     @Column(nullable = false)
-    private int  dueDay;
+    private int dueDay;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -39,10 +39,10 @@ public class FixedExpenseJpaEntity extends BaseEntity{
     private String category;
 
     @Column(nullable = false)
-    private Date  starDate;
+    private Date starDate;
 
     @Column(nullable = false)
-    private Date  endDate;
+    private Date endDate;
 
     @Column(name = "is_active")
     private boolean active;

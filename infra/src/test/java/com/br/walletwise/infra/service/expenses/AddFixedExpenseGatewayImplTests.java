@@ -28,7 +28,7 @@ class AddFixedExpenseGatewayImplTests {
     @DisplayName("Should add Fixed expense")
     void shouldAddFixedExpense() {
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory();
-        FixedExpenseJpaEntity fixedExpenseEntity =  MocksFactory.fixedExpenseJpaEntityFactory(fixedExpense);
+        FixedExpenseJpaEntity fixedExpenseEntity = MocksFactory.fixedExpenseJpaEntityFactory(fixedExpense);
 
         when(this.mapper.map(fixedExpense)).thenReturn(fixedExpenseEntity);
 

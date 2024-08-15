@@ -10,7 +10,7 @@ import java.security.Key;
 @Component
 public class GetSignKey {
     @Value("${app.secret}")
-    private  String secretKey;
+    private String secretKey;
 
     public Key get() {
         byte[] keyBytes = Decoders.BASE64.decode(this.secretKey);

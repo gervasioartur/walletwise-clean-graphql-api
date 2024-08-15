@@ -39,8 +39,8 @@ class CreateUserGatewayImplTests {
         User result = this.createUserJpaGateway.create(user);
 
         assertThat(result.getId()).isEqualTo(savedUser.getId());
-        verify(this.mapper,times(1)).map(user);
-        verify(this.userJpaRepository,times(1)).save(userJpaEntity);
-        verify(this.mapper,times(1)).map(savedUserJpaEntity);
+        verify(this.mapper, times(1)).map(user);
+        verify(this.userJpaRepository, times(1)).save(userJpaEntity);
+        verify(this.mapper, times(1)).map(savedUserJpaEntity);
     }
 }

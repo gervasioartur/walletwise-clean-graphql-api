@@ -19,7 +19,7 @@ public class GetFixedExpensesImpl implements GetFixedExpenses {
 
     @Override
     public List<FixedExpenseModel> get() {
-        User user =  this.getLoggedUser.get();
+        User user = this.getLoggedUser.get();
         return this.getFixedExpensesGateway.get(user.getId());
     }
 }

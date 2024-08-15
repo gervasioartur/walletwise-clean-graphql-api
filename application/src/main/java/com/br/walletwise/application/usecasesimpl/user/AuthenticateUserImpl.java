@@ -29,15 +29,15 @@ public class AuthenticateUserImpl implements AuthenticateUser {
 
     @Override
     public String authenticate(String usernameOrEmail, String password) {
-        Optional<User> userResult =  usernameOrEmail.contains("@") ?
+        Optional<User> userResult = usernameOrEmail.contains("@") ?
                 findByEmail.find(usernameOrEmail)
-                : findByUsername.find(usernameOrEmail) ;
+                : findByUsername.find(usernameOrEmail);
 
-        if(userResult.isEmpty()) throw  new UnauthorizedException("Bad credentials.");
+        if (userResult.isEmpty()) throw new UnauthorizedException("Bad credentials.");
         String token = this.generateToken.generate(userResult.get().getUsername());
-        if(token == null) throw  new UnauthorizedException("Bad credentials.");
+        if (token == null) throw new UnauthorizedException("Bad credentials.");
         this.authenticateUserGateway.authenticate(userResult.get().getUsername(), password);
-        Session session =  new Session(userResult.get().getId(), token);
+        Session session = new Session(userResult.get().getId(), token);
         session = this.saveSession.save(session);
         return session.getToken();
     }

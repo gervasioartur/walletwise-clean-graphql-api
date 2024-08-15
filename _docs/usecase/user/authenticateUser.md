@@ -1,6 +1,7 @@
 ## Feature: Authenticate user
 
 ### Scenario: User authentication fails when an unexpected exception occurs [✅]
+
     When I attempt to authenticate a user with
 
         | usenameOremail               | password        |
@@ -12,6 +13,7 @@
     And the response body should contain "An unexpected error occurred. Please try again later."
 
 ### Scenario: User authentication fails when user does not exist with email or username
+
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
@@ -23,6 +25,7 @@
     And the response body should contain "Bad credentials."
 
 ### Scenario: User authentication fails when password is wrong
+
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
@@ -34,6 +37,7 @@
     And the response body should contain "Bad credentials."
 
 ### Scenario: User authentication fails when username or email is blank [✅]
+
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
@@ -45,6 +49,7 @@
     And the response body should contain "Username or email is required."
 
 ### Scenario: User authentication fails when password is blank [✅]
+
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |
@@ -56,6 +61,7 @@
     And the response body should contain "Password is required."
 
 ### Scenario: User authentication succeeds when with valid authentication info ´[✅]
+
     When I attempt to authenticate a user with
 
         | usenameOremail               | password       |

@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -100,7 +99,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should return null if description is valid on update description")
     void shouldReturnNUllIfDescriptionIsValidaOnUpdateDescription() {
-        String description =  faker.lorem().word();
+        String description = faker.lorem().word();
 
         FixedExpense fixedExpense = new FixedExpense(
                 0,
@@ -113,7 +112,7 @@ class FixedExpenseTests {
                 Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
                 true);
 
-         fixedExpense.setDescription(description);
+        fixedExpense.setDescription(description);
 
         assertThat(fixedExpense.getDescription()).isEqualTo(description);
     }
@@ -152,7 +151,7 @@ class FixedExpenseTests {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1,32})
+    @ValueSource(ints = {-1, 32})
     @DisplayName("Should throw DomainException if due day is invalid on build with all arguments")
     void shouldThrowDomainExceptionIfDueDayIsInvalidOnBuildWithAllArguments(int dueDay) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
@@ -171,7 +170,7 @@ class FixedExpenseTests {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1,32})
+    @ValueSource(ints = {-1, 32})
     @DisplayName("Should throw DomainException if due day is invalid on build with no id")
     void shouldThrowDomainExceptionIfDueDayIsInvalidOnBuildWithNoId(int dueDay) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
@@ -187,10 +186,10 @@ class FixedExpenseTests {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1,32})
+    @ValueSource(ints = {-1, 32})
     @DisplayName("Should throw DomainException if due day is invalid on update due day")
     void shouldThrowDomainExceptionIfDueDayIsInvalidOnUpdateDueDay(int dueDay) {
-        FixedExpense fixedExpense =  new FixedExpense(
+        FixedExpense fixedExpense = new FixedExpense(
                 faker.lorem().word(),
                 23,
                 CategoryEnum.SCHOOL.getValue(),
@@ -207,7 +206,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should return null if due day is valid on update due day")
     void shouldReturnNUllIfDueDayIsValidaOnUpdateDueDay() {
-        int dueDay =  20;
+        int dueDay = 20;
 
         FixedExpense fixedExpense = new FixedExpense(
                 0,
@@ -279,7 +278,7 @@ class FixedExpenseTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"invalid_category","category", "any_category"})
+    @ValueSource(strings = {"invalid_category", "category", "any_category"})
     @DisplayName("Should throw DomainException if category is invalid on build with all arguments")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithAllArguments(String category) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
@@ -295,11 +294,11 @@ class FixedExpenseTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Category is invalid. These are available categories : " +
-                          CategoryEnum.RENT.getValue() + ","+ CategoryEnum.SCHOOL.getValue());
+                CategoryEnum.RENT.getValue() + "," + CategoryEnum.SCHOOL.getValue());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"invalid_category","category", "any_category"})
+    @ValueSource(strings = {"invalid_category", "category", "any_category"})
     @DisplayName("Should throw DomainException if category is invalid on build with no id")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithNoId(String category) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
@@ -312,11 +311,11 @@ class FixedExpenseTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Category is invalid. These are available categories : " +
-                CategoryEnum.RENT.getValue() + ","+ CategoryEnum.SCHOOL.getValue());
+                CategoryEnum.RENT.getValue() + "," + CategoryEnum.SCHOOL.getValue());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"invalid_category","category", "any_category"})
+    @ValueSource(strings = {"invalid_category", "category", "any_category"})
     @DisplayName("Should throw DomainException if category is invalid on update category")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnUpdateCategory(String category) {
         FixedExpense fixedExpense = new FixedExpense(
@@ -331,13 +330,13 @@ class FixedExpenseTests {
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Category is invalid. These are available categories : " +
-                CategoryEnum.RENT.getValue() + ","+ CategoryEnum.SCHOOL.getValue());
+                CategoryEnum.RENT.getValue() + "," + CategoryEnum.SCHOOL.getValue());
     }
 
     @Test
     @DisplayName("Should return null if category is valid on update category")
     void shouldReturnNUllIfCategoryIsValidaOnUpdateCategory() {
-        String category =  CategoryEnum.RENT.getValue();
+        String category = CategoryEnum.RENT.getValue();
 
         FixedExpense fixedExpense = new FixedExpense(
                 0,
@@ -392,7 +391,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should throw DomainException if amount is zero on update amount")
     void shouldThrowDomainExceptionIfAmountIsZeroOnUpdateAmount() {
-        FixedExpense fixedExpense =  new FixedExpense(
+        FixedExpense fixedExpense = new FixedExpense(
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
@@ -480,7 +479,7 @@ class FixedExpenseTests {
     @Test
     @DisplayName("Should return null if amount is valid on update amount")
     void shouldReturnNUllIfAmountIsValidaOnUpdateAmount() {
-        BigDecimal amount =  new BigDecimal(300);
+        BigDecimal amount = new BigDecimal(300);
 
         FixedExpense fixedExpense = new FixedExpense(
                 0,
@@ -705,7 +704,7 @@ class FixedExpenseTests {
         boolean active = true;
 
         FixedExpense fixedExpense = new FixedExpense
-                (id,userId,description,dueDay,category,amount,startDate,endDate,active);
+                (id, userId, description, dueDay, category, amount, startDate, endDate, active);
 
         fixedExpense.setActive(false);
         assertThat(fixedExpense.getId()).isEqualTo(id);

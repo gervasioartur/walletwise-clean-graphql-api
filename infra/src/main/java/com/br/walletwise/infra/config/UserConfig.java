@@ -29,12 +29,12 @@ public class UserConfig {
     }
 
     @Bean
-    public GenerateToken generateToken(GenerateTokenGateway generateTokenGateway){
+    public GenerateToken generateToken(GenerateTokenGateway generateTokenGateway) {
         return new GenerateTokenImpl(generateTokenGateway);
     }
 
     @Bean
-    public SaveSession saveSession(SaveSessionGateway saveSessionGateway){
+    public SaveSession saveSession(SaveSessionGateway saveSessionGateway) {
         return new SaveSessionImpl(saveSessionGateway);
     }
 
@@ -48,7 +48,7 @@ public class UserConfig {
                                              FindByEmail findByEmail,
                                              GenerateToken generateToken,
                                              AuthenticateUserGateway authenticateUserGateway,
-                                             SaveSession saveSession){
+                                             SaveSession saveSession) {
         return new AuthenticateUserImpl(findByUsername, findByEmail, generateToken, authenticateUserGateway, saveSession);
     }
 }
