@@ -2,6 +2,7 @@ package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.application.gateway.user.GetLoggedUserGateway;
 import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
@@ -18,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -28,6 +31,26 @@ class GetLoggedUserGatewayImplTests {
     private UserJpaRepository repository;
     @MockBean
     private UserMapper mapper;
+
+    @Test
+    @DisplayName("Should throw NotFoundException if user does not exist")
+    void shouldThrowNotFoundException() {
+        String username = MocksFactory.faker.name().username();
+        User user =  MocksFactory.userFactory();
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(username, "senha123");
+        SecurityContext securityContext = mock(SecurityContext.class);
+
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
+
+        when(repository.findByUsername(username)).thenReturn(Optional.empty());
+        Throwable exception = catchThrowable(() -> this.getLoggedUserGateway.get());
+
+        assertThat(exception).isInstanceOf(NotFoundException.class);
+        assertThat(exception.getMessage()).isEqualTo("Username not found.");
+        verify(repository, times(1)).findByUsername(username);
+    }
 
     @Test
     @DisplayName("Should return logged user")
