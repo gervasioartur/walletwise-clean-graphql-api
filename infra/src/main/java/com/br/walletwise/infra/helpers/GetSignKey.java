@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 
 @Component
-public class SignKey {
+public class GetSignKey {
     @Value("${app.secret}")
     private  String secretKey;
 
-    public Key getSignKey(){
+    public Key get() {
         byte[] keyBytes = Decoders.BASE64.decode(this.secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }

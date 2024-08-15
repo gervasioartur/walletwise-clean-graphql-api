@@ -10,14 +10,14 @@ import java.security.Key;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class SignKeyTests {
+public class GetSignKeyTests {
     @Autowired
-    private SignKey signKey;
+    private GetSignKey getSignKey;
 
     @Test
     @DisplayName("Should return key")
     void shouldReturnKey() {
-        Key result = this.signKey.getSignKey();
+        Key result = this.getSignKey.get();
         result.getAlgorithm();
         assertThat(result).isNotNull();
         assertThat(result.getAlgorithm()).isEqualTo("HmacSHA384");
