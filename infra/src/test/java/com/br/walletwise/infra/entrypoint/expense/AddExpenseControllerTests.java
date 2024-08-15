@@ -2,6 +2,7 @@ package com.br.walletwise.infra.entrypoint.expense;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
 import com.br.walletwise.infra.mappers.FixedExpenseMapper;
@@ -79,4 +80,30 @@ public class AddExpenseControllerTests {
 
         verify(this.usecase, times(1)).add(fixedExpense);
     }
+
+    @Test
+    @DisplayName("Should return bad request if user case throws DomainException")
+    void shouldTReturnBadRequestIfUserCaseThrowsDomainException() throws Exception {
+        AddFixedExpenseRequest requestParams = MocksFactory.addFixedExpenseRequestFactory();
+
+        FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(requestParams);
+
+        String json = new ObjectMapper().writeValueAsString(requestParams);
+
+        when(this.mapper.map(requestParams)).thenReturn(fixedExpense);
+        doThrow(DomainException.class).when(this.usecase).add(fixedExpense);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(this.URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc
+                .perform(request)
+                .andExpect(status().isBadRequest());
+
+        verify(this.usecase, times(1)).add(fixedExpense);
+    }
+
 }
