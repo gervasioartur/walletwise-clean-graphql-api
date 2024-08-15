@@ -106,4 +106,30 @@ public class AddExpenseControllerTests {
         verify(this.usecase, times(1)).add(fixedExpense);
     }
 
+    @Test
+    @DisplayName("Should return created on add expense success")
+    void shouldTReturnCreatedOnAddFixedExpenseSuccess() throws Exception {
+        AddFixedExpenseRequest requestParams = MocksFactory.addFixedExpenseRequestFactory();
+
+        FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(requestParams);
+
+        String json = new ObjectMapper().writeValueAsString(requestParams);
+
+        when(this.mapper.map(requestParams)).thenReturn(fixedExpense);
+        doNothing().when(this.usecase).add(fixedExpense);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(this.URL)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc
+                .perform(request)
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("body",Matchers.is("Expense Added.")));
+
+        verify(this.usecase, times(1)).add(fixedExpense);
+    }
+
 }
