@@ -5,6 +5,7 @@ import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 
 import com.br.walletwise.core.domain.enums.CategoryEnum;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.github.javafaker.Faker;
 
 import java.math.BigDecimal;
@@ -61,6 +62,19 @@ public class MocksFactory {
         return new FixedExpense(
                 faker.lorem().word(),
                 20,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
+        );
+    }
+
+    public static FixedExpenseModel fixedExpenseModelFactory(User user){
+        String ownerFullName = user.getFirstname() + " " + user.getLastname();
+        return new FixedExpenseModel(
+                ownerFullName,
+                MocksFactory.faker.lorem().paragraph(),
+                15,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
