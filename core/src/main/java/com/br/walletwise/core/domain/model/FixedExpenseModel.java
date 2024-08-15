@@ -33,10 +33,6 @@ public class FixedExpenseModel {
         return ownerFullName;
     }
 
-    public void setOwnerFullName(String ownerFullName) {
-        this.ownerFullName = ownerFullName;
-    }
-
     public String getDescription() {
         return description;
     }

@@ -1,6 +1,7 @@
 package com.br.walletwise.infra.mappers;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
@@ -32,5 +33,17 @@ public class FixedExpenseMapper {
                 request.amount(),
                 request.starDate(),
                 request.endDate());
+    }
+
+    public FixedExpenseModel map(FixedExpenseJpaEntity entity){
+        return new FixedExpenseModel(
+                entity.getUser().getFirstname() + " " + entity.getUser().getLastname(),
+                entity.getDescription(),
+                entity.getDueDay(),
+                entity.getCategory(),
+                entity.getAmount(),
+                entity.getStarDate(),
+                entity.getEndDate()
+        );
     }
 }
