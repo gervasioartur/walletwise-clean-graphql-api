@@ -29,7 +29,7 @@ public class AuthenticateUserController extends AbstractController<Response, Aut
 
     @Override
     @PostMapping
-    @Operation(summary = "Authenticate User")
+    @Operation(summary = "Authenticate user")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Returns successful message"),

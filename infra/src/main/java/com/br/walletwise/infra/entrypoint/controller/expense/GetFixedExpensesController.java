@@ -1,11 +1,10 @@
 package com.br.walletwise.infra.entrypoint.controller.expense;
 
-import com.br.walletwise.core.domain.entity.FixedExpense;
-import com.br.walletwise.core.exception.DomainException;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.infra.mappers.FixedExpenseMapper;
-import com.br.walletwise.usecase.expense.AddFixedExpense;
+import com.br.walletwise.usecase.expense.GetFixedExpenses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @SecurityScheme(
         name = "bearerAuth",
         type = SecuritySchemeType.HTTP,
@@ -29,29 +30,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/fixed-expenses")
 @Tag(name = "Fixed Expenses")
 @RequiredArgsConstructor
-public class AddExpenseController {
-    private final AddFixedExpense usecase;
-    private final FixedExpenseMapper mapper;
+public class GetFixedExpensesController {
+    private final GetFixedExpenses usecase;
 
-    @PostMapping
-    @Operation(summary = "Add fixed expenses")
-    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping
+    @Operation(summary = "List fixed expenses")
+    @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Returns successful message"),
-            @ApiResponse(responseCode = "400", description = "Bad request happened"),
+            @ApiResponse(responseCode = "200", description = "Returns successful message"),
             @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
     })
 
     @SecurityRequirement(name = "bearerAuth")
-    public ResponseEntity<Response> perform(@RequestBody AddFixedExpenseRequest request) {
+    public ResponseEntity<Response> perform() {
         try {
-            FixedExpense fixedExpense = this.mapper.map(request);
-            this.usecase.add(fixedExpense);
-            Response response = Response.builder().body("Expense Added.").build();
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        } catch (DomainException ex) {
-            Response response = Response.builder().body(ex.getMessage()).build();
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            List<FixedExpenseModel> list = this.usecase.get();
+            Response response = Response.builder().body(list).build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception ex) {
             Response response = Response
                     .builder().body("An unexpected error occurred. Please try again later.").build();

@@ -265,6 +265,18 @@ public class MocksFactory {
         );
     }
 
+    public static FixedExpenseModel fixedExpenseModelFactory(User user) {
+        return new FixedExpenseModel(
+                user.getFirstname() + " " + user.getLastname(),
+                faker.lorem().paragraph(),
+                2,
+                faker.lorem().word(),
+                new BigDecimal(faker.number().randomNumber()),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
+        );
+    }
+
     public static FixedExpenseJpaEntity fixedExpenseJpaEntityFactory(User user){
         return FixedExpenseJpaEntity
                 .builder()
