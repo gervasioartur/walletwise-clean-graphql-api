@@ -24,61 +24,6 @@ class FixedExpenseTests {
     private final Faker faker = new Faker();
 
     @Test
-    @DisplayName("Should throw DomainException if user id is null on build with all arguments")
-    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithAllArguments() {
-        Throwable exception = catchThrowable(() -> new FixedExpense(
-                0,
-                null,
-                faker.lorem().word(),
-                1,
-                CategoryEnum.SCHOOL.getValue(),
-                new BigDecimal(200),
-                new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("User info is required.");
-    }
-
-    @Test
-    @DisplayName("Should throw DomainException if user id is null on build with no id")
-    void shouldThrowDomainExceptionIfUserIdIsNullOnBuildWithNoId() {
-        Throwable exception = catchThrowable(() -> new FixedExpense(
-                null,
-                faker.lorem().word(),
-                1,
-                CategoryEnum.SCHOOL.getValue(),
-                new BigDecimal(200),
-                new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("User info is required.");
-    }
-
-    @Test
-    @DisplayName("Should throw DomainException if user id is null on update user id")
-    void shouldThrowDomainExceptionIfUserIdIsNullOnUpdateUserId() {
-        FixedExpense fixedExpense = new FixedExpense(
-                0,
-                UUID.randomUUID(),
-                faker.lorem().word(),
-                1,
-                CategoryEnum.SCHOOL.getValue(),
-                new BigDecimal(200),
-                new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
-
-        Throwable exception = catchThrowable(() -> fixedExpense.setUserId(null));
-
-        assertThat(exception).isInstanceOf(DomainException.class);
-        assertThat(exception.getMessage()).isEqualTo("User info is required.");
-    }
-
-    @Test
     @DisplayName("Should return null if user id is valid")
     void shouldReturnNulIfUserIdIsValid() {
         UUID userId = UUID.randomUUID();
@@ -123,14 +68,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if description is null or empty on build with no Id")
     void shouldThrowDomainExceptionIfDescriptionIsNullOrEmptyOnBuildWithNoId(String description) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 description,
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Description is required.");
@@ -141,14 +84,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if description is null or empty on update description")
     void shouldThrowDomainExceptionIfDescriptionIsNullOrEmptyOnUpdateDescription(String description) {
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setDescription(null));
 
@@ -199,14 +140,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if due day is zero(0) on build with no id")
     void shouldThrowDomainExceptionIfDueDayIsZeroOnBuildWithNoId() {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 0,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day is required.");
@@ -236,14 +175,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if due day is invalid on build with no id")
     void shouldThrowDomainExceptionIfDueDayIsInvalidOnBuildWithNoId(int dueDay) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 dueDay,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Due day must be between 1 and 31.");
@@ -254,14 +191,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if due day is invalid on update due day")
     void shouldThrowDomainExceptionIfDueDayIsInvalidOnUpdateDueDay(int dueDay) {
         FixedExpense fixedExpense =  new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 23,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setDueDay(dueDay));
 
@@ -314,14 +249,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if category is null or empty on build with no id")
     void shouldThrowDomainExceptionIfDueDayIsZeroOnBuildWithNoId(String category) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 category,
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Category is required.");
@@ -332,14 +265,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if category is null or empty on update category")
     void shouldThrowDomainExceptionIfCategoryOnUpdateCategory(String category) {
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setCategory(category));
 
@@ -372,14 +303,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if category is invalid on build with no id")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnBuildWithNoId(String category) {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 category,
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Category is invalid. These are available categories : " +
@@ -391,14 +320,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if category is invalid on update category")
     void shouldThrowDomainExceptionIfCategoryIsInvalidOnUpdateCategory(String category) {
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setCategory(category));
 
@@ -451,14 +378,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if amount is zero on build with no id")
     void shouldThrowDomainExceptionIfAmountIsZeroOnBuildWithNoId() {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(0),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Amount is required.");
@@ -468,14 +393,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if amount is zero on update amount")
     void shouldThrowDomainExceptionIfAmountIsZeroOnUpdateAmount() {
         FixedExpense fixedExpense =  new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setAmount(new BigDecimal(0)));
 
@@ -505,14 +428,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if amount is less than zero on build with no id")
     void shouldThrowDomainExceptionIfAmountIsLessThanZeroOnBuildWithNoId() {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(-1),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Invalid value for amount.");
@@ -522,14 +443,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if amount is less than zero on update amount")
     void shouldThrowDomainExceptionIfAmountIsLessThanZeroOnUpdateAmount() {
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 12,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setAmount(new BigDecimal(-1)));
 
@@ -602,14 +521,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if start date is null on build with no id")
     void shouldThrowDomainExceptionIfStartDateIsNullOnBuildWithNoId() {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 null,
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true));
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant())));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("Start date is required.");
@@ -620,14 +537,12 @@ class FixedExpenseTests {
     void shouldThrowDomainExceptionIfStartDateIsNullOnUpdateStartDate() {
 
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setStartDate(null));
 
@@ -641,14 +556,12 @@ class FixedExpenseTests {
         Date startDate = new Date();
 
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         fixedExpense.setStartDate(startDate);
         assertThat(fixedExpense.getStartDate()).isEqualTo(startDate);
@@ -676,14 +589,12 @@ class FixedExpenseTests {
     @DisplayName("Should throw DomainException if end date is null on build with no id")
     void shouldThrowDomainExceptionIfEndDateIsNullOnBuildWithNoId() {
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                null,
-                true));
+                null));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("End date is required.");
@@ -694,14 +605,12 @@ class FixedExpenseTests {
     void shouldThrowDomainExceptionIfEndDateIsNullOnUpdateENdDate() {
 
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setEndDate(null));
 
@@ -735,14 +644,12 @@ class FixedExpenseTests {
         Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
 
         Throwable exception = catchThrowable(() -> new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                endDate,
-                true));
+                endDate));
 
         assertThat(exception).isInstanceOf(DomainException.class);
         assertThat(exception.getMessage()).isEqualTo("End date must be after start date.");
@@ -754,14 +661,12 @@ class FixedExpenseTests {
         Date endDate = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
 
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
 
         Throwable exception = catchThrowable(() -> fixedExpense.setEndDate(endDate));
 
@@ -775,14 +680,12 @@ class FixedExpenseTests {
         Date endDate = Date.from(LocalDateTime.now().plusDays(20).atZone(ZoneId.systemDefault()).toInstant());
 
         FixedExpense fixedExpense = new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 1,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(10).atZone(ZoneId.systemDefault()).toInstant()),
-                true);
+                Date.from(LocalDateTime.now().plusDays(10).atZone(ZoneId.systemDefault()).toInstant()));
 
         fixedExpense.setEndDate(endDate);
         assertThat(fixedExpense.getEndDate()).isEqualTo(endDate);

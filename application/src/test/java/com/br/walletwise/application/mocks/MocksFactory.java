@@ -59,14 +59,12 @@ public class MocksFactory {
 
     public static FixedExpense fixedExpenseFactory(){
         return new FixedExpense(
-                UUID.randomUUID(),
                 faker.lorem().word(),
                 20,
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(200),
                 new Date(),
-                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
-                true
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
         );
     }
 }

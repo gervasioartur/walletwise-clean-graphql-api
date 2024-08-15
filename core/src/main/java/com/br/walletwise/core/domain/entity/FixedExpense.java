@@ -44,22 +44,20 @@ public class FixedExpense extends AbstractEntity {
         if(error != null) throw new DomainException(error);
     }
 
-    public FixedExpense(UUID userId,
+    public FixedExpense(
                         String description,
                         int dueDay,
                         String category,
                         BigDecimal amount,
                         Date startDate,
-                        Date endDate,
-                        boolean isActive) {
-        this.userId = userId;
+                        Date endDate) {
+
         this.description = description;
         this.dueDay = dueDay;
         this.category = category;
         this.amount = amount;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.isActive = isActive;
 
         String error = this.validate();
         if(error != null) throw new DomainException(error);
@@ -75,8 +73,6 @@ public class FixedExpense extends AbstractEntity {
 
     public void setUserId(UUID userId) {
         this.userId = userId;
-        String error = this.validate();
-        if(error != null) throw new DomainException(error);
     }
 
     public String getDescription() {
@@ -150,11 +146,10 @@ public class FixedExpense extends AbstractEntity {
     @Override
     protected List<Validator> buildValidators() {
         List<Validator> validators = new ArrayList<>();
-        validators.addAll(ValidationBuilder.of("User info",this.userId).required().build());
         validators.addAll(ValidationBuilder.of("Description",this.description).required().build());
-        validators.addAll(ValidationBuilder.of("Due day", this.dueDay).required().dueDay().build());
         validators.addAll(ValidationBuilder.of("Category",this.category).required().category().build());
         validators.addAll(ValidationBuilder.of("Amount",this.amount).required().amount().build());
+        validators.addAll(ValidationBuilder.of("Due day", this.dueDay).required().dueDay().build());
         validators.addAll(ValidationBuilder.of("Start date", this.startDate).required().build());
         validators.addAll(ValidationBuilder.of("End date", this.endDate).required().endDate(this.startDate).build());
         return validators;
