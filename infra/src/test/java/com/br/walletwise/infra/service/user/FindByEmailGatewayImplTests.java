@@ -1,6 +1,5 @@
-package com.br.walletwise.infra.service;
+package com.br.walletwise.infra.service.user;
 
-import com.br.walletwise.application.gateway.user.FindByUsernameGateway;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.infra.mappers.UserMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
@@ -18,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class FindByUsernameGatewayImplTests {
+class FindByEmailGatewayImplTests {
     @Autowired
-    FindByUsernameGateway findByUsernameGateway;
+    FindByEmailGatewayImpl findByEmailJpaGateway;
 
     @MockBean
     private UserJpaRepository userJpaRepository;
@@ -30,19 +29,19 @@ class FindByUsernameGatewayImplTests {
     @Test
     @DisplayName("Should return optional of user")
     void shouldReturnOptionalOfUser() {
-        User user = MocksFactory.userFactory();
+       User user = MocksFactory.userFactory();
 
         UserJpaEntity entity = MocksFactory.userJpaEntityFactory(user);
 
-        when(this.userJpaRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(entity));
-        when(this.mapper.map(entity)).thenReturn(user);
+       when(this.userJpaRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(entity));
+       when(this.mapper.map(entity)).thenReturn(user);
 
-        Optional<User> result = this.findByUsernameGateway.find(user.getUsername());
+       Optional<User> result = this.findByEmailJpaGateway.find(user.getEmail());
 
-        assertThat(result).isPresent();
-        assertThat(result.get().getId()).isEqualTo(user.getId());
-        assertThat(result.get().getEmail()).isEqualTo(user.getEmail());
-        verify(this.userJpaRepository, times(1)).findByUsername(user.getUsername());
-        verify(this.mapper, times(1)).map(entity);
+       assertThat(result).isPresent();
+       assertThat(result.get().getId()).isEqualTo(user.getId());
+       assertThat(result.get().getEmail()).isEqualTo(user.getEmail());
+       verify(this.userJpaRepository, times(1)).findByEmail(user.getEmail());
+       verify(this.mapper, times(1)).map(entity);
     }
 }

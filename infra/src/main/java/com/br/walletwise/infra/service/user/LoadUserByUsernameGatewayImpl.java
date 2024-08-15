@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.service;
+package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.infra.persistence.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;

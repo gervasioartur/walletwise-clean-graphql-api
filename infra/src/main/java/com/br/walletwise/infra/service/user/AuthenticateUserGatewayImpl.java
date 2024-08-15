@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.service;
+package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.application.gateway.user.AuthenticateUserGateway;
 import lombok.RequiredArgsConstructor;

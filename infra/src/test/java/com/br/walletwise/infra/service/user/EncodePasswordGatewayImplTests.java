@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.service;
+package com.br.walletwise.infra.service.user;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

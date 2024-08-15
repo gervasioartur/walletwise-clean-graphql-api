@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.service;
+package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.application.gateway.user.SaveSessionGateway;
 import com.br.walletwise.core.domain.entity.Session;
