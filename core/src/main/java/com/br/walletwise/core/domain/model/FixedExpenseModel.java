@@ -1,9 +1,10 @@
 package com.br.walletwise.core.domain.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class FixedExpenseModel {
+public class FixedExpenseModel implements Serializable {
     private long expenseCode;
     private String ownerFullName;
     private String description;
