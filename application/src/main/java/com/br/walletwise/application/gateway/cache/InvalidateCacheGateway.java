@@ -1,5 +1,5 @@
 package com.br.walletwise.application.gateway.cache;
 
-public interface DeleteCacheGateway {
+public interface InvalidateCacheGateway {
     void delete(String key);
 }

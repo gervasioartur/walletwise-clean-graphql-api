@@ -1,7 +1,7 @@
 package com.br.walletwise.infra.config;
 
 import com.br.walletwise.application.gateway.cache.AddToCacheGateway;
-import com.br.walletwise.application.gateway.cache.DeleteCacheGateway;
+import com.br.walletwise.application.gateway.cache.InvalidateCacheGateway;
 import com.br.walletwise.application.gateway.cache.GetCacheGateway;
 import com.br.walletwise.application.usecasesimpl.cache.AddToCacheImpl;
 import com.br.walletwise.application.usecasesimpl.cache.InvalidateCacheImpl;
@@ -33,8 +33,8 @@ public class CacheConfig {
     }
 
     @Bean
-    public InvalidateCache deleteCache(DeleteCacheGateway deleteCacheGateway) {
-        return new InvalidateCacheImpl(deleteCacheGateway);
+    public InvalidateCache deleteCache(InvalidateCacheGateway invalidateCacheGateway) {
+        return new InvalidateCacheImpl(invalidateCacheGateway);
     }
 
     @Bean

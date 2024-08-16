@@ -1,6 +1,6 @@
 package com.br.walletwise.application.usecaseimpl.cache;
 
-import com.br.walletwise.application.gateway.cache.DeleteCacheGateway;
+import com.br.walletwise.application.gateway.cache.InvalidateCacheGateway;
 import com.br.walletwise.application.usecasesimpl.cache.InvalidateCacheImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,9 +12,9 @@ class InvalidateCacheImplTests {
     @DisplayName("Should invalidate cache")
     void shouldInvalidateCache() {
         String key = "key";
-        DeleteCacheGateway  deleteCacheGateway = mock(DeleteCacheGateway.class);
-        InvalidateCacheImpl invalidateCacheImpl = new InvalidateCacheImpl(deleteCacheGateway);
+        InvalidateCacheGateway invalidateCacheGateway = mock(InvalidateCacheGateway.class);
+        InvalidateCacheImpl invalidateCacheImpl = new InvalidateCacheImpl(invalidateCacheGateway);
         invalidateCacheImpl.delete(key);
-        verify(deleteCacheGateway, times(1)).delete(key);
+        verify(invalidateCacheGateway, times(1)).delete(key);
     }
 }
