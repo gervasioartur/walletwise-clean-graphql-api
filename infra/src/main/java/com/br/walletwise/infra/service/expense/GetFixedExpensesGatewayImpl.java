@@ -1,5 +1,6 @@
 package com.br.walletwise.infra.service.expense;
 
+import com.br.walletwise.application.gateway.cache.GetCacheGateway;
 import com.br.walletwise.application.gateway.expense.GetFixedExpensesGateway;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.mappers.FixedExpenseMapper;
