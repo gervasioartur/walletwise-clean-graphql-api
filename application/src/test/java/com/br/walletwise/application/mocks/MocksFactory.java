@@ -71,6 +71,7 @@ public class MocksFactory {
     public static FixedExpenseModel fixedExpenseModelFactory(User user) {
         String ownerFullName = user.getFirstname() + " " + user.getLastname();
         return new FixedExpenseModel(
+                faker.number().randomNumber(),
                 ownerFullName,
                 MocksFactory.faker.lorem().paragraph(),
                 15,
