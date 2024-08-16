@@ -27,6 +27,6 @@ public class AddFixedExpenseImpl implements AddFixedExpense {
         fixedExpense.setUserId(user.getId());
         fixedExpense.setActive(true);
         this.addFixedExpenseGateway.add(fixedExpense);
-        this.deleteCache.delete(user.getId().toString());
+        this.deleteCache.delete("fixedExpenses:" + user.getId());
     }
 }

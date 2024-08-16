@@ -7,7 +7,7 @@ import redis.clients.jedis.Jedis;
 
 @Service
 @RequiredArgsConstructor
-public class DeleteCacheGatewayImpl implements DeleteCacheGateway {
+public class DeleteRedisCacheGatewayImpl implements DeleteCacheGateway {
     private final Jedis jedis;
 
     @Override
