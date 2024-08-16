@@ -5,7 +5,7 @@ import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.expense.AddFixedExpenseImpl;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.usecase.cache.DeleteCache;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.expense.AddFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,14 +21,14 @@ class AddFixedExpenseImplTests {
 
     private GetLoggedUser getLoggedUser;
     private AddFixedExpenseGateway addFixedExpenseGateway;
-    private DeleteCache deleteCache;
+    private InvalidateCache invalidateCache;
 
     @BeforeEach
     void setUp() {
         this.getLoggedUser = mock(GetLoggedUser.class);
         this.addFixedExpenseGateway = mock(AddFixedExpenseGateway.class);
-        this.deleteCache = mock(DeleteCache.class);
-        this.addFixedExpense = new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser, deleteCache);
+        this.invalidateCache = mock(InvalidateCache.class);
+        this.addFixedExpense = new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser, invalidateCache);
     }
 
     @Test
@@ -41,12 +41,12 @@ class AddFixedExpenseImplTests {
 
         when(this.getLoggedUser.get()).thenReturn(user);
         doNothing().when(this.addFixedExpenseGateway).add(fixedExpense);
-        doNothing().when(this.deleteCache).delete(user.getId().toString());
+        doNothing().when(this.invalidateCache).delete(user.getId().toString());
 
         this.addFixedExpense.add(fixedExpense);
 
         verify(this.getLoggedUser, times(1)).get();
         verify(this.addFixedExpenseGateway, times(1)).add(fixedExpense);
-        verify(this.deleteCache, times(1)).delete(user.getId().toString());
+        verify(this.invalidateCache, times(1)).delete(user.getId().toString());
     }
 }

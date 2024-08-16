@@ -4,10 +4,10 @@ import com.br.walletwise.application.gateway.cache.AddToCacheGateway;
 import com.br.walletwise.application.gateway.cache.DeleteCacheGateway;
 import com.br.walletwise.application.gateway.cache.GetCacheGateway;
 import com.br.walletwise.application.usecasesimpl.cache.AddToCacheImpl;
-import com.br.walletwise.application.usecasesimpl.cache.DeleteCacheImpl;
+import com.br.walletwise.application.usecasesimpl.cache.InvalidateCacheImpl;
 import com.br.walletwise.application.usecasesimpl.cache.GetCacheImpl;
 import com.br.walletwise.usecase.cache.AddToCache;
-import com.br.walletwise.usecase.cache.DeleteCache;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.cache.GetCache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,8 +33,8 @@ public class CacheConfig {
     }
 
     @Bean
-    public DeleteCache deleteCache(DeleteCacheGateway deleteCacheGateway) {
-        return new DeleteCacheImpl(deleteCacheGateway);
+    public InvalidateCache deleteCache(DeleteCacheGateway deleteCacheGateway) {
+        return new InvalidateCacheImpl(deleteCacheGateway);
     }
 
     @Bean

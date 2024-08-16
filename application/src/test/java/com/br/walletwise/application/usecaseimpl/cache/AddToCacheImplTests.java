@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 
-public class AddToCacheImplTests {
+class AddToCacheImplTests {
     @Test
     @DisplayName("Should add value with ket to cache")
     void shouldAddValueWithKetToCache() {

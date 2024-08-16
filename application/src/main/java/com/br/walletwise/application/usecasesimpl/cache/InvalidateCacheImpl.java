@@ -1,12 +1,12 @@
 package com.br.walletwise.application.usecasesimpl.cache;
 
 import com.br.walletwise.application.gateway.cache.DeleteCacheGateway;
-import com.br.walletwise.usecase.cache.DeleteCache;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 
-public class DeleteCacheImpl implements DeleteCache {
+public class InvalidateCacheImpl implements InvalidateCache {
     private final DeleteCacheGateway deleteCacheGateway;
 
-    public DeleteCacheImpl(DeleteCacheGateway deleteCacheGateway) {
+    public InvalidateCacheImpl(DeleteCacheGateway deleteCacheGateway) {
         this.deleteCacheGateway = deleteCacheGateway;
     }
 

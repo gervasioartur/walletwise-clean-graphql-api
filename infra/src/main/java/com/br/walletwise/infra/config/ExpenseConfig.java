@@ -6,7 +6,7 @@ import com.br.walletwise.application.usecasesimpl.expense.AddFixedExpenseImpl;
 import com.br.walletwise.application.usecasesimpl.expense.GetFixedExpensesImpl;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.usecase.cache.AddToCache;
-import com.br.walletwise.usecase.cache.DeleteCache;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.cache.GetCache;
 import com.br.walletwise.usecase.expense.AddFixedExpense;
 import com.br.walletwise.usecase.expense.GetFixedExpenses;
@@ -20,8 +20,8 @@ public class ExpenseConfig {
     @Bean
     public AddFixedExpense addFixedExpense(AddFixedExpenseGateway addFixedExpenseGateway,
                                            GetLoggedUser getLoggedUser,
-                                           DeleteCache deleteCache) {
-        return new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser, deleteCache);
+                                           InvalidateCache invalidateCache) {
+        return new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser, invalidateCache);
     }
 
     @Bean

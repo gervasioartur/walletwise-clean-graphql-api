@@ -3,22 +3,22 @@ package com.br.walletwise.application.usecasesimpl.expense;
 import com.br.walletwise.application.gateway.expense.AddFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.usecase.cache.DeleteCache;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.expense.AddFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
 
 public class AddFixedExpenseImpl implements AddFixedExpense {
     private final AddFixedExpenseGateway addFixedExpenseGateway;
     private final GetLoggedUser getLoggedUser;
-    private final DeleteCache deleteCache;
+    private final InvalidateCache invalidateCache;
 
     public AddFixedExpenseImpl(AddFixedExpenseGateway addFixedExpenseGateway,
                                GetLoggedUser getLoggedUser,
-                               DeleteCache deleteCache) {
+                               InvalidateCache invalidateCache) {
 
         this.addFixedExpenseGateway = addFixedExpenseGateway;
         this.getLoggedUser = getLoggedUser;
-        this.deleteCache = deleteCache;
+        this.invalidateCache = invalidateCache;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class AddFixedExpenseImpl implements AddFixedExpense {
         fixedExpense.setUserId(user.getId());
         fixedExpense.setActive(true);
         this.addFixedExpenseGateway.add(fixedExpense);
-        this.deleteCache.delete("fixedExpenses:" + user.getId());
+        this.invalidateCache.delete("fixedExpenses:" + user.getId());
     }
 }
