@@ -30,7 +30,7 @@ public class GetFixedExpensesImpl implements GetFixedExpenses {
     @Override
     public List<FixedExpenseModel> get() {
         User user = this.getLoggedUser.get();
-        List<FixedExpenseModel> cachedFixedExpenses = this.getCache.get(user.getId().toString());
+        List<FixedExpenseModel> cachedFixedExpenses = this.getCache.get("fixedExpenses:" + user.getId());
         if (cachedFixedExpenses.size() != 0) {
             return cachedFixedExpenses;
         } else {
