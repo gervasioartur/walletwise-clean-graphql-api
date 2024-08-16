@@ -12,7 +12,7 @@ public class AddToCacheImpl<T> implements AddToCache<T> {
     }
 
     @Override
-    public void add(String key,T value) {
+    public void add(String key, T value) {
         this.addToCacheGateway.add(key, value);
     }
 }

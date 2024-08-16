@@ -21,7 +21,7 @@ public class ExpenseConfig {
     public AddFixedExpense addFixedExpense(AddFixedExpenseGateway addFixedExpenseGateway,
                                            GetLoggedUser getLoggedUser,
                                            DeleteCache deleteCache) {
-        return new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser,deleteCache);
+        return new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser, deleteCache);
     }
 
     @Bean
@@ -29,6 +29,6 @@ public class ExpenseConfig {
                                              GetLoggedUser getLoggedUser,
                                              GetCache<FixedExpenseModel> getCache,
                                              AddToCache addToCache) {
-        return new GetFixedExpensesImpl(getFixedExpensesGateway, getLoggedUser,getCache,addToCache);
+        return new GetFixedExpensesImpl(getFixedExpensesGateway, getLoggedUser, getCache, addToCache);
     }
 }

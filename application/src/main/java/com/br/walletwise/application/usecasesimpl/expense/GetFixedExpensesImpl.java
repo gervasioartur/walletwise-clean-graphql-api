@@ -31,12 +31,12 @@ public class GetFixedExpensesImpl implements GetFixedExpenses {
     public List<FixedExpenseModel> get() {
         User user = this.getLoggedUser.get();
         List<FixedExpenseModel> cachedFixedExpenses = this.getCache.get(user.getId().toString());
-        if(cachedFixedExpenses.size() != 0){
+        if (cachedFixedExpenses.size() != 0) {
             return cachedFixedExpenses;
-        }else {
+        } else {
             List<FixedExpenseModel> fixedExpenseModelList = this.getFixedExpensesGateway.get(user.getId());
-            this.addToCache.add("fixedExpenses:" + user.getId(),fixedExpenseModelList);
-            return  fixedExpenseModelList;
+            this.addToCache.add("fixedExpenses:" + user.getId(), fixedExpenseModelList);
+            return fixedExpenseModelList;
         }
     }
 }

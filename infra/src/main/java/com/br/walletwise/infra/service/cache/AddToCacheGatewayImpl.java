@@ -15,11 +15,11 @@ public class AddToCacheGatewayImpl<T> implements AddToCacheGateway<T> {
 
     @Override
     public void add(String key, T value) {
-       try {
-           String jsonValue = this.mapper.writeValueAsString(value);
-           this.jedis.set(key, jsonValue);
-       }catch (Exception ex){
-           throw new UnexpectedException(ex.getMessage());
-       }
+        try {
+            String jsonValue = this.mapper.writeValueAsString(value);
+            this.jedis.set(key, jsonValue);
+        } catch (Exception ex) {
+            throw new UnexpectedException(ex.getMessage());
+        }
     }
 }

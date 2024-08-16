@@ -20,8 +20,9 @@ public class GetCacheGatewayImpl<T> implements GetCacheGateway<T> {
     public List<T> get(String key) {
         try {
             String value = jedis.get(key);
-            return this.mapper.readValue(value, new TypeReference<List<T>>() {});
-        }catch (Exception ex){
+            return this.mapper.readValue(value, new TypeReference<List<T>>() {
+            });
+        } catch (Exception ex) {
             throw new UnexpectedException(ex.getMessage());
         }
     }

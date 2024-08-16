@@ -31,7 +31,7 @@ class GetFixedExpensesImplTests {
         this.getFixedExpensesGateway = mock(GetFixedExpensesGateway.class);
         this.getCache = mock(GetCache.class);
         this.addToCache = mock(AddToCache.class);
-        this.GetFixedExpenses = new GetFixedExpensesImpl(getFixedExpensesGateway, getLoggedUser, getCache,addToCache);
+        this.GetFixedExpenses = new GetFixedExpensesImpl(getFixedExpensesGateway, getLoggedUser, getCache, addToCache);
     }
 
     @Test
@@ -64,8 +64,8 @@ class GetFixedExpensesImplTests {
         assertThat(result.getLast().getStartDate()).isEqualTo(fixedExpenseModelList.getLast().getStartDate());
         assertThat(result.getLast().getEndDate()).isEqualTo(fixedExpenseModelList.getLast().getEndDate());
 
-        verify(this.getFixedExpensesGateway,times(0)).get(user.getId());
-        verify(this.addToCache,times(0)).add("fixedExpenses:"+user.getId(),fixedExpenseModelList);
+        verify(this.getFixedExpensesGateway, times(0)).get(user.getId());
+        verify(this.addToCache, times(0)).add("fixedExpenses:" + user.getId(), fixedExpenseModelList);
     }
 
     @Test
@@ -98,8 +98,8 @@ class GetFixedExpensesImplTests {
         assertThat(result.getLast().getStartDate()).isEqualTo(fixedExpenseModelList.getLast().getStartDate());
         assertThat(result.getLast().getEndDate()).isEqualTo(fixedExpenseModelList.getLast().getEndDate());
 
-        verify(this.getCache,times(1)).get(user.getId().toString());
-        verify(this.getFixedExpensesGateway,times(1)).get(user.getId());
-        verify(this.addToCache,times(1)).add("fixedExpenses:"+user.getId(),fixedExpenseModelList);
+        verify(this.getCache, times(1)).get(user.getId().toString());
+        verify(this.getFixedExpensesGateway, times(1)).get(user.getId());
+        verify(this.addToCache, times(1)).add("fixedExpenses:" + user.getId(), fixedExpenseModelList);
     }
 }

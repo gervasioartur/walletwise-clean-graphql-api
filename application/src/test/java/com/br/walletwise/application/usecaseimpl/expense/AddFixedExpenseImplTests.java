@@ -28,7 +28,7 @@ class AddFixedExpenseImplTests {
         this.getLoggedUser = mock(GetLoggedUser.class);
         this.addFixedExpenseGateway = mock(AddFixedExpenseGateway.class);
         this.deleteCache = mock(DeleteCache.class);
-        this.addFixedExpense = new AddFixedExpenseImpl(addFixedExpenseGateway,getLoggedUser,deleteCache);
+        this.addFixedExpense = new AddFixedExpenseImpl(addFixedExpenseGateway, getLoggedUser, deleteCache);
     }
 
     @Test

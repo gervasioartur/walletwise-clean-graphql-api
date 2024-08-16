@@ -23,22 +23,22 @@ public class CacheConfig {
     private String redisHost;
 
     @Bean
-    public Jedis jedis(){
-        return  new Jedis(this.redisHost,this.redisPort);
+    public Jedis jedis() {
+        return new Jedis(this.redisHost, this.redisPort);
     }
-    
+
     @Bean
-    public AddToCache addToCache(AddToCacheGateway addToCacheGateway){
+    public AddToCache addToCache(AddToCacheGateway addToCacheGateway) {
         return new AddToCacheImpl(addToCacheGateway);
     }
 
     @Bean
-    public DeleteCache deleteCache(DeleteCacheGateway deleteCacheGateway){
+    public DeleteCache deleteCache(DeleteCacheGateway deleteCacheGateway) {
         return new DeleteCacheImpl(deleteCacheGateway);
     }
 
     @Bean
-    public GetCache getCache(GetCacheGateway getCacheGateway){
+    public GetCache getCache(GetCacheGateway getCacheGateway) {
         return new GetCacheImpl(getCacheGateway);
     }
 }
