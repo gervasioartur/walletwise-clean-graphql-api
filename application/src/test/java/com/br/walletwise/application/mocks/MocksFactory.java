@@ -82,6 +82,20 @@ public class MocksFactory {
         );
     }
 
+    public static FixedExpense fixedExpenseFactory(User user, FixedExpense fixedExpense) {
+        return new FixedExpense(
+                fixedExpense.getId(),
+                user.getId(),
+                faker.lorem().word(),
+                20,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                true
+        );
+    }
+
     public static FixedExpenseModel fixedExpenseModelFactory(User user) {
         String ownerFullName = user.getFirstname() + " " + user.getLastname();
         return new FixedExpenseModel(
@@ -93,6 +107,20 @@ public class MocksFactory {
                 new BigDecimal(200),
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
+        );
+    }
+
+    public static FixedExpenseModel fixedExpenseModelFactory(User user,FixedExpense fixedExpense) {
+        String ownerFullName = user.getFirstname() + " " + user.getLastname();
+        return new FixedExpenseModel(
+                fixedExpense.getId(),
+                ownerFullName,
+                fixedExpense.getDescription(),
+                fixedExpense.getDueDay(),
+                fixedExpense.getCategory(),
+                fixedExpense.getAmount(),
+                fixedExpense.getStartDate(),
+                fixedExpense.getEndDate()
         );
     }
 }
