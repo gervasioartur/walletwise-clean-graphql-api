@@ -57,7 +57,7 @@ public class MocksFactory {
         return new Session(UUID.randomUUID(), session.getUserId(), session.getToken(), session.getCreationDate(), true);
     }
 
-    public static FixedExpense fixedExpenseFactory() {
+    public static FixedExpense fixedExpenseWithNotIdFactory() {
         return new FixedExpense(
                 faker.lorem().word(),
                 20,
@@ -65,6 +65,20 @@ public class MocksFactory {
                 new BigDecimal(200),
                 new Date(),
                 Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
+        );
+    }
+
+    public static FixedExpense fixedExpenseFactory(User user) {
+        return new FixedExpense(
+                faker.number().randomNumber(),
+                user.getId(),
+                faker.lorem().word(),
+                20,
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(200),
+                new Date(),
+                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()),
+                true
         );
     }
 

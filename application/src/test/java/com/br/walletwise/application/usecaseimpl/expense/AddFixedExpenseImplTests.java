@@ -34,7 +34,7 @@ class AddFixedExpenseImplTests {
     @Test
     @DisplayName("Should add FixedExpense")
     void shouldAddFixedExpense() {
-        FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory();
+        FixedExpense fixedExpense = MocksFactory.fixedExpenseWithNotIdFactory();
         fixedExpense.setUserId(UUID.randomUUID());
         fixedExpense.setActive(true);
         User user = MocksFactory.userFactory(fixedExpense.getUserId());

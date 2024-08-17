@@ -44,6 +44,8 @@ public class FixedExpense extends AbstractEntity {
         if (error != null) throw new DomainException(error);
     }
 
+
+
     public FixedExpense(
             String description,
             int dueDay,
@@ -65,6 +67,10 @@ public class FixedExpense extends AbstractEntity {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public UUID getUserId() {
