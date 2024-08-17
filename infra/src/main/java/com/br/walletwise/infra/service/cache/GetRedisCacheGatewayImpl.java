@@ -22,7 +22,8 @@ public class GetRedisCacheGatewayImpl<T> implements GetCacheGateway<T> {
             String value = this.jedis.get(key);
             return value == null ?
                     List.of() :
-                    this.mapper.readValue(value, new TypeReference<List<T>>() {});
+                    this.mapper.readValue(value, new TypeReference<List<T>>() {
+                    });
         } catch (Exception ex) {
             throw new UnexpectedException(ex.getMessage());
         }
