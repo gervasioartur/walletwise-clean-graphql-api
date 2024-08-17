@@ -39,6 +39,7 @@ class FixedExpenseTests {
                 true);
 
         fixedExpense.setUserId(userId);
+        fixedExpense.setId(1);
 
         assertThat(fixedExpense.getUserId()).isEqualTo(userId);
     }

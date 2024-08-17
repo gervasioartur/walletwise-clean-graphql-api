@@ -6,6 +6,7 @@ import com.br.walletwise.application.usecasesimpl.expense.UpdateFixedExpenseImpl
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.enums.CategoryEnum;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
@@ -47,18 +48,18 @@ class UpdateFixedExpenseImplTests {
     @DisplayName("Should throw NotFoundException if user fixed expense does not exist")
     void shouldThrowNotFoundExceptionIfUserFixedExpenseDoesNotExist() {
         User user = MocksFactory.userFactory();
-        FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
+        FixedExpenseModel fixedExpense = MocksFactory.fixedExpenseModelFactory(user);
 
         when(this.getLoggedUser.get()).thenReturn(user);
-        when(this.getFixedExpense.get(user.getId(), fixedExpense.getId())).thenReturn(Optional.empty());
+        when(this.getFixedExpense.get(user.getId(), fixedExpense.getExpenseCode())).thenReturn(Optional.empty());
 
         Throwable exception = catchThrowable(() -> this.updateFixedExpense.update(fixedExpense));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         assertThat(exception.getMessage()).isEqualTo("Fixed expense with code "
-                + fixedExpense.getId() + " not found");
+                + fixedExpense.getExpenseCode() + " not found");
         verify(this.getLoggedUser, times(1)).get();
-        verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());
+        verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getExpenseCode());
     }
 
     @Test
@@ -66,6 +67,7 @@ class UpdateFixedExpenseImplTests {
     void shouldUpdateFixedExpense() {
         User user = MocksFactory.userFactory();
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
+        FixedExpenseModel fixedExpenseModel = MocksFactory.fixedExpenseModelFactory(user, fixedExpense);
 
         when(this.getLoggedUser.get()).thenReturn(user);
         when(this.getFixedExpense.get(user.getId(), fixedExpense.getId())).thenReturn(Optional.of(fixedExpense));
@@ -80,7 +82,35 @@ class UpdateFixedExpenseImplTests {
         doNothing().when(this.updateFixedExpenseGateway).updated(fixedExpense);
         doNothing().when(this.invalidateCache).delete("fixedExpenses:" + fixedExpense.getId());
 
-        this.updateFixedExpense.update(fixedExpense);
+        this.updateFixedExpense.update(fixedExpenseModel);
+
+        verify(this.getLoggedUser, times(1)).get();
+        verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());
+        verify(this.updateFixedExpenseGateway, times(1)).updated(fixedExpense);
+        verify(this.invalidateCache, times(1)).delete("fixedExpenses:" + user.getId());
+    }
+
+    @Test
+    @DisplayName("Should use old values on update fixed expense")
+    void shouldUseOldValuesOnUpdateFixedExpense() {
+        User user = MocksFactory.userFactory();
+        FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
+        FixedExpenseModel fixedExpenseModel = MocksFactory.fixedExpenseModelFactory(user, fixedExpense);
+
+        fixedExpenseModel.setDescription(null);
+        fixedExpenseModel.setDueDay(0);
+        fixedExpenseModel.setCategory(null);
+        fixedExpenseModel.setAmount(null);
+        fixedExpenseModel.setStartDate(null);
+        fixedExpenseModel.setEndDate(null);
+
+        when(this.getLoggedUser.get()).thenReturn(user);
+        when(this.getFixedExpense.get(user.getId(), fixedExpense.getId())).thenReturn(Optional.of(fixedExpense));
+
+        doNothing().when(this.updateFixedExpenseGateway).updated(fixedExpense);
+        doNothing().when(this.invalidateCache).delete("fixedExpenses:" + fixedExpense.getId());
+
+        this.updateFixedExpense.update(fixedExpenseModel);
 
         verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());

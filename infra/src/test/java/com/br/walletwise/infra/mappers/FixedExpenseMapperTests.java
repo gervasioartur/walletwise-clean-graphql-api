@@ -4,6 +4,7 @@ import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
+import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +39,7 @@ class FixedExpenseMapperTests {
 
     @Test
     @DisplayName("Should return Fixed Expense")
-    void shouldReturnFixedExpenseFromJpaEntity() {
+    void shouldReturnFixedExpenseFromAddFixedExpenseRequest() {
         AddFixedExpenseRequest request = MocksFactory.addFixedExpenseRequestFactory();
 
         FixedExpense result = this.mapper.map(request);
@@ -51,6 +52,23 @@ class FixedExpenseMapperTests {
         assertThat(result.getStartDate()).isEqualTo(request.starDate());
         assertThat(result.getEndDate()).isEqualTo(request.endDate());
     }
+
+    @Test
+    @DisplayName("Should return Fixed Expense")
+    void shouldReturnFixedExpenseFromUpdateFixedExpenseRequest() {
+        UpdateFixedExpenseRequest request = MocksFactory.updateFixedExpenseRequestFactory();
+
+        FixedExpenseModel result = this.mapper.map(request);
+
+        assertThat(result).isNotNull();
+        assertThat(result.getDescription()).isEqualTo(request.description());
+        assertThat(result.getDueDay()).isEqualTo(request.dueDay());
+        assertThat(result.getAmount()).isEqualTo(request.amount());
+        assertThat(result.getCategory()).isEqualTo(request.category());
+        assertThat(result.getStartDate()).isEqualTo(request.starDate());
+        assertThat(result.getEndDate()).isEqualTo(request.endDate());
+    }
+
 
     @Test
     @DisplayName("Should return Fixed eExpense Model")
@@ -70,4 +88,22 @@ class FixedExpenseMapperTests {
         assertThat(result.getStartDate()).isEqualTo(entity.getStarDate());
         assertThat(result.getEndDate()).isEqualTo(entity.getEndDate());
     }
+
+    @Test
+    @DisplayName("Should return Fixed Expense from FixedExpense jpa entity")
+    void shouldReturnFixedExpenseFromJpaEntity() {
+        User user = MocksFactory.userFactory();
+        FixedExpenseJpaEntity entity = MocksFactory.fixedExpenseJpaEntityFactory(user);
+
+        FixedExpense result = this.mapper.mapToDomainObj(entity);
+
+        assertThat(result).isNotNull();
+        assertThat(result.getDescription()).isEqualTo(entity.getDescription());
+        assertThat(result.getDueDay()).isEqualTo(entity.getDueDay());
+        assertThat(result.getAmount()).isEqualTo(entity.getAmount());
+        assertThat(result.getCategory()).isEqualTo(entity.getCategory());
+        assertThat(result.getStartDate()).isEqualTo(entity.getStarDate());
+        assertThat(result.getEndDate()).isEqualTo(entity.getEndDate());
+    }
+
 }

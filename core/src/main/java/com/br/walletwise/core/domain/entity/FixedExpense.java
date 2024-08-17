@@ -5,6 +5,7 @@ import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contract.Validator;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,9 @@ public class FixedExpense extends AbstractEntity {
     private Date startDate;
     private Date endDate;
     private boolean isActive;
+    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
+
 
     public FixedExpense(long id,
                         UUID userId,
@@ -146,6 +150,22 @@ public class FixedExpense extends AbstractEntity {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

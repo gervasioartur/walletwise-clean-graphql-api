@@ -3,6 +3,7 @@ package com.br.walletwise.infra.mappers;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
+import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import org.springframework.stereotype.Component;
@@ -22,11 +23,23 @@ public class FixedExpenseMapper {
                 .starDate(fixedExpense.getStartDate())
                 .endDate(fixedExpense.getEndDate())
                 .active(fixedExpense.isActive())
+                .createdAt(fixedExpense.getCreatedAt())
+                .updatedAt(fixedExpense.getUpdatedAt())
                 .build();
     }
 
     public FixedExpense map(AddFixedExpenseRequest request) {
         return new FixedExpense(
+                request.description(),
+                request.dueDay(),
+                request.category(),
+                request.amount(),
+                request.starDate(),
+                request.endDate());
+    }
+
+    public FixedExpenseModel map(UpdateFixedExpenseRequest request) {
+        return new FixedExpenseModel(
                 request.description(),
                 request.dueDay(),
                 request.category(),
@@ -49,7 +62,7 @@ public class FixedExpenseMapper {
     }
 
     public FixedExpense mapToDomainObj(FixedExpenseJpaEntity entity) {
-        return new FixedExpense(
+        FixedExpense expense = new FixedExpense(
                 entity.getId(),
                 entity.getUser().getId(),
                 entity.getDescription(),
@@ -60,5 +73,9 @@ public class FixedExpenseMapper {
                 entity.getEndDate(),
                 entity.isActive()
         );
+
+        expense.setCreatedAt(entity.getCreatedAt());
+        expense.setUpdatedAt(entity.getUpdatedAt());
+        return expense;
     }
 }

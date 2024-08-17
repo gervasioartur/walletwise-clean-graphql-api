@@ -1,7 +1,7 @@
 package com.br.walletwise.usecase.expense;
 
-import com.br.walletwise.core.domain.entity.FixedExpense;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 
 public interface UpdateFixedExpense {
-    void update(FixedExpense fixedExpense);
+    void update(FixedExpenseModel fixedExpense);
 }
