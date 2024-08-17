@@ -6,12 +6,10 @@ import com.br.walletwise.application.usecasesimpl.expense.UpdateFixedExpenseImpl
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.enums.CategoryEnum;
-import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.expense.UpdateFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +45,7 @@ class UpdateFixedExpenseImplTests {
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
 
         when(this.getLoggedUser.get()).thenReturn(user);
-        when(this.getFixedExpense.get(user.getId(),fixedExpense.getId())).thenReturn(Optional.empty());
+        when(this.getFixedExpense.get(user.getId(), fixedExpense.getId())).thenReturn(Optional.empty());
 
         Throwable exception = catchThrowable(() -> this.updateFixedExpense.update(fixedExpense));
 
@@ -55,7 +53,7 @@ class UpdateFixedExpenseImplTests {
         assertThat(exception.getMessage()).isEqualTo("Fixed expense with code "
                 + fixedExpense.getId() + " not found");
         verify(this.getLoggedUser, times(1)).get();
-        verify(this.getFixedExpense, times(1)).get(user.getId(),fixedExpense.getId());
+        verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());
     }
 
     @Test
@@ -65,21 +63,21 @@ class UpdateFixedExpenseImplTests {
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
 
         when(this.getLoggedUser.get()).thenReturn(user);
-        when(this.getFixedExpense.get(user.getId(),fixedExpense.getId())).thenReturn(Optional.of(fixedExpense));
+        when(this.getFixedExpense.get(user.getId(), fixedExpense.getId())).thenReturn(Optional.of(fixedExpense));
 
         fixedExpense.setDescription(MocksFactory.faker.lorem().paragraph());
         fixedExpense.setDueDay(15);
         fixedExpense.setCategory(CategoryEnum.RENT.getValue());
         fixedExpense.setAmount(new BigDecimal(400));
         fixedExpense.setStartDate(new Date());
-        fixedExpense.setEndDate( Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
+        fixedExpense.setEndDate(Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
 
         doNothing().when(this.updateFixedExpenseGateway).updated(fixedExpense);
 
         this.updateFixedExpense.update(fixedExpense);
 
         verify(this.getLoggedUser, times(1)).get();
-        verify(this.getFixedExpense, times(1)).get(user.getId(),fixedExpense.getId());
+        verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());
         verify(this.updateFixedExpenseGateway, times(1)).updated(fixedExpense);
     }
 }

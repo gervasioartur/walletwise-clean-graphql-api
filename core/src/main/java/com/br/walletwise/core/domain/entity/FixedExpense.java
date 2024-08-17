@@ -45,7 +45,6 @@ public class FixedExpense extends AbstractEntity {
     }
 
 
-
     public FixedExpense(
             String description,
             int dueDay,

@@ -3,7 +3,6 @@ package com.br.walletwise.application.usecasesimpl.expense;
 import com.br.walletwise.application.gateway.expense.UpdateFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.expense.UpdateFixedExpense;
@@ -27,7 +26,7 @@ public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
     @Override
     public void update(FixedExpense fixedExpense) {
         User user = this.getLoggedUser.get();
-        FixedExpense savedFixedExpense =  this.getFixedExpense.get(user.getId(), fixedExpense.getId())
+        FixedExpense savedFixedExpense = this.getFixedExpense.get(user.getId(), fixedExpense.getId())
                 .orElseThrow(() -> new NotFoundException
                         ("Fixed expense with code " + fixedExpense.getId() + " not found"));
 

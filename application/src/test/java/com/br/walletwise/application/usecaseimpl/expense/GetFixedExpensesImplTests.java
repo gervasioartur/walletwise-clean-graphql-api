@@ -42,7 +42,7 @@ class GetFixedExpensesImplTests {
                 List.of(MocksFactory.fixedExpenseModelFactory(user), MocksFactory.fixedExpenseModelFactory(user));
 
         when(this.getLoggedUser.get()).thenReturn(user);
-        when(this.getCache.get("fixedExpenses:"+user.getId())).thenReturn(fixedExpenseModelList);
+        when(this.getCache.get("fixedExpenses:" + user.getId())).thenReturn(fixedExpenseModelList);
         when(this.getFixedExpensesGateway.get(user.getId())).thenReturn(fixedExpenseModelList);
 
         List<FixedExpenseModel> result = this.GetFixedExpenses.get();
@@ -99,7 +99,7 @@ class GetFixedExpensesImplTests {
         assertThat(result.getLast().getStartDate()).isEqualTo(fixedExpenseModelList.getLast().getStartDate());
         assertThat(result.getLast().getEndDate()).isEqualTo(fixedExpenseModelList.getLast().getEndDate());
 
-        verify(this.getCache, times(1)).get("fixedExpenses:"+user.getId());
+        verify(this.getCache, times(1)).get("fixedExpenses:" + user.getId());
         verify(this.getFixedExpensesGateway, times(1)).get(user.getId());
         verify(this.addToCache, times(1)).add("fixedExpenses:" + user.getId(), fixedExpenseModelList);
     }

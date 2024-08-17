@@ -47,6 +47,6 @@ class AddFixedExpenseImplTests {
 
         verify(this.getLoggedUser, times(1)).get();
         verify(this.addFixedExpenseGateway, times(1)).add(fixedExpense);
-        verify(this.invalidateCache, times(1)).delete("fixedExpenses:"+user.getId());
+        verify(this.invalidateCache, times(1)).delete("fixedExpenses:" + user.getId());
     }
 }

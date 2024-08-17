@@ -110,7 +110,7 @@ public class MocksFactory {
         );
     }
 
-    public static FixedExpenseModel fixedExpenseModelFactory(User user,FixedExpense fixedExpense) {
+    public static FixedExpenseModel fixedExpenseModelFactory(User user, FixedExpense fixedExpense) {
         String ownerFullName = user.getFirstname() + " " + user.getLastname();
         return new FixedExpenseModel(
                 fixedExpense.getId(),
