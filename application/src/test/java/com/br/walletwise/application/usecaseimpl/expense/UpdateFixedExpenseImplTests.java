@@ -78,13 +78,13 @@ class UpdateFixedExpenseImplTests {
         fixedExpense.setEndDate(Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
 
         doNothing().when(this.updateFixedExpenseGateway).updated(fixedExpense);
-        doNothing().when(this.invalidateCache).delete("fixedExpenses:"+fixedExpense.getId());
+        doNothing().when(this.invalidateCache).delete("fixedExpenses:" + fixedExpense.getId());
 
         this.updateFixedExpense.update(fixedExpense);
 
         verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());
         verify(this.updateFixedExpenseGateway, times(1)).updated(fixedExpense);
-        verify(this.invalidateCache, times(1)).delete("fixedExpenses:"+user.getId());
+        verify(this.invalidateCache, times(1)).delete("fixedExpenses:" + user.getId());
     }
 }

@@ -42,6 +42,6 @@ public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
         savedFixedExpense.setEndDate(fixedExpense.getEndDate());
 
         this.updateFixedExpenseGateway.updated(savedFixedExpense);
-        this.invalidateCache.delete("fixedExpenses:"+user.getId());
+        this.invalidateCache.delete("fixedExpenses:" + user.getId());
     }
 }
