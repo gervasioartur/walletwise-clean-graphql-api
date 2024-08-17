@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface GetFixedExpenseGateway {
-    Optional<FixedExpense> get(UUID userId, long expenseCode);
+    Optional<FixedExpense> get(long expenseCode, UUID userId);
 }

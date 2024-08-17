@@ -16,6 +16,6 @@ public class GetFixedExpenseImpl implements GetFixedExpense {
 
     @Override
     public Optional<FixedExpense> get(UUID userId, long expenseCode) {
-        return this.getFixedExpenseGateway.get(userId, expenseCode);
+        return this.getFixedExpenseGateway.get(expenseCode, userId);
     }
 }

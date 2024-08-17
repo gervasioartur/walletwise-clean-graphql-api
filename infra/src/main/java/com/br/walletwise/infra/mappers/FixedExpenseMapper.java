@@ -47,4 +47,18 @@ public class FixedExpenseMapper {
                 entity.getEndDate()
         );
     }
+
+    public FixedExpense mapToDomainObj(FixedExpenseJpaEntity entity) {
+        return new FixedExpense(
+                entity.getId(),
+                entity.getUser().getId(),
+                entity.getDescription(),
+                entity.getDueDay(),
+                entity.getCategory(),
+                entity.getAmount(),
+                entity.getStarDate(),
+                entity.getEndDate(),
+                entity.isActive()
+        );
+    }
 }
