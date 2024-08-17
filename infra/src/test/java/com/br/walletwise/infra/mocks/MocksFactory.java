@@ -252,6 +252,16 @@ public class MocksFactory {
                 request.endDate());
     }
 
+    public static FixedExpense fixedExpenseFactory(FixedExpenseJpaEntity entity) {
+        return new FixedExpense(
+                entity.getDescription(),
+                entity.getDueDay(),
+                entity.getCategory(),
+                entity.getAmount(),
+                entity.getStarDate(),
+                entity.getEndDate());
+    }
+
     public static FixedExpenseModel fixedExpenseModelFactory(FixedExpenseJpaEntity entity) {
         String ownerFullName = entity.getUser().getFirstname() + " " + entity.getUser().getLastname();
         return new FixedExpenseModel(

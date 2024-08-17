@@ -31,11 +31,11 @@ class GetFixedExpenseImplTests {
         User user = MocksFactory.userFactory();
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
 
-        when(this.getFixedExpenseGateway.get(user.getId(), fixedExpense.getId())).thenReturn(Optional.empty());
+        when(this.getFixedExpenseGateway.get(fixedExpense.getId(), user.getId())).thenReturn(Optional.empty());
 
         Optional<FixedExpense> result = this.getFixedExpense.get(user.getId(), fixedExpense.getId());
 
         assertThat(result).isEmpty();
-        verify(this.getFixedExpenseGateway, times(1)).get(user.getId(), fixedExpense.getId());
+        verify(this.getFixedExpenseGateway, times(1)).get(fixedExpense.getId(), user.getId());
     }
 }
