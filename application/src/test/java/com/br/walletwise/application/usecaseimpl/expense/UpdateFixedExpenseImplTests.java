@@ -7,6 +7,7 @@ import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.enums.CategoryEnum;
 import com.br.walletwise.core.exception.NotFoundException;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.expense.UpdateFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
@@ -29,13 +30,17 @@ class UpdateFixedExpenseImplTests {
     private GetLoggedUser getLoggedUser;
     private GetFixedExpense getFixedExpense;
     private UpdateFixedExpenseGateway updateFixedExpenseGateway;
+    private InvalidateCache invalidateCache;
 
     @BeforeEach
     void setUp() {
         this.getLoggedUser = mock(GetLoggedUser.class);
         this.getFixedExpense = mock(GetFixedExpense.class);
         this.updateFixedExpenseGateway = mock(UpdateFixedExpenseGateway.class);
-        this.updateFixedExpense = new UpdateFixedExpenseImpl(getLoggedUser, getFixedExpense, updateFixedExpenseGateway);
+        this.invalidateCache = mock(InvalidateCache.class);
+        this.updateFixedExpense = new UpdateFixedExpenseImpl(getLoggedUser,
+                getFixedExpense,
+                updateFixedExpenseGateway, invalidateCache);
     }
 
     @Test
@@ -73,11 +78,13 @@ class UpdateFixedExpenseImplTests {
         fixedExpense.setEndDate(Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()));
 
         doNothing().when(this.updateFixedExpenseGateway).updated(fixedExpense);
+        doNothing().when(this.invalidateCache).delete("fixedExpenses:"+fixedExpense.getId());
 
         this.updateFixedExpense.update(fixedExpense);
 
         verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpense, times(1)).get(user.getId(), fixedExpense.getId());
         verify(this.updateFixedExpenseGateway, times(1)).updated(fixedExpense);
+        verify(this.invalidateCache, times(1)).delete("fixedExpenses:"+user.getId());
     }
 }
