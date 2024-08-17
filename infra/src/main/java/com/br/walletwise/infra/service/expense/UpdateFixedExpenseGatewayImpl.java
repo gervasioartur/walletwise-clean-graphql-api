@@ -16,7 +16,7 @@ public class UpdateFixedExpenseGatewayImpl implements UpdateFixedExpenseGateway 
 
     @Override
     public void updated(FixedExpense fixedExpense) {
-        FixedExpenseJpaEntity entity =  this.mapper.map(fixedExpense);
+        FixedExpenseJpaEntity entity = this.mapper.map(fixedExpense);
         this.repository.save(entity);
     }
 }

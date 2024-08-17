@@ -19,7 +19,7 @@ public class GetFixedExpenseGatewayImpl implements GetFixedExpenseGateway {
 
     @Override
     public Optional<FixedExpense> get(long expenseCode, UUID userId) {
-        Optional<FixedExpenseJpaEntity> entity = this.repository.findByIdAndUserId(expenseCode,userId);
+        Optional<FixedExpenseJpaEntity> entity = this.repository.findByIdAndUserId(expenseCode, userId);
         return entity.map(this.mapper::mapToDomainObj);
     }
 }

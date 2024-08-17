@@ -30,11 +30,11 @@ public class GetFixedExpenseGatewayImplTests {
     @Test
     @DisplayName("Should return optional of fixed expense")
     public void shouldReturnOptionalOfFixedExpense() {
-        User user  = MocksFactory.userFactory();
+        User user = MocksFactory.userFactory();
         FixedExpenseJpaEntity entity = MocksFactory.fixedExpenseJpaEntityFactory(user);
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(entity);
 
-        when(this.repository.findByIdAndUserId(entity.getId(),entity.getUser().getId())).thenReturn(Optional.of(entity));
+        when(this.repository.findByIdAndUserId(entity.getId(), entity.getUser().getId())).thenReturn(Optional.of(entity));
         when(this.mapper.mapToDomainObj(entity)).thenReturn(fixedExpense);
 
         Optional<FixedExpense> result = this.getFixedExpenseGateway.get(entity.getId(), entity.getUser().getId());
@@ -42,6 +42,6 @@ public class GetFixedExpenseGatewayImplTests {
         assertThat(result).isPresent();
         assertThat(result.get().getId()).isEqualTo(fixedExpense.getId());
         verify(this.mapper, times(1)).mapToDomainObj(entity);
-        verify(this.repository, times(1)).findByIdAndUserId(entity.getId(),entity.getUser().getId());
+        verify(this.repository, times(1)).findByIdAndUserId(entity.getId(), entity.getUser().getId());
     }
 }
