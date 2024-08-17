@@ -4,6 +4,7 @@ import com.br.walletwise.application.gateway.expense.UpdateFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.NotFoundException;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.expense.UpdateFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
@@ -13,14 +14,17 @@ public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
     private final GetLoggedUser getLoggedUser;
     private final GetFixedExpense getFixedExpense;
     private final UpdateFixedExpenseGateway updateFixedExpenseGateway;
+    private final InvalidateCache invalidateCache;
 
     public UpdateFixedExpenseImpl(GetLoggedUser getLoggedUser,
                                   GetFixedExpense getFixedExpense,
-                                  UpdateFixedExpenseGateway updateFixedExpenseGateway) {
+                                  UpdateFixedExpenseGateway updateFixedExpenseGateway,
+                                  InvalidateCache invalidateCache) {
 
         this.getLoggedUser = getLoggedUser;
         this.getFixedExpense = getFixedExpense;
         this.updateFixedExpenseGateway = updateFixedExpenseGateway;
+        this.invalidateCache = invalidateCache;
     }
 
     @Override
@@ -38,5 +42,6 @@ public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
         savedFixedExpense.setEndDate(fixedExpense.getEndDate());
 
         this.updateFixedExpenseGateway.updated(savedFixedExpense);
+        this.invalidateCache.delete("fixedExpenses:"+user.getId());
     }
 }
