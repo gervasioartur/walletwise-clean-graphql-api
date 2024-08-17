@@ -1,14 +1,14 @@
 package com.br.walletwise.infra.config;
 
 import com.br.walletwise.application.gateway.cache.AddToCacheGateway;
-import com.br.walletwise.application.gateway.cache.InvalidateCacheGateway;
 import com.br.walletwise.application.gateway.cache.GetCacheGateway;
+import com.br.walletwise.application.gateway.cache.InvalidateCacheGateway;
 import com.br.walletwise.application.usecasesimpl.cache.AddToCacheImpl;
-import com.br.walletwise.application.usecasesimpl.cache.InvalidateCacheImpl;
 import com.br.walletwise.application.usecasesimpl.cache.GetCacheImpl;
+import com.br.walletwise.application.usecasesimpl.cache.InvalidateCacheImpl;
 import com.br.walletwise.usecase.cache.AddToCache;
-import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.cache.GetCache;
+import com.br.walletwise.usecase.cache.InvalidateCache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

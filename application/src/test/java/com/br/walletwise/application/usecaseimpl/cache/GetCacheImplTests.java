@@ -16,9 +16,9 @@ public class GetCacheImplTests {
     @DisplayName("Should return values from cache")
     void shouldValueFromCache() {
         String key = "key";
-        GetCacheGateway getCacheGateway =  mock(GetCacheGateway.class);
+        GetCacheGateway getCacheGateway = mock(GetCacheGateway.class);
         when(getCacheGateway.get(key)).thenReturn(List.of());
-        GetCache getCache =  new GetCacheImpl(getCacheGateway);
+        GetCache getCache = new GetCacheImpl(getCacheGateway);
         var result = getCache.get(key);
         assertThat(result.size()).isEqualTo(0);
         verify(getCacheGateway, times(1)).get(key);

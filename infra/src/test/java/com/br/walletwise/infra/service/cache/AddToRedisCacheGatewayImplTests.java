@@ -4,14 +4,10 @@ import com.br.walletwise.application.gateway.cache.AddToCacheGateway;
 import com.br.walletwise.core.exception.UnexpectedException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assert;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import redis.clients.jedis.Jedis;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,9 +23,9 @@ class AddToRedisCacheGatewayImplTests {
 
     @BeforeEach
     void setUp() {
-        this.jedis =mock(Jedis.class);
-        this.mapper =  mock(ObjectMapper.class);
-        this.addToCacheGateway =  new AddToRedisCacheGatewayImpl(jedis,mapper);
+        this.jedis = mock(Jedis.class);
+        this.mapper = mock(ObjectMapper.class);
+        this.addToCacheGateway = new AddToRedisCacheGatewayImpl(jedis, mapper);
     }
 
     @Test
@@ -38,7 +34,7 @@ class AddToRedisCacheGatewayImplTests {
         String key = "key";
         String value = "value";
         when(this.mapper.writeValueAsString(value)).thenThrow(JsonProcessingException.class);
-        Throwable exception = catchThrowable(() -> this.addToCacheGateway.add(key,value));
+        Throwable exception = catchThrowable(() -> this.addToCacheGateway.add(key, value));
         assertThat(exception).isInstanceOf(UnexpectedException.class);
         verify(this.mapper, times(1)).writeValueAsString(value);
     }
@@ -52,11 +48,11 @@ class AddToRedisCacheGatewayImplTests {
         String cachedValue = "cached_value";
 
         when(this.mapper.writeValueAsString(value)).thenReturn(jsonValue);
-        when(this.jedis.set(key,jsonValue)).thenReturn(cachedValue);
+        when(this.jedis.set(key, jsonValue)).thenReturn(cachedValue);
 
-        this.addToCacheGateway.add(key,value);
+        this.addToCacheGateway.add(key, value);
 
         verify(this.mapper, times(1)).writeValueAsString(value);
-        verify(this.jedis).set(key,jsonValue);
+        verify(this.jedis).set(key, jsonValue);
     }
 }

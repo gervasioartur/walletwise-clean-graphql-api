@@ -20,6 +20,6 @@ class AddToCacheImplTests {
 
         addToCache.add(key, value);
 
-        verify(addToCacheGateway,times(1)).add(key, value);
+        verify(addToCacheGateway, times(1)).add(key, value);
     }
 }
