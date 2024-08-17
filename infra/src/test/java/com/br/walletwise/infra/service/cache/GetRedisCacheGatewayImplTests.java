@@ -1,7 +1,9 @@
 package com.br.walletwise.infra.service.cache;
 
 import com.br.walletwise.application.gateway.cache.GetCacheGateway;
+import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.exception.UnexpectedException;
+import com.br.walletwise.infra.mocks.MocksFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,12 +50,26 @@ class GetRedisCacheGatewayImplTests {
     @DisplayName("Should return null if there not value in cache with specified key")
     void shouldReturnNullIfValueInCacheWithSpecifiedKey() throws JsonProcessingException {
         String key = "any_key";
-
         when(this.jedis.get(key)).thenReturn(null);
-
         var result = this.getRedisCacheGateway.get(key);
-
         assertThat(result).isEqualTo(List.of());
+        verify(this.jedis, times(1)).get(key);
+    }
+
+    @Test
+    @DisplayName("Should return list oc cached values")
+    void shouldListOccCachedValues() throws JsonProcessingException {
+        String key = "any_key";
+        String jsonValue = "any_Json_value";
+
+        List list = List.of("item1", "item2");
+
+        when(this.jedis.get(key)).thenReturn(jsonValue);
+        when(this.mapper.readValue(jsonValue, new TypeReference<List<Object>>() {})).thenReturn(list);
+
+        List<FixedExpense> result = this.getRedisCacheGateway.get(key);
+
+        assertThat(result).isNull();
         verify(this.jedis, times(1)).get(key);
     }
 }
