@@ -11,6 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.*;
@@ -40,5 +42,18 @@ class GetRedisCacheGatewayImplTests {
 
         assertThat(exception).isInstanceOf(UnexpectedException.class);
         verify(this.mapper, times(1)).readValue(jsonValue, Object.class);
+    }
+
+    @Test
+    @DisplayName("Should return null if there not value in cache with specified key")
+    void shouldReturnNullIfValueInCacheWithSpecifiedKey() throws JsonProcessingException {
+        String key = "any_key";
+
+        when(this.jedis.get(key)).thenReturn(null);
+
+        var result = this.getRedisCacheGateway.get(key);
+
+        assertThat(result).isEqualTo(List.of());
+        verify(this.jedis, times(1)).get(key);
     }
 }
