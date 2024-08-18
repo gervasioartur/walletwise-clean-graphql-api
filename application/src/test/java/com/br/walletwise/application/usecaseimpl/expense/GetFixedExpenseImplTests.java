@@ -5,6 +5,7 @@ import com.br.walletwise.application.mocks.MocksFactory;
 import com.br.walletwise.application.usecasesimpl.expense.GetFixedExpenseImpl;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,15 +28,31 @@ class GetFixedExpenseImplTests {
 
     @Test
     @DisplayName("Should return optional of fixed expense ")
-    void shouldReturnEmptyOptionalOfFixedEpense() {
+    void shouldReturnEmptyOptionalOfFixedExpense() {
         User user = MocksFactory.userFactory();
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
 
-        when(this.getFixedExpenseGateway.get(fixedExpense.getId(), user.getId())).thenReturn(Optional.empty());
+        when(this.getFixedExpenseGateway.get(fixedExpense.getId(), user.getId())).thenReturn(Optional.of(fixedExpense));
 
         Optional<FixedExpense> result = this.getFixedExpense.get(user.getId(), fixedExpense.getId());
 
-        assertThat(result).isEmpty();
+        assertThat(result.get().getUserId()).isEqualTo(fixedExpense.getUserId());
         verify(this.getFixedExpenseGateway, times(1)).get(fixedExpense.getId(), user.getId());
+    }
+
+    @Test
+    @DisplayName("Should return optional of fixed expense model")
+    void shouldReturnEmptyOptionalOfFixedExpenseModel() {
+        User user = MocksFactory.userFactory();
+        FixedExpenseModel fixedExpense = MocksFactory.fixedExpenseModelFactory(user);
+
+        when(this.getFixedExpenseGateway.getModel(fixedExpense.getExpenseCode(), user.getId()))
+                .thenReturn(Optional.of(fixedExpense));
+
+        Optional<FixedExpenseModel> result = this.getFixedExpense.getModel(user.getId(), fixedExpense.getExpenseCode());
+
+        assertThat(result.get().getDueDay()).isEqualTo(fixedExpense.getDueDay());
+        verify(this.getFixedExpenseGateway, times(1))
+                .getModel(fixedExpense.getExpenseCode(), user.getId());
     }
 }
