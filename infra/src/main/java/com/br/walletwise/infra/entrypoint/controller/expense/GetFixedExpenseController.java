@@ -4,7 +4,6 @@ import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
-import com.br.walletwise.usecase.expense.GetFixedExpenses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,8 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @SecurityScheme(
         name = "bearerAuth",
@@ -48,7 +45,7 @@ public class GetFixedExpenseController {
             FixedExpenseModel list = this.usecase.get(expenseCode);
             Response response = Response.builder().body(list).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
-        }catch (NotFoundException ex) {
+        } catch (NotFoundException ex) {
             Response response = Response.builder().body(ex.getMessage()).build();
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } catch (Exception ex) {

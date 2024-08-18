@@ -28,7 +28,7 @@ public class GetFixedExpenseImpl implements GetFixedExpense {
     @Override
     public FixedExpenseModel get(long expenseCode) {
         User user = this.getLoggedUser.get();
-        return this.getFixedExpenseGateway.getModel(expenseCode,user.getId())
+        return this.getFixedExpenseGateway.getModel(expenseCode, user.getId())
                 .orElseThrow(() -> new NotFoundException("Resource not found."));
     }
 }

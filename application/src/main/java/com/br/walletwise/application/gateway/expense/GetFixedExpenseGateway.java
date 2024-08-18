@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface GetFixedExpenseGateway {
     Optional<FixedExpense> get(long expenseCode, UUID userId);
+
     Optional<FixedExpenseModel> getModel(long expenseCode, UUID userId);
 
 }

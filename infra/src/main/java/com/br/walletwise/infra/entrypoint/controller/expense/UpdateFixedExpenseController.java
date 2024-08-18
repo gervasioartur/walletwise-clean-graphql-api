@@ -26,7 +26,7 @@ public class UpdateFixedExpenseController {
     private final FixedExpenseMapper mapper;
 
     @PutMapping({"/{expenseCode}"})
-    @Operation(summary = "List fixed expenses")
+    @Operation(summary = "Update fixed expense")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Returns successful message"),

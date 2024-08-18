@@ -5,7 +5,6 @@ import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
-import com.br.walletwise.usecase.expense.GetFixedExpenses;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -22,10 +20,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.List;
-
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,7 +52,7 @@ class GetFixedExpenseControllerTests {
         doThrow(HttpServerErrorException.InternalServerError.class).when(this.usecase).get(expenseCode);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(this.URL+"/"+expenseCode)
+                .get(this.URL + "/" + expenseCode)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -78,7 +73,7 @@ class GetFixedExpenseControllerTests {
         doThrow(NotFoundException.class).when(this.usecase).get(expenseCode);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(this.URL+"/"+expenseCode)
+                .get(this.URL + "/" + expenseCode)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -101,7 +96,7 @@ class GetFixedExpenseControllerTests {
         when(this.usecase.get(expenseCode)).thenReturn(fixedExpenseModel);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .get(this.URL+"/"+expenseCode)
+                .get(this.URL + "/" + expenseCode)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
