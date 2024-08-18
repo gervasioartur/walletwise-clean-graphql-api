@@ -1,6 +1,7 @@
 package com.br.walletwise.infra.entrypoint.controller.expense;
 
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
+import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.expense.GetFixedExpenses;
@@ -14,10 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,20 +33,24 @@ import java.util.List;
 public class GetFixedExpenseController {
     private final GetFixedExpense usecase;
 
-    @GetMapping
-    @Operation(summary = "List fixed expenses")
+    @GetMapping("/{expenseCode}")
+    @Operation(summary = "Get fixed expenses")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Returns successful message"),
+            @ApiResponse(responseCode = "404", description = "Resource not found"),
             @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
     })
 
     @SecurityRequirement(name = "bearerAuth")
-    public ResponseEntity<Response> perform() {
+    public ResponseEntity<Response> perform(@PathVariable("expenseCode") long expenseCode) {
         try {
-            List<FixedExpenseModel> list = this.usecase.getModel();
+            FixedExpenseModel list = this.usecase.get(expenseCode);
             Response response = Response.builder().body(list).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (NotFoundException ex) {
+            Response response = Response.builder().body(ex.getMessage()).build();
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } catch (Exception ex) {
             Response response = Response
                     .builder().body("An unexpected error occurred. Please try again later.").build();

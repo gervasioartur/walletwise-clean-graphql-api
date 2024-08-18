@@ -39,8 +39,8 @@ public class ExpenseConfig {
     }
 
     @Bean
-    public GetFixedExpense getFixedExpense(GetFixedExpenseGateway getFixedExpenseGateway) {
-        return new GetFixedExpenseImpl(getFixedExpenseGateway);
+    public GetFixedExpense getFixedExpense(GetFixedExpenseGateway getFixedExpenseGateway, GetLoggedUser getLoggedUser) {
+        return new GetFixedExpenseImpl(getFixedExpenseGateway, getLoggedUser);
     }
 
     @Bean
