@@ -19,6 +19,7 @@ public class AddToRedisCacheGatewayImpl<T> implements AddToCacheGateway<T> {
             String jsonValue = this.mapper.writeValueAsString(value);
             this.jedis.set(key, jsonValue);
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new UnexpectedException(ex.getMessage());
         }
     }

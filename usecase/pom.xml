@@ -12,6 +12,7 @@
     <artifactId>usecase</artifactId>
     <name>usecase</name>
     <description>usecase</description>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

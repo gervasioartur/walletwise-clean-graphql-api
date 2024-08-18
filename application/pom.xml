@@ -12,6 +12,7 @@
     <artifactId>application</artifactId>
     <name>application</name>
     <description>application</description>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

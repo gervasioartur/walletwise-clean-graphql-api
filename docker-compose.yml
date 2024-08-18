@@ -1,12 +1,14 @@
 version: '3.9'
 
 services:
-  redis:
-    container_name: redis
+  walletwise-cache:
+    container_name: walletwise-cache
     image: redis:6.0
     restart: always
     ports:
       - "6379:6379"
+    networks:
+      - walletwise-network
 
   walletwise-database:
     container_name: walletwise-database
@@ -19,6 +21,37 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=walletwise-database
+    networks:
+      - walletwise-network
+
+  walletwise-rest-api:
+    build:
+      dockerfile: Dockerfile
+    container_name: walletwise-rest-api
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    depends_on:
+      - walletwise-database
+      - walletwise-cache
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - PORT:8080
+      - APP_VERSION=develop
+      - APP_SERVER_URL=http://localhost:8080
+      - APP_SECRET=5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+      - APP_ENVIRONMENT=develop
+      - SPRING_APPLICATION_NAME=walletwise-rest-api
+      ## DATABASE CONFIGURATION
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://walletwise-database:5432/walletwise-database
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=pass
+      - SPRING_JPA_SHOW_SQL=false
+      ## CONFIGURING CACHE
+      - SPRING_DATA_REDIS_HOST=walletwise-cache
+      - SPRING_DATA_REDIS_PORT=6379
+    command: mvn spring-boot:run
     networks:
       - walletwise-network
 

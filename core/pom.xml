@@ -12,6 +12,7 @@
     <artifactId>core</artifactId>
     <name>core</name>
     <description>core</description>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

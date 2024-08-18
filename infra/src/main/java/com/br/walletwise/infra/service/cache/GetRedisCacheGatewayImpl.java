@@ -25,6 +25,7 @@ public class GetRedisCacheGatewayImpl<T> implements GetCacheGateway<T> {
                     this.mapper.readValue(value, new TypeReference<List<T>>() {
                     });
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new UnexpectedException(ex.getMessage());
         }
     }
