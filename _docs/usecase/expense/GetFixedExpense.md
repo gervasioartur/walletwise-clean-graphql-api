@@ -1,41 +1,40 @@
-## Feature: Delete Fixed expense
+## Feature: Get Fixed expense
 
-### Scenario: Delete fixed expense fails when an unexpected exception occurs [✅]
+### Scenario: Get fixed expense fails when an unexpected exception occurs [✅]
 
     Given logged user 
-    When I attempt to delete fixed expense with
+    When I attempt to get fixed expense with
 
         | expenseCode     |
         | 12              |
 
     Then an unexpected exception is thrown
-    And the expense is not deleted
+    And the fixed expense is not returned
     And the status code should be 500
     And the response body should contain "An unexpected error occurred. Please try again later."
 
-### Scenario: Delete fixed expense fails when fixed expense does not exist [✅]
+### Scenario: Get fixed expense fails when fixed expense does not exist [✅]
 
     Given logged user
-    When I attempt to delete fixed expense with
+    When I attempt to get fixed expense with
 
         | expenseCode     |
         | 12              |
 
     Then an domain exception is thrown
-    And the expense is not deleted
+    And the fixed expense is not returned
     And the status code should be 404
     And the response body should contain "Resource not found."
 
 
-### Scenario: Delete fixed expense succeeds [✅]
+### Scenario: Get fixed expense succeeds [✅]
 
     Given logged user
-    When I attempt to delete fixed expense with
+    When I attempt to get fixed expense with
 
         | expenseCode     |
         | 12              |
 
     Then an domain exception is thrown
-    And the expense is not deleted
     And the status code should be 200
-    And the response body should contain "OK."
+    And the response body should contain fixed expense model object.
