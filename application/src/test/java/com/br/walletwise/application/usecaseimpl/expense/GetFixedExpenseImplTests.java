@@ -37,9 +37,10 @@ class GetFixedExpenseImplTests {
         User user = MocksFactory.userFactory();
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
 
+        when(this.getLoggedUser.get()).thenReturn(user);
         when(this.getFixedExpenseGateway.get(fixedExpense.getId(), user.getId())).thenReturn(Optional.of(fixedExpense));
 
-        Optional<FixedExpense> result = this.getFixedExpense.get(user.getId(), fixedExpense.getId());
+        Optional<FixedExpense> result = this.getFixedExpense.get(fixedExpense.getId());
 
         assertThat(result.get().getUserId()).isEqualTo(fixedExpense.getUserId());
         verify(this.getFixedExpenseGateway, times(1)).get(fixedExpense.getId(), user.getId());
@@ -74,7 +75,7 @@ class GetFixedExpenseImplTests {
         when(this.getFixedExpenseGateway.getModel(fixedExpense.getExpenseCode(), user.getId()))
                 .thenReturn(Optional.of(fixedExpense));
 
-        FixedExpenseModel result = this.getFixedExpense.get(fixedExpense.getExpenseCode());
+        FixedExpenseModel result = this.getFixedExpense.getModel(fixedExpense.getExpenseCode());
 
         assertThat(result.getDueDay()).isEqualTo(fixedExpense.getDueDay());
         verify(this.getLoggedUser, times(1)).get();
