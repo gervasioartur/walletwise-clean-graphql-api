@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface GetFixedExpense {
     Optional<FixedExpense> get(UUID userId, long expenseCode);
 
-    Optional<FixedExpenseModel> getModel(UUID userId, long expenseCode);
+    Optional<FixedExpenseModel> get(long expenseCode);
 
 }
