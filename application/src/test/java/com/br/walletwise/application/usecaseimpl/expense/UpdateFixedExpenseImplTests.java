@@ -11,7 +11,6 @@ import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.cache.InvalidateCache;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.expense.UpdateFixedExpense;
-import com.br.walletwise.usecase.user.GetLoggedUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

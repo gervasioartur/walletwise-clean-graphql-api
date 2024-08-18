@@ -35,8 +35,7 @@ public class ExpenseConfig {
     }
 
     @Bean
-    public UpdateFixedExpense updateFixedExpense(GetLoggedUser getLoggedUser,
-                                                 GetFixedExpense getFixedExpense,
+    public UpdateFixedExpense updateFixedExpense(GetFixedExpense getFixedExpense,
                                                  UpdateFixedExpenseGateway updateFixedExpenseGateway,
                                                  InvalidateCache invalidateCache) {
         return new UpdateFixedExpenseImpl(getFixedExpense, updateFixedExpenseGateway, invalidateCache);

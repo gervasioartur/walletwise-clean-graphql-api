@@ -2,7 +2,6 @@ package com.br.walletwise.infra.entrypoint.controller.expense;
 
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.entrypoint.dto.Response;
-import com.br.walletwise.infra.mappers.FixedExpenseMapper;
 import com.br.walletwise.usecase.expense.DeleteFixedExpense;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
