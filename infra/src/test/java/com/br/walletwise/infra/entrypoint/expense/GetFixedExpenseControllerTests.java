@@ -93,7 +93,7 @@ class GetFixedExpenseControllerTests {
         User user = MocksFactory.userFactory();
         FixedExpenseModel fixedExpenseModel = MocksFactory.fixedExpenseModelFactory(user);
 
-        when(this.usecase.get(expenseCode)).thenReturn(fixedExpenseModel);
+        when(this.usecase.getModel(expenseCode)).thenReturn(fixedExpenseModel);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(this.URL + "/" + expenseCode)
@@ -104,6 +104,6 @@ class GetFixedExpenseControllerTests {
                 .perform(request)
                 .andExpect(status().isOk());
 
-        verify(this.usecase, times(1)).get(expenseCode);
+        verify(this.usecase, times(1)).getModel(expenseCode);
     }
 }

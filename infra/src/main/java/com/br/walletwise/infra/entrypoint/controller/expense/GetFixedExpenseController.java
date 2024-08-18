@@ -42,7 +42,7 @@ public class GetFixedExpenseController {
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Response> perform(@PathVariable("expenseCode") long expenseCode) {
         try {
-            FixedExpenseModel list = this.usecase.get(expenseCode);
+            FixedExpenseModel list = this.usecase.getModel(expenseCode);
             Response response = Response.builder().body(list).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NotFoundException ex) {
