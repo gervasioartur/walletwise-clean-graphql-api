@@ -2,6 +2,7 @@ package com.br.walletwise.application.usecasesimpl.expense;
 
 import com.br.walletwise.application.gateway.expense.GetFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
+import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 
 import java.util.Optional;
@@ -17,5 +18,10 @@ public class GetFixedExpenseImpl implements GetFixedExpense {
     @Override
     public Optional<FixedExpense> get(UUID userId, long expenseCode) {
         return this.getFixedExpenseGateway.get(expenseCode, userId);
+    }
+
+    @Override
+    public Optional<FixedExpenseModel> getModel(UUID userId, long expenseCode) {
+        return this.getFixedExpenseGateway.getModel(expenseCode,userId);
     }
 }
