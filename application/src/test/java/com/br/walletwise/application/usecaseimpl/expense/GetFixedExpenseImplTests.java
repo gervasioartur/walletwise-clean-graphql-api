@@ -7,6 +7,7 @@ import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
+import com.br.walletwise.usecase.user.GetLoggedUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,13 @@ import static org.mockito.Mockito.*;
 class GetFixedExpenseImplTests {
     private GetFixedExpense getFixedExpense;
     private GetFixedExpenseGateway getFixedExpenseGateway;
+    private GetLoggedUser getLoggedUser;
 
     @BeforeEach
     void setUp() {
         this.getFixedExpenseGateway = mock(GetFixedExpenseGateway.class);
-        this.getFixedExpense = new GetFixedExpenseImpl(getFixedExpenseGateway);
+        this.getLoggedUser = mock(GetLoggedUser.class);
+        this.getFixedExpense = new GetFixedExpenseImpl(getFixedExpenseGateway, getLoggedUser);
     }
 
     @Test
@@ -46,10 +49,11 @@ class GetFixedExpenseImplTests {
         User user = MocksFactory.userFactory();
         FixedExpenseModel fixedExpense = MocksFactory.fixedExpenseModelFactory(user);
 
+        when(this.getLoggedUser.get()).thenReturn(user);
         when(this.getFixedExpenseGateway.getModel(fixedExpense.getExpenseCode(), user.getId()))
                 .thenReturn(Optional.of(fixedExpense));
 
-        Optional<FixedExpenseModel> result = this.getFixedExpense.getModel(user.getId(), fixedExpense.getExpenseCode());
+        Optional<FixedExpenseModel> result = this.getFixedExpense.get(fixedExpense.getExpenseCode());
 
         assertThat(result.get().getDueDay()).isEqualTo(fixedExpense.getDueDay());
         verify(this.getFixedExpenseGateway, times(1))
