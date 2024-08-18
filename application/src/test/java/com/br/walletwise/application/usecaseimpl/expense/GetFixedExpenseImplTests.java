@@ -56,7 +56,7 @@ class GetFixedExpenseImplTests {
         when(this.getFixedExpenseGateway.getModel(fixedExpense.getExpenseCode(), user.getId()))
                 .thenReturn(Optional.empty());
 
-        Throwable exception = Assertions.catchThrowable((() -> this.getFixedExpense.get(fixedExpense.getExpenseCode())));
+        Throwable exception = Assertions.catchThrowable((() -> this.getFixedExpense.getModel(fixedExpense.getExpenseCode())));
 
         assertThat(exception).isInstanceOf(NotFoundException.class);
         assertThat(exception.getMessage()).isEqualTo(exception.getMessage());

@@ -49,7 +49,7 @@ class GetFixedExpenseControllerTests {
     void shouldTReturn500IfUnexpectedExceptionIsThrown() throws Exception {
         long expenseCode = 1;
 
-        doThrow(HttpServerErrorException.InternalServerError.class).when(this.usecase).get(expenseCode);
+        doThrow(HttpServerErrorException.InternalServerError.class).when(this.usecase).getModel(expenseCode);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(this.URL + "/" + expenseCode)
@@ -62,7 +62,7 @@ class GetFixedExpenseControllerTests {
                 .andExpect(jsonPath("body",
                         Matchers.is("An unexpected error occurred. Please try again later.")));
 
-        verify(this.usecase, times(1)).get(expenseCode);
+        verify(this.usecase, times(1)).getModel(expenseCode);
     }
 
     @Test
@@ -70,7 +70,7 @@ class GetFixedExpenseControllerTests {
     void shouldTReturn404IfNotFoundExceptionIsThrown() throws Exception {
         long expenseCode = 1;
 
-        doThrow(NotFoundException.class).when(this.usecase).get(expenseCode);
+        doThrow(NotFoundException.class).when(this.usecase).getModel(expenseCode);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(this.URL + "/" + expenseCode)
@@ -81,7 +81,7 @@ class GetFixedExpenseControllerTests {
                 .perform(request)
                 .andExpect(status().isNotFound());
 
-        verify(this.usecase, times(1)).get(expenseCode);
+        verify(this.usecase, times(1)).getModel(expenseCode);
     }
 
     @Test
