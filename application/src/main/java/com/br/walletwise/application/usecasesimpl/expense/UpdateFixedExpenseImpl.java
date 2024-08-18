@@ -2,7 +2,6 @@ package com.br.walletwise.application.usecasesimpl.expense;
 
 import com.br.walletwise.application.gateway.expense.UpdateFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
-import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.cache.InvalidateCache;

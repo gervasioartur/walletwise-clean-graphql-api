@@ -21,7 +21,7 @@ public class DeleteFixedExpenseImpl implements DeleteFixedExpense {
     @Override
     public void delete(long expenseCode) {
         FixedExpense result = this.getFixedExpense.get(expenseCode)
-                .orElseThrow(() ->  new NotFoundException("Resource not found."));
+                .orElseThrow(() -> new NotFoundException("Resource not found."));
         result.setActive(false);
         this.deleteFixedExpenseGateway.delete(result);
     }
