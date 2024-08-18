@@ -26,7 +26,6 @@
     And the status code should be 404
     And the response body should contain "Resource not found."
 
-
 ### Scenario: Get fixed expense succeeds [✅]
 
     Given logged user
