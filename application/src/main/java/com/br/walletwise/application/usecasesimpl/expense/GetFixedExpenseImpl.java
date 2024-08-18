@@ -4,6 +4,7 @@ import com.br.walletwise.application.gateway.expense.GetFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
+import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
 
@@ -25,8 +26,9 @@ public class GetFixedExpenseImpl implements GetFixedExpense {
     }
 
     @Override
-    public Optional<FixedExpenseModel> get(long expenseCode) {
+    public FixedExpenseModel get(long expenseCode) {
         User user = this.getLoggedUser.get();
-        return this.getFixedExpenseGateway.getModel(expenseCode,user.getId());
+        return this.getFixedExpenseGateway.getModel(expenseCode,user.getId())
+                .orElseThrow(() -> new NotFoundException("Resource not found."));
     }
 }

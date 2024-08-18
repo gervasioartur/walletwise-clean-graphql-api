@@ -6,8 +6,10 @@ import com.br.walletwise.application.usecasesimpl.expense.GetFixedExpenseImpl;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
+import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,8 +46,27 @@ class GetFixedExpenseImplTests {
     }
 
     @Test
-    @DisplayName("Should return optional of fixed expense model")
-    void shouldReturnEmptyOptionalOfFixedExpenseModel() {
+    @DisplayName("Should throw NotFoundException if fixed expense does not exist")
+    void shouldReturnThrowNotFoundExceptionIfFixedExpenseDoesNotExist() {
+        User user = MocksFactory.userFactory();
+        FixedExpenseModel fixedExpense = MocksFactory.fixedExpenseModelFactory(user);
+
+        when(this.getLoggedUser.get()).thenReturn(user);
+        when(this.getFixedExpenseGateway.getModel(fixedExpense.getExpenseCode(), user.getId()))
+                .thenReturn(Optional.empty());
+
+        Throwable exception = Assertions.catchThrowable((() -> this.getFixedExpense.get(fixedExpense.getExpenseCode())));
+
+        assertThat(exception).isInstanceOf(NotFoundException.class);
+        assertThat(exception.getMessage()).isEqualTo(exception.getMessage());
+        verify(this.getLoggedUser, times(1)).get();
+        verify(this.getFixedExpenseGateway, times(1))
+                .getModel(fixedExpense.getExpenseCode(), user.getId());
+    }
+
+    @Test
+    @DisplayName("Should return fixed expense model")
+    void shouldReturnFixedExpenseModel() {
         User user = MocksFactory.userFactory();
         FixedExpenseModel fixedExpense = MocksFactory.fixedExpenseModelFactory(user);
 
@@ -53,9 +74,10 @@ class GetFixedExpenseImplTests {
         when(this.getFixedExpenseGateway.getModel(fixedExpense.getExpenseCode(), user.getId()))
                 .thenReturn(Optional.of(fixedExpense));
 
-        Optional<FixedExpenseModel> result = this.getFixedExpense.get(fixedExpense.getExpenseCode());
+        FixedExpenseModel result = this.getFixedExpense.get(fixedExpense.getExpenseCode());
 
-        assertThat(result.get().getDueDay()).isEqualTo(fixedExpense.getDueDay());
+        assertThat(result.getDueDay()).isEqualTo(fixedExpense.getDueDay());
+        verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpenseGateway, times(1))
                 .getModel(fixedExpense.getExpenseCode(), user.getId());
     }
