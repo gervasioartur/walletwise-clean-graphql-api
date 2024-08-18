@@ -1,13 +1,9 @@
 package com.br.walletwise.infra.entrypoint.expense;
 
-import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
-import com.br.walletwise.infra.mappers.FixedExpenseMapper;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.usecase.expense.DeleteFixedExpense;
-import com.br.walletwise.usecase.expense.UpdateFixedExpense;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;

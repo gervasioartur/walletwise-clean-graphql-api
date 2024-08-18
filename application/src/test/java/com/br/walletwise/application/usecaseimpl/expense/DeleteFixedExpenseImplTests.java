@@ -40,7 +40,6 @@ class DeleteFixedExpenseImplTests {
     @DisplayName("Should throw NotFoundException if Fixed expense does not exist")
     void shouldThrowNotFoundExceptionIfFixedExpenseDoesNotExist() {
         long expenseCode = 1;
-        User user = MocksFactory.userFactory();
 
         when(this.getFixedExpense.get(expenseCode)).thenReturn(Optional.empty());
 

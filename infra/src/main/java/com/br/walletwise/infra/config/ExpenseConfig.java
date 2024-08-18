@@ -45,7 +45,7 @@ public class ExpenseConfig {
     @Bean
     public DeleteFixedExpense deleteFixedExpense(GetFixedExpense getFixedExpense,
                                                  DeleteFixedExpenseGateway deleteFixedExpenseGateway,
-                                                 InvalidateCache invalidateCache){
-        return new DeleteFixedExpenseImpl(getFixedExpense,deleteFixedExpenseGateway,invalidateCache);
+                                                 InvalidateCache invalidateCache) {
+        return new DeleteFixedExpenseImpl(getFixedExpense, deleteFixedExpenseGateway, invalidateCache);
     }
 }

@@ -1,13 +1,9 @@
 package com.br.walletwise.infra.entrypoint.controller.expense;
 
-import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.entrypoint.dto.Response;
-import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
 import com.br.walletwise.infra.mappers.FixedExpenseMapper;
 import com.br.walletwise.usecase.expense.DeleteFixedExpense;
-import com.br.walletwise.usecase.expense.UpdateFixedExpense;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class DeleteFixedExpenseController {
     private final DeleteFixedExpense usecase;
-    private final FixedExpenseMapper mapper;
 
     @DeleteMapping({"/{expenseCode}"})
     @Operation(summary = "Delete fixed expense")
