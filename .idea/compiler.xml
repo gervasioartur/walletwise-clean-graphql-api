@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="application" target="21" />
+      <module name="core" target="21" />
+      <module name="coverage" target="21" />
+      <module name="infra" target="21" />
+      <module name="usecase" target="21" />
+      <module name="walletwise-api" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

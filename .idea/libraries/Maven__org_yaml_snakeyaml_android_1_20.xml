@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: org.yaml:snakeyaml:android:1.20" type="java-imported" external-system-id="Maven">
+    <properties groupId="org.yaml" artifactId="snakeyaml" version="1.20" classifier="android" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.20/snakeyaml-1.20-android.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.20/snakeyaml-1.20-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.20/snakeyaml-1.20-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
