@@ -1,6 +1,6 @@
 ## Feature: Add Fixed expense
 
-### Scenario: Add fixed expense fails when an unexpected exception occurs []
+### Scenario: Add fixed expense fails when an unexpected exception occurs [✅]
 
     Given logged user 
     When I attempt to add fixed expense with
@@ -13,7 +13,7 @@
     And the status code should be 500
     And the response body should contain "An unexpected error occurred. Please try again later."
 
-### Scenario: Add fixed expense fails when description is blank []
+### Scenario: Add fixed expense fails when description is blank [✅]
 
     Given logged user
     When I attempt to add fixed expense with
@@ -26,7 +26,7 @@
     And the status code should be 400
     And the response body should contain "Description is required."
 
-### Scenario: Add fixed expense fails when category is blank []
+### Scenario: Add fixed expense fails when category is blank [✅]
 
     Given logged user
     When I attempt to add fixed expense with
@@ -39,7 +39,7 @@
     And the status code should be 400
     And the response body should contain "Category is required."
 
-### Scenario: Add fixed expense fails when amount is less than zero or equal zero  []
+### Scenario: Add fixed expense fails when amount is less than zero or equal zero  [✅]
 
     Given logged user
     When I attempt to add fixed expense with
@@ -52,7 +52,7 @@
     And the status code should be 400
     And the response body should contain "Amount is invalid, make it is grater than zero(0)."
 
-### Scenario: Add fixed expense fails when start date is null  []
+### Scenario: Add fixed expense fails when start date is null  [✅]
 
     Given logged user
     When I attempt to add fixed expense with
@@ -65,7 +65,7 @@
     And the status code should be 400
     And the response body should contain "Start date is required."
 
-### Scenario: Add fixed expense fails when end date is null  []
+### Scenario: Add fixed expense fails when end date is null  [✅]
 
     Given logged user
     When I attempt to add fixed expense with
@@ -78,7 +78,7 @@
     And the status code should be 400
     And the response body should contain "End date is required."
 
-### Scenario: Add fixed expense fails when end date is before the star date  []
+### Scenario: Add fixed expense fails when end date is before the star date  [✅]
 
     Given logged user
     When I attempt to add fixed expense with
@@ -91,7 +91,7 @@
     And the status code should be 400
     And the response body should contain "Invalid end date! End date should be after or equal the start date."
 
-### Scenario: Add fixed expense succeeds with correct values   []
+### Scenario: Add fixed expense succeeds with correct values   [✅]
 
     Given logged user
     When I attempt to add fixed expense with
