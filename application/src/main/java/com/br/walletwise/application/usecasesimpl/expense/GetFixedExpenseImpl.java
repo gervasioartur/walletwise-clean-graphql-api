@@ -9,7 +9,6 @@ import com.br.walletwise.usecase.expense.GetFixedExpense;
 import com.br.walletwise.usecase.user.GetLoggedUser;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public class GetFixedExpenseImpl implements GetFixedExpense {
     private final GetFixedExpenseGateway getFixedExpenseGateway;
@@ -21,12 +20,13 @@ public class GetFixedExpenseImpl implements GetFixedExpense {
     }
 
     @Override
-    public Optional<FixedExpense> get(UUID userId, long expenseCode) {
-        return this.getFixedExpenseGateway.get(expenseCode, userId);
+    public Optional<FixedExpense> get(long expenseCode) {
+        User user = this.getLoggedUser.get();
+        return this.getFixedExpenseGateway.get(expenseCode, user.getId());
     }
 
     @Override
-    public FixedExpenseModel get(long expenseCode) {
+    public FixedExpenseModel getModel(long expenseCode) {
         User user = this.getLoggedUser.get();
         return this.getFixedExpenseGateway.getModel(expenseCode, user.getId())
                 .orElseThrow(() -> new NotFoundException("Resource not found."));

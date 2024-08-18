@@ -30,8 +30,7 @@ public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
 
     @Override
     public void update(FixedExpenseModel fixedExpense) {
-        User user = this.getLoggedUser.get();
-        FixedExpense savedFixedExpense = this.getFixedExpense.get(user.getId(), fixedExpense.getExpenseCode())
+        FixedExpense savedFixedExpense = this.getFixedExpense.get(fixedExpense.getExpenseCode())
                 .orElseThrow(() -> new NotFoundException
                         ("Fixed expense with code " + fixedExpense.getExpenseCode() + " not found"));
 
@@ -43,6 +42,6 @@ public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
         savedFixedExpense.setEndDate(fixedExpense.getEndDate() == null ? savedFixedExpense.getEndDate() : fixedExpense.getEndDate());
 
         this.updateFixedExpenseGateway.updated(savedFixedExpense);
-        this.invalidateCache.delete("fixedExpenses:" + user.getId());
+        this.invalidateCache.delete("fixedExpenses:" + savedFixedExpense.getUserId());
     }
 }

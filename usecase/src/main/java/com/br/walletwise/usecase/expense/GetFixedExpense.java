@@ -7,8 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface GetFixedExpense {
-    Optional<FixedExpense> get(UUID userId, long expenseCode);
+    Optional<FixedExpense> get(long expenseCode);
 
-    FixedExpenseModel get(long expenseCode);
-
+    FixedExpenseModel getModel(long expenseCode);
 }
