@@ -11,17 +11,14 @@ import com.br.walletwise.usecase.user.GetLoggedUser;
 
 
 public class UpdateFixedExpenseImpl implements UpdateFixedExpense {
-    private final GetLoggedUser getLoggedUser;
     private final GetFixedExpense getFixedExpense;
     private final UpdateFixedExpenseGateway updateFixedExpenseGateway;
     private final InvalidateCache invalidateCache;
 
-    public UpdateFixedExpenseImpl(GetLoggedUser getLoggedUser,
-                                  GetFixedExpense getFixedExpense,
+    public UpdateFixedExpenseImpl(GetFixedExpense getFixedExpense,
                                   UpdateFixedExpenseGateway updateFixedExpenseGateway,
                                   InvalidateCache invalidateCache) {
 
-        this.getLoggedUser = getLoggedUser;
         this.getFixedExpense = getFixedExpense;
         this.updateFixedExpenseGateway = updateFixedExpenseGateway;
         this.invalidateCache = invalidateCache;

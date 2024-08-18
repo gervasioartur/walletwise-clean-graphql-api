@@ -28,18 +28,16 @@ import static org.mockito.Mockito.*;
 
 class UpdateFixedExpenseImplTests {
     private UpdateFixedExpense updateFixedExpense;
-    private GetLoggedUser getLoggedUser;
     private GetFixedExpense getFixedExpense;
     private UpdateFixedExpenseGateway updateFixedExpenseGateway;
     private InvalidateCache invalidateCache;
 
     @BeforeEach
     void setUp() {
-        this.getLoggedUser = mock(GetLoggedUser.class);
         this.getFixedExpense = mock(GetFixedExpense.class);
         this.updateFixedExpenseGateway = mock(UpdateFixedExpenseGateway.class);
         this.invalidateCache = mock(InvalidateCache.class);
-        this.updateFixedExpense = new UpdateFixedExpenseImpl(getLoggedUser,
+        this.updateFixedExpense = new UpdateFixedExpenseImpl(
                 getFixedExpense,
                 updateFixedExpenseGateway, invalidateCache);
     }
@@ -50,7 +48,6 @@ class UpdateFixedExpenseImplTests {
         User user = MocksFactory.userFactory();
         FixedExpenseModel fixedExpense = MocksFactory.fixedExpenseModelFactory(user);
 
-        when(this.getLoggedUser.get()).thenReturn(user);
         when(this.getFixedExpense.get(fixedExpense.getExpenseCode())).thenReturn(Optional.empty());
 
         Throwable exception = catchThrowable(() -> this.updateFixedExpense.update(fixedExpense));
@@ -58,7 +55,6 @@ class UpdateFixedExpenseImplTests {
         assertThat(exception).isInstanceOf(NotFoundException.class);
         assertThat(exception.getMessage()).isEqualTo("Fixed expense with code "
                 + fixedExpense.getExpenseCode() + " not found");
-        verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpense, times(1)).get(fixedExpense.getExpenseCode());
     }
 
@@ -69,7 +65,6 @@ class UpdateFixedExpenseImplTests {
         FixedExpense fixedExpense = MocksFactory.fixedExpenseFactory(user);
         FixedExpenseModel fixedExpenseModel = MocksFactory.fixedExpenseModelFactory(user, fixedExpense);
 
-        when(this.getLoggedUser.get()).thenReturn(user);
         when(this.getFixedExpense.get(fixedExpense.getId())).thenReturn(Optional.of(fixedExpense));
 
         fixedExpense.setDescription(MocksFactory.faker.lorem().paragraph());
@@ -84,7 +79,6 @@ class UpdateFixedExpenseImplTests {
 
         this.updateFixedExpense.update(fixedExpenseModel);
 
-        verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpense, times(1)).get(fixedExpense.getId());
         verify(this.updateFixedExpenseGateway, times(1)).updated(fixedExpense);
         verify(this.invalidateCache, times(1)).delete("fixedExpenses:" + user.getId());
@@ -104,7 +98,6 @@ class UpdateFixedExpenseImplTests {
         fixedExpenseModel.setStartDate(null);
         fixedExpenseModel.setEndDate(null);
 
-        when(this.getLoggedUser.get()).thenReturn(user);
         when(this.getFixedExpense.get(fixedExpense.getId())).thenReturn(Optional.of(fixedExpense));
 
         doNothing().when(this.updateFixedExpenseGateway).updated(fixedExpense);
@@ -112,7 +105,6 @@ class UpdateFixedExpenseImplTests {
 
         this.updateFixedExpense.update(fixedExpenseModel);
 
-        verify(this.getLoggedUser, times(1)).get();
         verify(this.getFixedExpense, times(1)).get(fixedExpense.getId());
         verify(this.updateFixedExpenseGateway, times(1)).updated(fixedExpense);
         verify(this.invalidateCache, times(1)).delete("fixedExpenses:" + user.getId());
