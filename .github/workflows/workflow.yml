@@ -59,6 +59,13 @@ jobs:
           name: report-upload
           path: coverage/
 
+      - name: Upload java binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-binaries
+          path: |
+            **/target/classes
+
   sonnar:
     runs-on: ubuntu-latest
     needs: test
@@ -75,6 +82,13 @@ jobs:
         with:
           name: report-upload
           path: coverage/
+        
+      - name: Download java binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: java-binaries
+          path: |
+            **/target/classes
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
