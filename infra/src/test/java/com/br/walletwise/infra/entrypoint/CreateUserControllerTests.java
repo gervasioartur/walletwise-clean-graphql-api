@@ -1,6 +1,7 @@
 package com.br.walletwise.infra.entrypoint;
 
 import com.br.walletwise.core.domain.entity.User;
+import com.br.walletwise.core.exception.ConflictException;
 import com.br.walletwise.core.exception.UnexpectedException;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserInput;
 import com.br.walletwise.infra.mappers.UserMapper;
@@ -50,5 +51,22 @@ class CreateUserControllerTests {
                 .path("createUser.body")
                 .entity(String.class)
                 .isEqualTo("An unexpected error occurred. Please try again later.");
+    }
+
+    @Test
+    @DisplayName("Should return conflict exception message if useCase throws conflict exception")
+    void shouldReturnConflictExceptionMessageIfUseCaseThrowsConflictException() {
+        User user =  MocksFactory.userFactory(this.createUserInput);
+
+        when(this.mapper.map(this.createUserInput)).thenReturn(user);
+        doThrow(new ConflictException("Any exception.")).when(this.createUser).create(user);
+
+        String mutation = "mutation { createUser(input: {firstname: \"John\", lastname: \"Doe\", username: \"johndoe\", email: \"john@example.com\", password: \"password123\"}) { body } }";
+
+        graphQlTester.document(mutation)
+                .execute()
+                .path("createUser.body")
+                .entity(String.class)
+                .isEqualTo("Any exception.");
     }
 }
