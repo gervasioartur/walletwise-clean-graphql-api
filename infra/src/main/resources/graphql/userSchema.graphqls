@@ -6,17 +6,7 @@ input CreateUserInput {
     password: String!
 }
 
-
-
-input AuthenticateUserRequest {
+input AuthenticateUserInput {
     usernameOrEmail: String!
     password: String!
-}
-
-type Query {
-    perform(input: AuthenticateUserRequest) : Response!
-}
-
-type Mutation {
-    createUser(input: CreateUserInput!): Response!
 }

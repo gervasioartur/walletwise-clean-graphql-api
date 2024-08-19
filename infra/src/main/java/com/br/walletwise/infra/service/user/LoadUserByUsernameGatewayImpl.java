@@ -13,7 +13,7 @@ public class LoadUserByUsernameGatewayImpl implements UserDetailsService {
     private final UserJpaRepository userJpaRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         return this.userJpaRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }

@@ -2,7 +2,7 @@ package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.application.gateway.user.SaveSessionGateway;
 import com.br.walletwise.core.domain.entity.Session;
-import com.br.walletwise.infra.mappers.SessionMapper;
+import com.br.walletwise.infra.mapper.SessionMapper;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
 import com.br.walletwise.infra.persistence.repository.SessionJpaRepository;
 import lombok.RequiredArgsConstructor;

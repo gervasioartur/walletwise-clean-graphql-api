@@ -1,0 +1,29 @@
+input AddFixedExpenseInput {
+    description: String!
+    category:  String!
+    amount: Float
+    dueDay: Int!
+    starDate:  LocalDate!
+    endDate: LocalDate!
+}
+
+type FixedExpense {
+    expenseCode: Int
+    ownerFullName: String
+    description: String
+    category: String
+    amount: Float
+    dueDay: Int
+    starDate:  LocalDate
+    endDate: LocalDate
+}
+
+input UpdateFixedExpense {
+    expenseCode: Int!
+    description: String
+    category: String
+    amount: Float
+    dueDay: Int
+    starDate:  LocalDate
+    endDate: LocalDate
+}

@@ -1,10 +1,10 @@
-package com.br.walletwise.infra.mappers;
+package com.br.walletwise.infra.mapper;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
-import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
+import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseInput;
+import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseInput;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +40,7 @@ class FixedExpenseMapperTests {
     @Test
     @DisplayName("Should return Fixed Expense")
     void shouldReturnFixedExpenseFromAddFixedExpenseRequest() {
-        AddFixedExpenseRequest request = MocksFactory.addFixedExpenseRequestFactory();
+        AddFixedExpenseInput request = MocksFactory.addFixedExpenseRequestFactory();
 
         FixedExpense result = this.mapper.map(request);
 
@@ -56,7 +56,7 @@ class FixedExpenseMapperTests {
     @Test
     @DisplayName("Should return Fixed Expense")
     void shouldReturnFixedExpenseFromUpdateFixedExpenseRequest() {
-        UpdateFixedExpenseRequest request = MocksFactory.updateFixedExpenseRequestFactory();
+        UpdateFixedExpenseInput request = MocksFactory.updateFixedExpenseRequestFactory();
 
         FixedExpenseModel result = this.mapper.map(request);
 

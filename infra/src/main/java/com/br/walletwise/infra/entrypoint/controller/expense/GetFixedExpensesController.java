@@ -1,38 +1,27 @@
 package com.br.walletwise.infra.entrypoint.controller.expense;
 
-import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.infra.entrypoint.dto.Response;
+import com.br.walletwise.infra.entrypoint.dto.FixedExpenseOutput;
+import com.br.walletwise.infra.mapper.FixedExpenseMapper;
 import com.br.walletwise.usecase.expense.GetFixedExpenses;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller
 @RequiredArgsConstructor
 public class GetFixedExpensesController {
     private final GetFixedExpenses usecase;
+    private final FixedExpenseMapper mapper;
 
-    public ResponseEntity<Response> perform() {
-        try {
-            List<FixedExpenseModel> list = this.usecase.get();
-            Response response = Response.builder().body("").build();
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception ex) {
-            Response response = Response
-                    .builder().body("An unexpected error occurred. Please try again later.").build();
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @QueryMapping
+    @PreAuthorize("isAuthenticated()")
+    public List<FixedExpenseOutput> getFixedExpenses() {
+        return this.usecase.get()
+                .stream()
+                .map(this.mapper::map)
+                .toList();
     }
 }

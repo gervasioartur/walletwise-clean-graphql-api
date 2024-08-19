@@ -5,9 +5,9 @@ import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.enums.CategoryEnum;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
+import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseInput;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserInput;
-import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
+import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseInput;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collection;
@@ -232,8 +233,20 @@ public class MocksFactory {
                 .build();
     }
 
-    public static AddFixedExpenseRequest addFixedExpenseRequestFactory() {
-        return new AddFixedExpenseRequest(
+    public static AddFixedExpenseInput addFixedExpenseRequestFactory() {
+        return new AddFixedExpenseInput(
+                MocksFactory.faker.lorem().paragraph(),
+                CategoryEnum.SCHOOL.getValue(),
+                new BigDecimal(MocksFactory.faker.number().randomNumber()),
+                10,
+                LocalDate.now(),
+                LocalDate.now().plusDays(2)
+        );
+    }
+
+    public static UpdateFixedExpenseInput updateFixedExpenseRequestFactory() {
+        return new UpdateFixedExpenseInput(
+                2,
                 MocksFactory.faker.lorem().paragraph(),
                 CategoryEnum.SCHOOL.getValue(),
                 new BigDecimal(MocksFactory.faker.number().randomNumber()),
@@ -243,28 +256,17 @@ public class MocksFactory {
         );
     }
 
-    public static UpdateFixedExpenseRequest updateFixedExpenseRequestFactory() {
-        return new UpdateFixedExpenseRequest(
-                MocksFactory.faker.lorem().paragraph(),
-                CategoryEnum.SCHOOL.getValue(),
-                new BigDecimal(MocksFactory.faker.number().randomNumber()),
-                10,
-                new Date(),
-                Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant())
-        );
-    }
-
-    public static FixedExpense fixedExpenseFactory(AddFixedExpenseRequest request) {
+    public static FixedExpense fixedExpenseFactory(AddFixedExpenseInput request) {
         return new FixedExpense(
                 request.description(),
                 request.dueDay(),
                 request.category(),
                 request.amount(),
-                request.starDate(),
-                request.endDate());
+                Date.from(request.starDate().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                Date.from(request.endDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
     }
 
-    public static FixedExpenseModel fixedExpenseFactory(UpdateFixedExpenseRequest request) {
+    public static FixedExpenseModel fixedExpenseFactory(UpdateFixedExpenseInput request) {
         return new FixedExpenseModel(
                 request.description(),
                 request.dueDay(),

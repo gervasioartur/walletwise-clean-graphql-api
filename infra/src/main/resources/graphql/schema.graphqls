@@ -1,3 +1,18 @@
+scalar LocalDate
+
 type Response {
-    body: String!
+    body: String
+}
+
+type Query {
+    getFixedExpense(fixedExpenseCode : Int!) : FixedExpense
+    getFixedExpenses : [FixedExpense]
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): Response
+    authenticateUser(input: AuthenticateUserInput!) : Response
+    addFixedExpense(input: AddFixedExpenseInput!): Response
+    deleteFixedExpense (fixedExpenseCode : Int!) : Response
+    updateFixedExpense (input: UpdateFixedExpense) : Response
 }

@@ -1,7 +1,7 @@
 package com.br.walletwise.infra.config;
 
-import com.br.walletwise.infra.helpers.GetUsernameFromToken;
-import com.br.walletwise.infra.helpers.ValidateToken;
+import com.br.walletwise.infra.helper.GetUsernameFromToken;
+import com.br.walletwise.infra.helper.ValidateToken;
 import com.br.walletwise.infra.service.user.LoadUserByUsernameGatewayImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,7 +20,8 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
+
     private final LoadUserByUsernameGatewayImpl loadUserByUsername;
     private final GetUsernameFromToken getUsernameFromToken;
     private final ValidateToken validateToken;
@@ -45,15 +45,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             UserDetails userDetails = this.loadUserByUsername.loadUserByUsername(username);
 
             if (this.validateToken.isValid(token, userDetails)) {
-                SecurityContext context = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                context.setAuthentication(authentication);
-                SecurityContextHolder.setContext(context);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }

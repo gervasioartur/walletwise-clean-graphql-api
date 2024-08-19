@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.mappers;
+package com.br.walletwise.infra.mapper;
 
 import com.br.walletwise.core.domain.entity.Session;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;

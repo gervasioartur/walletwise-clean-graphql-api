@@ -1,53 +1,35 @@
 package com.br.walletwise.infra.entrypoint.controller.user;
 
-import com.br.walletwise.core.exception.UnauthorizedException;
+import com.br.walletwise.core.exception.BusinessException;
 import com.br.walletwise.core.validation.ValidationBuilder;
 import com.br.walletwise.core.validation.validator.contract.Validator;
 import com.br.walletwise.infra.entrypoint.controller.AbstractController;
-import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserRequest;
+import com.br.walletwise.infra.entrypoint.dto.AuthenticateUserInput;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.usecase.user.AuthenticateUser;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Controller
 @RequiredArgsConstructor
-public class AuthenticateUserController extends AbstractController<Response, AuthenticateUserRequest> {
+public class AuthenticateUserController extends AbstractController<Response, AuthenticateUserInput> {
     private final AuthenticateUser usecase;
-    
-    public ResponseEntity<Response> perform(@RequestBody AuthenticateUserRequest request) {
-        String error = this.validate(request);
-        if (error != null) {
-            Response response = Response.builder().body(error).build();
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
 
-        try {
-            String token = this.usecase.authenticate(request.usernameOrEmail(), request.password());
-            Response response = Response.builder().body(token).build();
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (UnauthorizedException | AuthenticationException ex) {
-            Response response = Response.builder().body(ex.getMessage()).build();
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-        } catch (Exception ex) {
-            Response response = Response
-                    .builder().body("An unexpected error occurred. Please try again later.").build();
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @MutationMapping
+    public Response authenticateUser(@Argument(name = "input") AuthenticateUserInput input) {
+        String error = this.validate(input);
+        if (error != null) throw new BusinessException(error);
+        String token = this.usecase.authenticate(input.usernameOrEmail(), input.password());
+        return Response.builder().body(token).build();
     }
 
     @Override
-    protected List<Validator> buildValidators(AuthenticateUserRequest request) {
+    protected List<Validator> buildValidators(AuthenticateUserInput request) {
         List<Validator> validators = new ArrayList<>();
         validators.addAll(ValidationBuilder.of("Username or E-mail", request.usernameOrEmail()).required().build());
         validators.addAll(ValidationBuilder.of("Password", request.password()).required().build());

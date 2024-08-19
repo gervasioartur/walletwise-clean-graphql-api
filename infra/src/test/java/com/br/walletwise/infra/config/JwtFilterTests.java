@@ -1,7 +1,7 @@
 package com.br.walletwise.infra.config;
 
-import com.br.walletwise.infra.helpers.GetUsernameFromToken;
-import com.br.walletwise.infra.helpers.ValidateToken;
+import com.br.walletwise.infra.helper.GetUsernameFromToken;
+import com.br.walletwise.infra.helper.ValidateToken;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import com.br.walletwise.infra.service.user.LoadUserByUsernameGatewayImpl;
@@ -29,9 +29,9 @@ import java.util.UUID;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class JwtAuthenticationFilterTests {
+public class JwtFilterTests {
     @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private JwtFilter jwtFilter;
     @MockBean
     private LoadUserByUsernameGatewayImpl loadUserByUsername;
     @MockBean
@@ -50,7 +50,7 @@ public class JwtAuthenticationFilterTests {
     void shouldNotAuthenticateIfAuthorizationHeaderIsNull() throws ServletException, IOException {
         Mockito.when(request.getHeader("Authorization")).thenReturn(null);
 
-        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
         verify(this.filterChain, times(1)).doFilter(request, response);
@@ -61,7 +61,7 @@ public class JwtAuthenticationFilterTests {
     void shouldNotAuthenticateIfAuthorizationHeaderIsEmpty() throws ServletException, IOException {
         Mockito.when(request.getHeader("Authorization")).thenReturn("");
 
-        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
         verify(this.filterChain, times(1)).doFilter(request, response);
@@ -74,7 +74,7 @@ public class JwtAuthenticationFilterTests {
 
         Mockito.when(request.getHeader("Authorization")).thenReturn(authHeader);
 
-        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
         verify(this.filterChain, times(1)).doFilter(request, response);
@@ -87,7 +87,7 @@ public class JwtAuthenticationFilterTests {
 
         Mockito.when(request.getHeader("Authorization")).thenReturn(authHeader);
 
-        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+        jwtFilter.doFilterInternal(request, response, filterChain);
 
         Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
         verify(this.filterChain, times(1)).doFilter(request, response);
@@ -109,7 +109,7 @@ public class JwtAuthenticationFilterTests {
             when(securityContext.getAuthentication())
                     .thenReturn(new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList()));
 
-            jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+            jwtFilter.doFilterInternal(request, response, filterChain);
 
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNotNull();
             verify(this.filterChain, times(1)).doFilter(request, response);
@@ -133,7 +133,7 @@ public class JwtAuthenticationFilterTests {
             doThrow(UsernameNotFoundException.class).when(this.loadUserByUsername).loadUserByUsername(username);
 
             Throwable exception = Assertions
-                    .catchThrowable(() -> jwtAuthenticationFilter.doFilterInternal(request, response, filterChain));
+                    .catchThrowable(() -> jwtFilter.doFilterInternal(request, response, filterChain));
 
             Assertions.assertThat(exception).isInstanceOf(UsernameNotFoundException.class);
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
@@ -160,7 +160,7 @@ public class JwtAuthenticationFilterTests {
             when(this.loadUserByUsername.loadUserByUsername(username)).thenReturn(userDetails);
             when(this.validateToken.isValid(token, userDetails)).thenReturn(false);
 
-            jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+            jwtFilter.doFilterInternal(request, response, filterChain);
 
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
             verify(this.loadUserByUsername, times(1)).loadUserByUsername(username);
@@ -188,7 +188,7 @@ public class JwtAuthenticationFilterTests {
             securityContextHolder.when(SecurityContextHolder::createEmptyContext).thenReturn(securityContext);
             doNothing().when(securityContext).setAuthentication(any());
 
-            jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+            jwtFilter.doFilterInternal(request, response, filterChain);
 
             Assertions.assertThat(SecurityContextHolder.getContext().getAuthentication()).isNull();
             verify(this.loadUserByUsername, times(1)).loadUserByUsername(username);

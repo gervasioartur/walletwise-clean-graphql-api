@@ -1,35 +1,22 @@
 package com.br.walletwise.infra.entrypoint.controller.expense;
 
-import com.br.walletwise.core.exception.NotFoundException;
 import com.br.walletwise.infra.entrypoint.dto.Response;
 import com.br.walletwise.usecase.expense.DeleteFixedExpense;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 
+@Controller
 @RequiredArgsConstructor
 public class DeleteFixedExpenseController {
     private final DeleteFixedExpense usecase;
 
-
-    public ResponseEntity<Response> perform(@PathVariable("expenseCode") long expenseCode) {
-        try {
-            this.usecase.delete(expenseCode);
-            Response response = Response.builder().body("OK").build();
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (NotFoundException ex) {
-            Response response = Response.builder().body(ex.getMessage()).build();
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        } catch (Exception ex) {
-            Response response = Response
-                    .builder().body("An unexpected error occurred. Please try again later.").build();
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @MutationMapping
+    @PreAuthorize("isAuthenticated()")
+    public Response deleteFixedExpense(@Argument("fixedExpenseCode") long fixedExpenseCode) {
+        this.usecase.delete(fixedExpenseCode);
+        return Response.builder().body("OK").build();
     }
 }

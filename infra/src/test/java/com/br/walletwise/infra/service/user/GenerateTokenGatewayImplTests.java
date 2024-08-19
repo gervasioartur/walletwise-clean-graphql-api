@@ -1,7 +1,7 @@
 package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.application.gateway.user.GenerateTokenGateway;
-import com.br.walletwise.infra.helpers.CreateToken;
+import com.br.walletwise.infra.helper.CreateToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

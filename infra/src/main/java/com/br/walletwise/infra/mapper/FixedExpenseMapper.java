@@ -1,12 +1,19 @@
-package com.br.walletwise.infra.mappers;
+package com.br.walletwise.infra.mapper;
 
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
-import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
+import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseInput;
+import com.br.walletwise.infra.entrypoint.dto.FixedExpenseOutput;
+import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseInput;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Component
 public class FixedExpenseMapper {
@@ -28,17 +35,37 @@ public class FixedExpenseMapper {
                 .build();
     }
 
-    public FixedExpense map(AddFixedExpenseRequest request) {
+    public FixedExpense map(AddFixedExpenseInput request) {
+        LocalDateTime startDateTime = request.starDate().atStartOfDay();
+        Instant startInstant = startDateTime.atZone(ZoneId.systemDefault()).toInstant();
+
+        LocalDateTime endDateTime = request.endDate().atStartOfDay();
+        Instant endInstant = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
+
         return new FixedExpense(
                 request.description(),
                 request.dueDay(),
                 request.category(),
                 request.amount(),
-                request.starDate(),
-                request.endDate());
+                Date.from(startInstant),
+                Date.from(endInstant));
     }
 
-    public FixedExpenseModel map(UpdateFixedExpenseRequest request) {
+    public FixedExpenseOutput map(FixedExpenseModel request) {
+        LocalDate startDate = request.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate endDate = request.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return new FixedExpenseOutput(
+                (int) request.getExpenseCode(),
+                request.getOwnerFullName(),
+                request.getDescription(),
+                request.getDueDay(),
+                request.getCategory(),
+                request.getAmount(),
+                startDate,
+                endDate);
+    }
+
+    public FixedExpenseModel map(UpdateFixedExpenseInput request) {
         return new FixedExpenseModel(
                 request.description(),
                 request.dueDay(),

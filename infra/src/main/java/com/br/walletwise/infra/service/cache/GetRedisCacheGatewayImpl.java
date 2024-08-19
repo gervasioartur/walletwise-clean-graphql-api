@@ -8,24 +8,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
-public class GetRedisCacheGatewayImpl<T> implements GetCacheGateway<T> {
-    private final ObjectMapper mapper;
+public class GetRedisCacheGatewayImpl implements GetCacheGateway {
     private final Jedis jedis;
+    private final ObjectMapper mapper;
 
     @Override
-    public List<T> get(String key) {
+    public List<LinkedHashMap<String, Object>> get(String key) {
         try {
             String value = this.jedis.get(key);
-            return value == null ?
-                    List.of() :
-                    this.mapper.readValue(value, new TypeReference<List<T>>() {
-                    });
+            return value == null ? List.of() : this.mapper.readValue(value, new TypeReference<>() {
+            });
         } catch (Exception ex) {
-            ex.printStackTrace();
             throw new UnexpectedException(ex.getMessage());
         }
     }

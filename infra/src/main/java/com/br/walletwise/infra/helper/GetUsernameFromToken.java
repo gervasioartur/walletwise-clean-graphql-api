@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.helpers;
+package com.br.walletwise.infra.helper;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

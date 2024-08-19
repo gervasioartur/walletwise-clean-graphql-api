@@ -3,7 +3,7 @@ package com.br.walletwise.infra.service.expense;
 import com.br.walletwise.application.gateway.expense.GetFixedExpenseGateway;
 import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
-import com.br.walletwise.infra.mappers.FixedExpenseMapper;
+import com.br.walletwise.infra.mapper.FixedExpenseMapper;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.repository.FixedExpenseJpaRepository;
 import lombok.RequiredArgsConstructor;

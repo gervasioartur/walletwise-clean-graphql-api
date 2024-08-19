@@ -24,8 +24,8 @@ public class AddFixedExpenseImpl implements AddFixedExpense {
     @Override
     public void add(FixedExpense fixedExpense) {
         User user = this.getLoggedUser.get();
-        fixedExpense.setUserId(user.getId());
         fixedExpense.setActive(true);
+        fixedExpense.setUserId(user.getId());
         this.addFixedExpenseGateway.add(fixedExpense);
         this.invalidateCache.delete("fixedExpenses:" + user.getId());
     }

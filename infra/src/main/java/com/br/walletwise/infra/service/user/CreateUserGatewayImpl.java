@@ -2,7 +2,7 @@ package com.br.walletwise.infra.service.user;
 
 import com.br.walletwise.application.gateway.user.CreateUserGateway;
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.infra.mappers.UserMapper;
+import com.br.walletwise.infra.mapper.UserMapper;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import com.br.walletwise.infra.persistence.repository.UserJpaRepository;
 import jakarta.transaction.Transactional;

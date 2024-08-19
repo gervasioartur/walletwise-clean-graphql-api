@@ -1,4 +1,4 @@
-package com.br.walletwise.infra.helpers;
+package com.br.walletwise.infra.helper;
 
 import com.br.walletwise.core.domain.enums.GeneralEnumInt;
 import com.br.walletwise.infra.mocks.MocksFactory;

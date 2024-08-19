@@ -1,7 +1,6 @@
 package com.br.walletwise.infra.service.cache;
 
 import com.br.walletwise.application.gateway.cache.GetCacheGateway;
-import com.br.walletwise.core.domain.entity.FixedExpense;
 import com.br.walletwise.core.exception.UnexpectedException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +26,7 @@ class GetRedisCacheGatewayImplTests {
     void setup() {
         this.mapper = mock(ObjectMapper.class);
         this.jedis = mock(Jedis.class);
-        this.getRedisCacheGateway = new GetRedisCacheGatewayImpl(this.mapper, this.jedis);
+        this.getRedisCacheGateway = new GetRedisCacheGatewayImpl(this.jedis, this.mapper);
     }
 
     @Test
@@ -66,7 +66,7 @@ class GetRedisCacheGatewayImplTests {
         when(this.mapper.readValue(jsonValue, new TypeReference<List<Object>>() {
         })).thenReturn(list);
 
-        List<FixedExpense> result = this.getRedisCacheGateway.get(key);
+        List<LinkedHashMap<String, Object>> result = this.getRedisCacheGateway.get(key);
 
         assertThat(result).isNull();
         verify(this.jedis, times(1)).get(key);

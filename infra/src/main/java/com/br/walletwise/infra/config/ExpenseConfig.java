@@ -11,6 +11,8 @@ import com.br.walletwise.usecase.user.GetLoggedUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class ExpenseConfig {
 
@@ -24,8 +26,9 @@ public class ExpenseConfig {
     @Bean
     public GetFixedExpenses getFixedExpenses(GetFixedExpensesGateway getFixedExpensesGateway,
                                              GetLoggedUser getLoggedUser,
-                                             GetCache<FixedExpenseModel> getCache,
-                                             AddToCache addToCache) {
+                                             GetCache getCache,
+                                             AddToCache<List<FixedExpenseModel>> addToCache) {
+
         return new GetFixedExpensesImpl(getFixedExpensesGateway, getLoggedUser, getCache, addToCache);
     }
 
