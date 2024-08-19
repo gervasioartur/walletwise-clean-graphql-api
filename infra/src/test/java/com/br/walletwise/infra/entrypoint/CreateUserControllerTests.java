@@ -2,6 +2,7 @@ package com.br.walletwise.infra.entrypoint;
 
 import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.exception.ConflictException;
+import com.br.walletwise.core.exception.DomainException;
 import com.br.walletwise.core.exception.UnexpectedException;
 import com.br.walletwise.infra.entrypoint.dto.CreateUserInput;
 import com.br.walletwise.infra.mappers.UserMapper;
@@ -60,6 +61,23 @@ class CreateUserControllerTests {
 
         when(this.mapper.map(this.createUserInput)).thenReturn(user);
         doThrow(new ConflictException("Any exception.")).when(this.createUser).create(user);
+
+        String mutation = "mutation { createUser(input: {firstname: \"John\", lastname: \"Doe\", username: \"johndoe\", email: \"john@example.com\", password: \"password123\"}) { body } }";
+
+        graphQlTester.document(mutation)
+                .execute()
+                .path("createUser.body")
+                .entity(String.class)
+                .isEqualTo("Any exception.");
+    }
+
+    @Test
+    @DisplayName("Should return domain exception if useCase throws domain exception")
+    void shouldReturnDomainExceptionIfUseCaseThrowsDomainException() {
+        User user =  MocksFactory.userFactory(this.createUserInput);
+
+        when(this.mapper.map(this.createUserInput)).thenReturn(user);
+        doThrow(new DomainException("Any exception.")).when(this.createUser).create(user);
 
         String mutation = "mutation { createUser(input: {firstname: \"John\", lastname: \"Doe\", username: \"johndoe\", email: \"john@example.com\", password: \"password123\"}) { body } }";
 
