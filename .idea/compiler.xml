@@ -3,14 +3,16 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="coverage" />
+        <module name="core" />
+        <module name="usecase" />
+        <module name="infra" />
+        <module name="application" />
+      </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="application" target="21" />
-      <module name="core" target="21" />
-      <module name="coverage" target="21" />
-      <module name="infra" target="21" />
-      <module name="usecase" target="21" />
-      <module name="walletwise-api" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>
