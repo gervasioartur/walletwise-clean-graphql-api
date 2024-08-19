@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: report-upload
-          path: coverage/
+          path: coverage/target/site/jacoco-aggregate/jacoco.xml
 
       - name: Upload java binaries
         uses: actions/upload-artifact@v4
@@ -81,7 +81,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: report-upload
-          path: coverage/
+          path: jacoco.xml
         
       - name: Download java binaries
         uses: actions/download-artifact@v4
