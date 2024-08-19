@@ -18,31 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@SecurityScheme(
-        name = "bearerAuth",
-        type = SecuritySchemeType.HTTP,
-        scheme = "bearer",
-        bearerFormat = "JWT"
-)
-
-@RestController
-@RequestMapping("/fixed-expenses")
-@Tag(name = "Fixed Expenses")
 @RequiredArgsConstructor
 public class AddFixedExpenseController {
     private final AddFixedExpense usecase;
     private final FixedExpenseMapper mapper;
 
-    @PostMapping
-    @Operation(summary = "Add fixed expense")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Returns successful message"),
-            @ApiResponse(responseCode = "400", description = "Bad request happened"),
-            @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
-    })
-
-    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Response> perform(@RequestBody AddFixedExpenseRequest request) {
         try {
             FixedExpense fixedExpense = this.mapper.map(request);

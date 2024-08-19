@@ -6,7 +6,7 @@ import com.br.walletwise.core.domain.entity.User;
 import com.br.walletwise.core.domain.enums.CategoryEnum;
 import com.br.walletwise.core.domain.model.FixedExpenseModel;
 import com.br.walletwise.infra.entrypoint.dto.AddFixedExpenseRequest;
-import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
+import com.br.walletwise.infra.entrypoint.dto.CreateUserInput;
 import com.br.walletwise.infra.entrypoint.dto.UpdateFixedExpenseRequest;
 import com.br.walletwise.infra.persistence.entity.FixedExpenseJpaEntity;
 import com.br.walletwise.infra.persistence.entity.SessionJpaEntity;
@@ -60,7 +60,7 @@ public class MocksFactory {
         );
     }
 
-    public static User userFactory(CreateUserRequest request) {
+    public static User userFactory(CreateUserInput request) {
         return new User(
                 request.firstname(),
                 request.lastname(),
@@ -113,8 +113,8 @@ public class MocksFactory {
                 .build();
     }
 
-    public static CreateUserRequest createUserRequestFactory() {
-        return new CreateUserRequest(
+    public static CreateUserInput createUserInputFactory() {
+        return new CreateUserInput(
                 faker.name().firstName(),
                 faker.name().lastName(),
                 faker.name().username(),

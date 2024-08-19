@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 @Builder
 public class Response {
-    private Object body;
+    private String body;
 }

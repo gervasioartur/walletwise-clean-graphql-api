@@ -1,0 +1,22 @@
+input CreateUserInput {
+    firstname: String!
+    lastname: String!
+    username: String!
+    email: String!
+    password: String!
+}
+
+
+
+input AuthenticateUserRequest {
+    usernameOrEmail: String!
+    password: String!
+}
+
+type Query {
+    perform(input: AuthenticateUserRequest) : Response!
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): Response!
+}

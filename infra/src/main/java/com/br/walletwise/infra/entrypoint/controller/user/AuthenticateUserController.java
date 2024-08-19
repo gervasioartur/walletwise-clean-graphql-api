@@ -20,24 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping("/users/authenticate")
-@Tag(name = "User")
+
 @RequiredArgsConstructor
 public class AuthenticateUserController extends AbstractController<Response, AuthenticateUserRequest> {
     private final AuthenticateUser usecase;
-
-    @Override
-    @PostMapping
-    @Operation(summary = "Authenticate user")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Returns successful message"),
-            @ApiResponse(responseCode = "400", description = "Bad request happened"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
-    })
-
+    
     public ResponseEntity<Response> perform(@RequestBody AuthenticateUserRequest request) {
         String error = this.validate(request);
         if (error != null) {

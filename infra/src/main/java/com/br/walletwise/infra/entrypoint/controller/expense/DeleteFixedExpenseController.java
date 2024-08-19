@@ -13,23 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/fixed-expenses")
-@Tag(name = "Fixed Expenses")
 @RequiredArgsConstructor
 public class DeleteFixedExpenseController {
     private final DeleteFixedExpense usecase;
 
-    @DeleteMapping({"/{expenseCode}"})
-    @Operation(summary = "Delete fixed expense")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Returns successful message"),
-            @ApiResponse(responseCode = "404", description = "Resource not found"),
-            @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
-    })
 
-    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Response> perform(@PathVariable("expenseCode") long expenseCode) {
         try {
             this.usecase.delete(expenseCode);

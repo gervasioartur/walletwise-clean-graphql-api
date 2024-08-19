@@ -1,7 +1,7 @@
 package com.br.walletwise.infra.mappers;
 
 import com.br.walletwise.core.domain.entity.User;
-import com.br.walletwise.infra.entrypoint.dto.CreateUserRequest;
+import com.br.walletwise.infra.entrypoint.dto.CreateUserInput;
 import com.br.walletwise.infra.mocks.MocksFactory;
 import com.br.walletwise.infra.persistence.entity.UserJpaEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +19,7 @@ class UserMapperTests {
     @Test
     @DisplayName("Should return user on map from creatUserRequest")
     void shouldReturnUserOnMapFromCreatUserRequest() {
-        CreateUserRequest request = MocksFactory.createUserRequestFactory();
+        CreateUserInput request = MocksFactory.createUserInputFactory();
 
         User user = this.mapper.map(request);
 

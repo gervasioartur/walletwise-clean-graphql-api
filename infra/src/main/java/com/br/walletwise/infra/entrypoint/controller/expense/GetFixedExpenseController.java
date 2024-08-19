@@ -16,34 +16,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@SecurityScheme(
-        name = "bearerAuth",
-        type = SecuritySchemeType.HTTP,
-        scheme = "bearer",
-        bearerFormat = "JWT"
-)
-
-@RestController
-@RequestMapping("/fixed-expenses")
-@Tag(name = "Fixed Expenses")
 @RequiredArgsConstructor
 public class GetFixedExpenseController {
     private final GetFixedExpense usecase;
 
-    @GetMapping("/{expenseCode}")
-    @Operation(summary = "Get fixed expenses")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Returns successful message"),
-            @ApiResponse(responseCode = "404", description = "Resource not found"),
-            @ApiResponse(responseCode = "500", description = "An unexpected error occurred."),
-    })
 
-    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<Response> perform(@PathVariable("expenseCode") long expenseCode) {
         try {
             FixedExpenseModel list = this.usecase.getModel(expenseCode);
-            Response response = Response.builder().body(list).build();
+            Response response = Response.builder().body("").build();
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NotFoundException ex) {
             Response response = Response.builder().body(ex.getMessage()).build();

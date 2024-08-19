@@ -58,10 +58,10 @@ jobs:
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ vars.DOCKER_PASSWORD }}
-    
+
       - name: Pull sonarsource/sonar-scanner-cli image
         run: docker pull "sonarsource/sonar-scanner-cli:latest"
-    
+
       - name: Analysing with sonarsource
         run: docker run -e SONAR_TOKEN=${{ vars.SONAR_TOKEN }}  -v "${PWD}:/usr/src" sonarsource/sonar-scanner-cli
 
