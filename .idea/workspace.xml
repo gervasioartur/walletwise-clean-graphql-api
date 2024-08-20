@@ -5,76 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="979f4490-2a58-4615-8ff4-f1b37a710e5b" name="Changes" comment="test: ensure CreateUserController returns success&#10;message on creat user success">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/br/walletwise/core/exception/BusinessException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/GraphQLConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/FixedExpenseOutput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/util/GraphQLExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/src/main/resources/graphql/fixedExpensesSchema.graphqls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/gateway/cache/GetCacheGateway.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/gateway/cache/GetCacheGateway.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/usecasesimpl/cache/GetCacheImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/usecasesimpl/cache/GetCacheImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/usecasesimpl/expense/AddFixedExpenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/usecasesimpl/expense/AddFixedExpenseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/usecasesimpl/expense/GetFixedExpensesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/com/br/walletwise/application/usecasesimpl/expense/GetFixedExpensesImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/test/java/com/br/walletwise/application/usecaseimpl/expense/GetFixedExpensesImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/test/java/com/br/walletwise/application/usecaseimpl/expense/GetFixedExpensesImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/ExpenseConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/ExpenseConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/JwtFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/AbstractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/AbstractController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/AddFixedExpenseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/AddFixedExpenseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/DeleteFixedExpenseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/DeleteFixedExpenseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/GetFixedExpenseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/GetFixedExpenseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/GetFixedExpensesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/GetFixedExpensesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/UpdateFixedExpenseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/expense/UpdateFixedExpenseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/user/AuthenticateUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/user/AuthenticateUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/user/CreateUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/controller/user/CreateUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/AddFixedExpenseRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/AddFixedExpenseInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/AuthenticateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/AuthenticateUserInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/UpdateFixedExpenseRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/entrypoint/dto/UpdateFixedExpenseInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helpers/CreateToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helper/CreateToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helpers/GetSignKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helper/GetSignKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helpers/GetUsernameFromToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helper/GetUsernameFromToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helpers/ValidateToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/helper/ValidateToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/mappers/FixedExpenseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/mapper/FixedExpenseMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/mappers/SessionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/mapper/SessionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/cache/GetRedisCacheGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/cache/GetRedisCacheGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/AddFixedExpenseGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/AddFixedExpenseGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/DeleteFixedExpenseGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/DeleteFixedExpenseGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/GetFixedExpenseGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/GetFixedExpenseGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/GetFixedExpensesGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/GetFixedExpensesGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/UpdateFixedExpenseGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/expense/UpdateFixedExpenseGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/CreateUserGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/CreateUserGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/FindByEmailGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/FindByEmailGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/FindByUsernameGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/FindByUsernameGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/GenerateTokenGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/GenerateTokenGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/GetLoggedUserGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/GetLoggedUserGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/LoadUserByUsernameGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/LoadUserByUsernameGatewayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/SaveSessionGatewayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/java/com/br/walletwise/infra/service/user/SaveSessionGatewayImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infra/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/resources/graphql/schema.graphqls" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/resources/graphql/schema.graphqls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/main/resources/graphql/userSchema.graphqls" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/main/resources/graphql/userSchema.graphqls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/config/JwtAuthenticationFilterTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/config/JwtFilterTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/entrypoint/CreateUserControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/entrypoint/CreateUserControllerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/helpers/CreateTokenTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/helper/CreateTokenTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/helpers/GetSignKeyTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/helper/GetSignKeyTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/helpers/ValidateTokenTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/helper/ValidateTokenTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mappers/FixedExpenseMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mapper/FixedExpenseMapperTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mappers/SessionMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mapper/SessionMapperTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mappers/UserMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mapper/UserMapperTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mocks/MocksFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mocks/MocksFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/AddFixedExpenseGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/AddFixedExpenseGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/DeleteFixedExpenseGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/DeleteFixedExpenseGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/GetFixedExpenseGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/GetFixedExpenseGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/GetFixedExpensesGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/GetFixedExpensesGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/UpdateFixedExpenseGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/expenses/UpdateFixedExpenseGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/CreateUserGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/CreateUserGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/FindByEmailGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/FindByEmailGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/FindByUsernameGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/FindByUsernameGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/GenerateTokenGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/GenerateTokenGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/GetLoggedUserGatewayImplTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/GetLoggedUserGatewayImplTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/SaveSessionGatewayTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/service/user/SaveSessionGatewayTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usecase/src/main/java/com/br/walletwise/usecase/cache/GetCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/usecase/src/main/java/com/br/walletwise/usecase/cache/GetCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mapper/FixedExpenseMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/infra/src/test/java/com/br/walletwise/infra/mapper/FixedExpenseMapperTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,27 +59,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.CreateUserControllerTests.executor&quot;: &quot;Debug&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.WalletWiseApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/add-graphql&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gerva/Documents/Projects/walletwise-clean-graphql-api/infra/src/main/resources/graphql&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.CreateUserControllerTests.executor": "Debug",
+    "JUnit.FixedExpenseMapperTests.executor": "Run",
+    "JUnit.GetRedisCacheGatewayImplTests.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.WalletWiseApplication.executor": "Debug",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/gerva/Documents/Projects/walletwise-clean-graphql-api/infra/src/main/resources/graphql",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -161,7 +97,22 @@
       <recent name="com.br.walletwise.core.exception" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GetRedisCacheGatewayImplTests">
+  <component name="RunManager" selected="JUnit.FixedExpenseMapperTests">
+    <configuration name="FixedExpenseMapperTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="infra" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.br.walletwise.infra.mapper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.br.walletwise.infra.mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.br.walletwise.infra.mapper.FixedExpenseMapperTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GetRedisCacheGatewayImplTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="infra" />
       <extension name="coverage">
@@ -186,6 +137,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FixedExpenseMapperTests" />
         <item itemvalue="JUnit.GetRedisCacheGatewayImplTests" />
       </list>
     </recent_temporary>
@@ -209,7 +161,7 @@
       <workItem from="1724023912847" duration="4384000" />
       <workItem from="1724033536070" duration="107000" />
       <workItem from="1724033832885" duration="4430000" />
-      <workItem from="1724040535286" duration="50096000" />
+      <workItem from="1724040535286" duration="54360000" />
     </task>
     <task id="LOCAL-00001" summary="docs: add project documentation">
       <option name="closed" value="true" />
@@ -259,7 +211,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724048671598</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="test: ensure CreateUserController returns success&#10;message on creat user success">
+      <option name="closed" value="true" />
+      <created>1724119485604</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724119485605</updated>
+    </task>
+    <task id="LOCAL-00008" summary="test: ensure CreateUserController returns success&#10;message on creat user success">
+      <option name="closed" value="true" />
+      <created>1724119615578</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724119615578</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,34 +241,38 @@
     <MESSAGE value="test: ensure CreateUserController returns success&#10;message on creat user success" />
     <option name="LAST_COMMIT_MESSAGE" value="test: ensure CreateUserController returns success&#10;message on creat user success" />
   </component>
-  <component name="WfRunsListSearchHistory">{
-  &quot;history&quot;: [
+  <component name="WfRunsListSearchHistory"><![CDATA[{
+  "history": [
     {
-      &quot;branch&quot;: &quot;master&quot;,
-      &quot;currentBranchFilter&quot;: true
+      "branch": "master",
+      "currentBranchFilter": true
     },
     {
-      &quot;branch&quot;: &quot;master&quot;,
-      &quot;currentBranchFilter&quot;: true
+      "branch": "master",
+      "currentBranchFilter": true
     },
     {
-      &quot;branch&quot;: &quot;main&quot;,
-      &quot;currentBranchFilter&quot;: true
+      "branch": "main",
+      "currentBranchFilter": true
     },
     {
-      &quot;branch&quot;: &quot;main&quot;,
-      &quot;currentBranchFilter&quot;: true
+      "branch": "main",
+      "currentBranchFilter": true
     },
     {
-      &quot;branch&quot;: &quot;main&quot;,
-      &quot;currentBranchFilter&quot;: true
+      "branch": "main",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "main",
+      "currentBranchFilter": true
     }
   ],
-  &quot;lastFilter&quot;: {
-    &quot;branch&quot;: &quot;main&quot;,
-    &quot;currentBranchFilter&quot;: true
+  "lastFilter": {
+    "branch": "main",
+    "currentBranchFilter": true
   }
-}</component>
+}]]></component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
